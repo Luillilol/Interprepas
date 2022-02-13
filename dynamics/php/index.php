@@ -9,7 +9,7 @@
 <body>
     <h1>INTERPREPAS OWO </h1>
     <?php
-        include("dynamics/php/config.php");
+        include("dynamics/php/config.php");     
         $con=connect();
         $sql="Create TABLE a(a int)";
         $result=mysqli_query($con,$sql);
