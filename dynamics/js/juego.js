@@ -1,47 +1,77 @@
 window.onload = function() {
+    //variables globales
+    let pantalla = "mainMenu";
+    let canvas = document.getElementById("juego");
+    let ctx = canvas.getContext("2d");
+    let colorFondo = "#000000";
+    let colorBotones = "#FEFA00";
+    let menuFont = new FontFace('menuFont', 'url()')
+    let botonesY = canvas.height/5;
 
-    function mainMenu(ctx) {
-        let stringJuego = 'Jugar';
-        let stringInstrucciones = 'Instrucciones';
-        let stringConfig = 'Configuracíon';
-        let botonColor = '#00ff00';
-
-        for (var i = 0; i < 3; i++) {
-            ctx.rect(0, i * 100, 100, 100);
-            ctx.fillStyle = botonColor;
-            ctx.fill();
-            ctx.font = "10px Arial";
-            if (i == 0) {
-                ctx.fillText(stringJuego, 10, i * 100 + 50);
-            }
-            if (i == 1) {
-                ctx.fillText(stringInstrucciones, 10, i * 100 + 50);
-            }
-            if (i == 2) {
-                ctx.fillText(stringConfig, 10, i * 100 + 50);
-            }
-
+    //eventos de los botones del menu
+    function menuEvents(e){
+        //checa el boton que se presiono
+        if(e.offsetY >= botonesY && e.offsetY <= botonesY + 50){
+            pantalla = "juego";
+        }
+        if(e.offsetY >= botonesY*2 && e.offsetY <= botonesY*2 + 50){
+            pantalla = "Instrucciones"
+        }
+        if(e.offsetY >= botonesY*3 && e.offsetY <= botonesY*3 + 50){
+            pantalla = "conf";
         }
     }
 
-
-    function juego() {
-        //variables de entorno
-        let colorFondo = '#0071aa';
-        let juegoState = 'mainMenu';
-
-        let canvas = document.getElementById("juego");
-        let ctx = canvas.getContext("2d");
+    //dibuja el fondo del menu *
+    function fondoMenu(){
+        colorFondo = "#33CCFF";
         ctx.rect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = colorFondo;
         ctx.fill();
-
-        if (juegoState === 'mainMenu') {
-            mainMenu(ctx);
-        }
-        //ctx.stroke();
     }
 
-    juego();
+    //dibuja los botones, recibe de parametros :
+    //text = string que se va a mostrar en el boton
+    //y = posicion de y en coordenadas cartesianas del la esquina superios izquierda del boton
+    //textX = separacion en x del texto del boton y la esquina izquierda
+    function boton(text, y, textX) {
+        ctx.font = "30px serif";
+        ctx.beginPath();
+            ctx.rect(canvas.height/4, y, 400, 50);
+            ctx.fillStyle = colorBotones;
+            ctx.fill();
+            ctx.textAlign = "Center"
+            ctx.strokeText(text, (canvas.height/4)+textX, y + 25);
+        ctx.closePath();
+    }
 
+    //funcion que que llama a las funciones de dibujo del menu
+    function mainMenu() {
+        fondoMenu();
+        boton("Jugar", botonesY, 150);
+        boton("¿Cómo Jugar?", botonesY*2, 100);
+        boton("Configuración", botonesY*3, 100)
+    }
+
+    //funcion que dibuja el canvas dependiendo de la pantalla *
+    function draw() {
+        if (pantalla == "mainMenu") {
+            mainMenu();
+        } else if (pantalla == "game") {
+            game();
+        } else if (pantalla == "gameOver") {
+            gameOver();
+        }
+    }
+
+    //eventos de mouse para el canvas 
+    canvas.addEventListener('mouseup', e => {
+        if(pantalla == 'mainMenu')
+        {
+            menuEvents(e);
+        }
+    });
+
+    //timer del juego puesto a 60 fps
+    setInterval(draw, 16);
 }
