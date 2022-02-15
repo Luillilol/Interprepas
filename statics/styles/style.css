@@ -12,7 +12,11 @@ body{
 
 }
 /* p{
-    justify-content: right;
+    position: relative;
+    top: 0%;
+    /* font-family: ; 
+    font-size: 3vw;
+    margin: 0px;
 } */
 
 .diseñoFranjas{
@@ -21,17 +25,38 @@ body{
     width: 100%;
     height: 4%;
 }
+.claseBotonMenu{
+    position: absolute;
+    background-color: #0071FF;
+    width: 20%; 
+    height: 9%;
+    top: 25%;
+    left: 15%;
+    border-radius: 35px;
+    text-align: center;
+}
+.textoBotonMenu{
+    position: relative;
+    top: 0%;
+    font-size: 2vw;
+    margin: 0px;
+}
 
+#titulo{
+    position: relative;
+    top: 0%;
+    /* font-family: ; */
+    font-size: 3vw;
+    margin: 0px;
+}
 #franja1{
     top: 1%;
     left: 0%;
 }
-
 #franja2{
     bottom: 1%;
     left: 0%;
 }
-
 #fondoTitulo{
     position: absolute;
     background-color: #FEA470;
@@ -40,7 +65,6 @@ body{
     top: 7%;
     left: 0%;
 }
-
 #divTitulo{
     position: absolute;
     background-color: white;
@@ -48,7 +72,30 @@ body{
     height: 100%;
     top: 0%;
     left: 40%;
+    text-align:center;
     
-
 }
+#idBotonJugar{
+    top: 35%;
+    left: 15%;
+}
+#idBotonInstrucciones{
+    top: 50%;
+    left: 15%;
+}
+#idBotonCreditos{
+    top: 65%;
+    left: 15%;
+}
+#idImagen{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: #D052EC;
+    top: 30%;
+    right: 15%;
+    border-radius: 10%;
+}
+
+
 
