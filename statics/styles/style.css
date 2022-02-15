@@ -1,24 +1,26 @@
-/* =======FUENTES =======  */
+/* ================================FUENTES ===========================  */
 /*LA FUENTE PARA EL TITULO SE LLAMA "GALINDO"*/
 @font-face{
     font-family: Galindo_normal;
     src: url("../fonts/Galindo/Galindo-Regular.ttf");
 }
-/* ====== GENERAL ======= */
+/* ============================== GENERAL ============================== */
 body{
     background-color: #FFBD97;
     width: 100%;
     height: 100%;
-
 }
+
 p{
     position: relative;
     top: 0%;
-    font-family: Galindo_normal; 
-    /*font-size: 3vw;
+    font-family: Galindo_normal;
+    /* font-family: ; 
+    font-size: 3vw;
     margin: 0px;*/
 }
 
+/* ============================ CLASES ==============================*/
 .diseñoFranjas{
     position: absolute;
     background-color: #FF6EB8;
@@ -30,21 +32,29 @@ p{
     background-color: #0071FF;
     width: 20%; 
     height: 9%;
-    top: 25%;
     left: 15%;
     border-radius: 35px;
-    text-align: center;
+    text-align: center;    
+    transition: background-color .5s;
+}
+.claseBotonMenu:hover{
+    background-color: #004CAC;
+    left: 12%;
+    width: 21%;
+    height: 10%;
 }
 .textoBotonMenu{
     position: relative;
-    top: 0%;
+    top: 25%;
     font-size: 2vw;
     margin: 0px;
 }
 
+/* ========================== ID ===================================*/
+
 #titulo{
     position: relative;
-    top: 0%;
+    top: 20%;
     /* font-family: ; */
     font-size: 3vw;
     margin: 0px;
@@ -67,13 +77,12 @@ p{
 }
 #divTitulo{
     position: absolute;
-    background-color: white;
+    /* background-color: white; */
     width: 20%;
     height: 100%;
     top: 0%;
     left: 40%;
-    text-align:center;
-    
+    text-align:center;    
 }
 #idBotonJugar{
     top: 35%;
@@ -96,6 +105,9 @@ p{
     right: 15%;
     border-radius: 10%;
 }
+
+
+
 
 
 
