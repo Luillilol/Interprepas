@@ -5,7 +5,7 @@ window.onload = function() {
     let ctx = canvas.getContext("2d");
     let colorFondo = "#000000";
     let colorBotones = "#FEFA00";
-    let menuFont = new FontFace('menuFont', 'url()')
+    let menuFont = new FontFace('menuFont', 'url(../../statics/fonts/Galindo/Galindo-Regular.tff)')
     let botonesY = canvas.height/5;
 
     //eventos de los botones del menu
@@ -35,7 +35,7 @@ window.onload = function() {
     //y = posicion de y en coordenadas cartesianas del la esquina superios izquierda del boton
     //textX = separacion en x del texto del boton y la esquina izquierda
     function boton(text, y, textX) {
-        ctx.font = "30px serif";
+        ctx.font = "manuFont 30px";
         ctx.beginPath();
             ctx.rect(canvas.height/4, y, 400, 50);
             ctx.fillStyle = colorBotones;
