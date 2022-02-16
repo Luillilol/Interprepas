@@ -39,9 +39,14 @@ p{
 }
 .claseBotonMenu:hover{
     background-color: #004CAC;
+    cursor: pointer;
     left: 12%;
     width: 21%;
     height: 10%;
+}
+.claseBotonMenu:active{
+    transition: background-color .0s;
+    background-color: #64a7f8;
 }
 .textoBotonMenu{
     position: relative;
@@ -98,14 +103,22 @@ p{
 }
 #idImagen{
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 30%;
+    height: 50%;
     background-color: #D052EC;
     top: 30%;
     right: 15%;
     border-radius: 10%;
 }
+#idCreativeCommons{
+    position: absolute;
+    width: 13%;
+    height: 8%;
+    right: 0%;
+    bottom: 6%;
+}
 
+/* 380 133 */
 
 
 
