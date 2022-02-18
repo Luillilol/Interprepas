@@ -1,3 +1,13 @@
+/*==============================Colores=======================*/
+:root{
+    --pink: #FFBEFF;
+    --green: #70F15B; 
+    --blue: #48C8FF;
+    --orange: #FFBC3A;
+    --fondo: #FEFFD9;
+
+}
+
 /* ================================FUENTES ===========================  */
 /*LA FUENTE PARA EL TITULO SE LLAMA "GALINDO"*/
 @font-face{
@@ -6,15 +16,16 @@
 }
 /* ============================== GENERAL ============================== */
 body{
-    background-color: #FFBD97;
+    background-color: var(--fondo);
     width: 100%;
     height: 100%;
 }
 
-p{
+h1, p{
     position: relative;
     top: 0%;
     font-family: Galindo_normal;
+    text-align: center;
     /* font-family: ; 
     font-size: 3vw;
     margin: 0px;*/
@@ -23,78 +34,76 @@ p{
 /* ============================ CLASES ==============================*/
 .diseñoFranjas{
     position: absolute;
-    background-color: #FF6EB8;
+    background-color: var(--pink);
     width: 100%;
-    height: 4%;
+    height: 5.5%;
 }
 .claseBotonMenu{
     position: absolute;
-    background-color: #0071FF;
-    width: 20%; 
-    height: 9%;
+    background-color: var(--blue);
+    width: 25%; 
+    height: 14%;
     left: 15%;
     border-radius: 35px;
     text-align: center;    
-    transition: background-color .5s;
+    transition: background-color .4s;
 }
 .claseBotonMenu:hover{
-    background-color: #004CAC;
+    background-color: var(--pink);
     cursor: pointer;
     left: 12%;
-    width: 21%;
-    height: 10%;
+    width: 26%;
+    height: 15%;
 }
 .claseBotonMenu:active{
     transition: background-color .0s;
-    background-color: #64a7f8;
+    background-color: var(--pink);
 }
 .textoBotonMenu{
     position: relative;
     top: 25%;
-    font-size: 2vw;
+    font-size: 3vw;
     margin: 0px;
+    text-align: center;
 }
 
 /* ========================== ID ===================================*/
 
 #titulo{
     position: relative;
-    top: 20%;
+    top: 7%;
     /* font-family: ; */
-    font-size: 3vw;
+    font-size: 8.4vh;
     margin: 0px;
+
+    text-align: center;
 }
 #franja1{
-    top: 1%;
+    top: 0%;
     left: 0%;
 }
 #franja2{
-    bottom: 1%;
+    bottom: 0%;
     left: 0%;
+    background-color: var(--green);
 }
 #fondoTitulo{
     position: absolute;
-    background-color: #FEA470;
+    background-color: var(--orange);
     width: 100%;
     height: 12%;
-    top: 7%;
-    left: 0%;
+    top: 5%;
+    left: 0;
+    text-align: center;
 }
-#divTitulo{
-    position: absolute;
-    /* background-color: white; */
-    width: 20%;
-    height: 100%;
-    top: 0%;
-    left: 40%;
-    text-align:center;    
-}
+
+
 #idBotonJugar{
-    top: 35%;
+    top: 25%;
     left: 15%;
 }
 #idBotonInstrucciones{
-    top: 50%;
+    top: 45%;
     left: 15%;
 }
 #idBotonCreditos{
@@ -105,7 +114,7 @@ p{
     position: absolute;
     width: 30%;
     height: 50%;
-    background-color: #D052EC;
+    background-color: var(--blue);
     top: 30%;
     right: 15%;
     border-radius: 10%;
