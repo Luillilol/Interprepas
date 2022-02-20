@@ -6,6 +6,14 @@ window.addEventListener("load", ()=>{
     let divCaractJuego = document.getElementById("id_caractJuego");
     let botonForm = document.getElementById("boton");
     let cerrarVentana = document.getElementById("cerrarVentana");
+    let p1R1 = document.getElementById("1Jugadores");
+    let p1R2 = document.getElementById("2Jugadores");
+    let p1R3 = document.getElementById("3Jugadores");
+    let p1R4 = document.getElementById("4Jugadores");
+    let p2R1 = document.getElementById("tablero21");
+    let p2R2 = document.getElementById("tablero42");
+
+    
 
     //Eventos de los botónes del menú (Jugar, Instrucciones y )
     botonJugar.addEventListener("click", ()=>{
@@ -14,17 +22,7 @@ window.addEventListener("load", ()=>{
         divCaractJuego.style.visibility="visible";
     });
 
-    botonForm.addEventListener("click", ()=>{
-        window.location.assign("./templates/juego.html");
-    });
-    cerrarVentana.addEventListener("click", ()=>{
-        fondoDegradado.style.visibility="hidden";
-        divCaractJuego.style.visibility="hidden";
-    });
-    
-
-
-    botonInstrucciones.addEventListener("click", ()=>{
+     botonInstrucciones.addEventListener("click", ()=>{
         console.log("Hola pagina a instrucciones");
         window.location.assign("./templates/instrucciones.html");
     });
@@ -33,5 +31,43 @@ window.addEventListener("load", ()=>{
         console.log("Hola pagina a creditos");
         window.location.assign("./templates/creditos.html");
     });
+
+    //Eventos del Modal con Cuestionario
+    botonForm.addEventListener("click", ()=>{
+        //Genera las coockies respecto a las respuestas
+        if(p1R1.checked){
+            console.log("1Jugador");
+            document.cookie = "jugadores=1";
+        }else if(p1R2.checked){
+            console.log("2Jugadores");
+            document.cookie = "jugadores=2";
+        }else if(p1R3.checked){
+            console.log("3Jugadores");
+            document.cookie = "jugadores=3";
+        }else if(p1R4.checked){
+            console.log("4Jugadores");
+            document.cookie = "jugadores=4";
+        }
+        if(p2R1.checked){
+            console.log("Tablero 21");
+            document.cookie = "tablero=21";
+        }else if(p2R2.checked){
+            console.log("Tablero 42");
+            document.cookie = "tablero=42";
+        }
+
+
+        window.location.assign("./templates/juego.html");
+
+    });
+    cerrarVentana.addEventListener("click", ()=>{
+        fondoDegradado.style.visibility="hidden";
+        divCaractJuego.style.visibility="hidden";
+    });
+
+    
+
+
+   
 });
 
