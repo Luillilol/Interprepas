@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
     <div id="franja1" class="diseñoFranjas"></div>
     <div id="franja2" class="diseñoFranjas"></div>
     <div id="fondoTitulo" class=""><div id="divTitulo"><p id="titulo">Maratón</p></div></div>
@@ -18,7 +19,24 @@
     <div id="idBotonInstrucciones" class="claseBotonMenu"><p  class="textoBotonMenu">Instrucciones</p></div>
     <div id="idBotonCreditos" class="claseBotonMenu"><p class="textoBotonMenu">Créditos</p></div>
     <div id="idImagen"></div>
-    <img id="idCreativeCommons" src="./statics/img/creativecommons.png" alt="Creative Commons">
+    <!-- <img id="idCreativeCommons" src="./statics/img/creativecommons.png" alt="Creative Commons"> -->
+    <div id="id_capaOscura"></div>
+    <div id="id_caractJuego">
+        <form id="form">
+           
+        <p id="numJugadores">Selecciona el número de jugadores</p>
+        <label for="1Jugadores" id="label1Jugador" class="classLabelJugador">1</label><input type="radio" id="1Jugadores" name="numJugadores" value="1">
+        <label for="2Jugadores" id="label2Jugador" class="classLabelJugador">2</label><input type="radio" id="2Jugadores" name="numJugadores" value="2">
+        <label for="3Jugadores" id="label3Jugador" class="classLabelJugador">3</label><input type="radio" id="3Jugadores" name="numJugadores" value="3">
+        <label for="4Jugadores" id="label4Jugador" class="classLabelJugador">4</label><input type="radio" id="4Jugadores" name="numJugadores" value="4">            
+        
+        <p>Selecciona el tipo de tablero</p>
+        <label for="tablero21">21 Casillas</label> <input type="radio" id="tablero21" name="casillas" value="21">
+        <label for="tablero42">42 Casillas</label> <input type="radio" id="tablero42" name="casillas" value="42">
+        <button type="button" id="boton">Aceptar</button>
+        </form>
+        <div id="cerrarVentana"><p id="PcerrarVentana">X</p></div>
+    </div>
     
     <script src="./dynamics/js/index.js"></script>
 </body>
