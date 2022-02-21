@@ -178,9 +178,8 @@ h1, p{
     text-align: center; 
     top:78%;
 }
-#Tableross{
-    position: absolute;
-    font-size: 2vw;
+.Tableross{
+    font-size: 1.3vw;
 }
 
 #boton{
