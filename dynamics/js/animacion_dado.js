@@ -11,34 +11,35 @@ function dado() {
     function printrand(){
         let rand = Math.floor(Math.random() * (6 - 1)) + 1;
         console.log(rand);
+        
         if(rand==1){
-            ctx.drawImage(img,175*3,175*4,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,175*4,135,135,850,0,100,100);
         }
         if(rand==2){
-            ctx.drawImage(img,175*3,175*1,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,175*1,135,135,850,0,100,100);
         }
         if(rand==3){
-            ctx.drawImage(img,175*3,0,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,0,135,135,850,0,100,100);
         }
         if(rand==4){
-            ctx.drawImage(img,175*3,175*7,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,175*7,135,135,850,0,100,100);
         }
         if(rand==5){
-            ctx.drawImage(img,175*3,175*6,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,175*6,135,135,850,0,100,100);
         }
         if(rand==6){
-            ctx.drawImage(img,175*3,175*3,135,135,0,0,100,100);
+            ctx.drawImage(img,175*3,175*3,135,135,850,0,100,100);
         }
     }
 
     function drawsprite(ctx,img,x,y){
-        ctx.drawImage(img,175*x,175*y,135,135,0,0,100,100);
+        ctx.drawImage(img,175*x,175*y,135,135,850,0,100,100);
     }
 
     function step(){
         countAnimacion++;
         if(countAnimacion % 2 === 0){
-            ctx.clearRect(0,0,1000,1000);
+            ctx.clearRect(850,0,100,100);
             drawsprite(ctx,img,pos[0], pos[1]);
             if(pos[0]<15){
                 pos[0]++;
@@ -64,9 +65,11 @@ function dado() {
         }).then(()=>{
            return new Promise((resolve)=>{
                setTimeout(()=>{
+                   //ctx.rect(850,0,100,100);
                    printrand();
                    resolve();
-               }, 4780)
+                   
+               }, 4900)
            })
         })
     }

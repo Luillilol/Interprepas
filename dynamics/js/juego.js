@@ -9,6 +9,7 @@ window.onload = function() {
     let botonesY = canvas.height/5;
     let jugadores;
     let tablero;
+    let pause = false;
     
     //separar las cookies
     function cookies(){
@@ -16,7 +17,7 @@ window.onload = function() {
         let cookiesArray = cookies.split("; ");
         cookiesArray.forEach(element => {
             let cookie = element.split("=");
-            //console.log(cookie[1]);
+            console.log(cookie[1]);
             if(cookie[0] == "jugadores"){
                 jugadores=cookie[1];
             }else{
@@ -28,11 +29,12 @@ window.onload = function() {
 
     function tableroEvents(e){
         dado();
+        //dado();
     }
     
 
     //eventos de los botones del menu
-    function menuEvents(e){
+    /*function menuEvents(e){
         //checa el boton que se presiono
         if(e.offsetY >= botonesY && e.offsetY <= botonesY + 50){
             pantalla = "juego";
@@ -74,16 +76,24 @@ window.onload = function() {
         boton("Jugar", botonesY, 150);
         boton("¿Cómo Jugar?", botonesY*2, 100);
         boton("Configuración", botonesY*3, 100)
+    }*/
+
+    function chooseScreen(){
+        if (pantalla == "mainMenu") {
+            mainMenu();
+        } else if (pantalla == "tablero") {
+            if(tablero == 21){
+                tablero21(ctx);
+            }
+        } else if (pantalla == "gameOver") {
+            gameOver();
+        }
     }
 
     //funcion que dibuja el canvas dependiendo de la pantalla *
     function draw() {
-        if (pantalla == "mainMenu") {
-            mainMenu();
-        } else if (pantalla == "tablero") {
-            tabelro();
-        } else if (pantalla == "gameOver") {
-            gameOver();
+        if(pause == false){
+            chooseScreen();
         }
     }
 
@@ -99,7 +109,8 @@ window.onload = function() {
     });
 
     cookies();
-    //timer del juego puesto a 60 fps
+    //timer del juego puesto a 24 fps
     
-    setInterval(draw, 16);
+    setInterval(draw, 41);
+    
 }
