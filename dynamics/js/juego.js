@@ -7,6 +7,25 @@ window.onload = function() {
     let colorBotones = "#FEFA00";
     let menuFont = new FontFace('menuFont', 'url(../../statics/fonts/Galindo/Galindo-Regular.tff)')
     let botonesY = canvas.height/5;
+    let jugadores;
+    let tablero;
+    
+    //separar las cookies
+    function cookies(){
+        let cookies = document.cookie;
+        let cookiesArray = cookies.split("; ");
+        cookiesArray.forEach(element => {
+            let cookie = element.split("=");
+            //console.log(cookie[1]);
+            if(cookie[0] == "jugadores"){
+                jugadores=cookie[1];
+            }else{
+                tablero=cookie[1];
+            }
+        });
+
+    }
+    
 
     //eventos de los botones del menu
     function menuEvents(e){
@@ -72,6 +91,7 @@ window.onload = function() {
         }
     });
 
+    cookies();
     //timer del juego puesto a 60 fps
     setInterval(draw, 16);
 }
