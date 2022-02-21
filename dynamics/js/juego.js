@@ -81,7 +81,8 @@ window.onload = function() {
         if (pantalla == "mainMenu") {
             mainMenu();
         } else if (pantalla == "tablero") {
-            tabelro();
+            //tabelro();
+            ;
         } else if (pantalla == "gameOver") {
             gameOver();
         }
