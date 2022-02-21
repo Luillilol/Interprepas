@@ -1,0 +1,16 @@
+:root{
+    --fondo: #FEFFD9;
+}
+/* ================================FUENTES ===========================  */
+/*LA FUENTE PARA EL TITULO SE LLAMA "GALINDO"*/
+@font-face{
+    font-family: Galindo_normal;
+    src: url("../fonts/Galindo/Galindo-Regular.ttf");
+}
+body{
+    background-color: var(--fondo);
+   
+}
+h1{
+    font-family: Galindo_normal;
+}

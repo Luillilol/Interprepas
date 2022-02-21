@@ -1,6 +1,6 @@
 window.onload = function() {
     //variables globales
-    let pantalla = "mainMenu";
+    let pantalla = "tablero";
     let canvas = document.getElementById("juego");
     let ctx = canvas.getContext("2d");
     let colorFondo = "#000000";
@@ -24,6 +24,10 @@ window.onload = function() {
             }
         });
 
+    }
+
+    function tableroEvents(e){
+        dado();
     }
     
 
@@ -76,8 +80,8 @@ window.onload = function() {
     function draw() {
         if (pantalla == "mainMenu") {
             mainMenu();
-        } else if (pantalla == "game") {
-            game();
+        } else if (pantalla == "tablero") {
+            tabelro();
         } else if (pantalla == "gameOver") {
             gameOver();
         }
@@ -89,9 +93,13 @@ window.onload = function() {
         {
             menuEvents(e);
         }
+        else if(pantalla == 'tablero'){
+            tableroEvents(e);
+        }
     });
 
     cookies();
     //timer del juego puesto a 60 fps
+    
     setInterval(draw, 16);
 }

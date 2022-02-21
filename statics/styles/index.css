@@ -1,3 +1,13 @@
+/*==============================Colores=======================*/
+:root{
+    --pink: #FFBEFF;
+    --green: #70F15B; 
+    --blue: #48C8FF;
+    --orange: #FFBC3A;
+    --fondo: #FEFFD9;
+
+}
+
 /* ================================FUENTES ===========================  */
 /*LA FUENTE PARA EL TITULO SE LLAMA "GALINDO"*/
 @font-face{
@@ -6,15 +16,16 @@
 }
 /* ============================== GENERAL ============================== */
 body{
-    background-color: #FEFFCA;
+    background-color: var(--fondo);
     width: 100%;
     height: 100%;
 }
 
-p{
+h1, p{
     position: relative;
     top: 0%;
     font-family: Galindo_normal;
+    text-align: center;
     /* font-family: ; 
     font-size: 3vw;
     margin: 0px;*/
@@ -23,36 +34,37 @@ p{
 /* ============================ CLASES ==============================*/
 .diseñoFranjas{
     position: absolute;
-    background-color: #70F15B;
+    background-color: var(--pink);
     width: 100%;
-    height: 4%;
+    height: 5.5%;
 }
 .claseBotonMenu{
     position: absolute;
-    background-color: #0071FF;
-    width: 20%; 
-    height: 9%;
+    background-color: var(--blue);
+    width: 25%; 
+    height: 14%;
     left: 15%;
     border-radius: 35px;
     text-align: center;    
-    transition: background-color .5s;
+    transition: background-color .4s;
 }
 .claseBotonMenu:hover{
-    background-color: #004CAC;
+    background-color: var(--pink);
     cursor: pointer;
     left: 12%;
-    width: 21%;
-    height: 10%;
+    width: 26%;
+    height: 15%;
 }
 .claseBotonMenu:active{
     transition: background-color .0s;
-    background-color: #64a7f8;
+    background-color: var(--pink);
 }
 .textoBotonMenu{
     position: relative;
-    top: 15%;
-    font-size: 2.5vw;
+    top: 25%;
+    font-size: 3vw;
     margin: 0px;
+    text-align: center;
 }
 .classLabelJugador{
     width: 20px;
@@ -64,42 +76,39 @@ p{
 
 #titulo{
     position: relative;
-    top: 0%;
+    top: 7%;
     /* font-family: ; */
-    font-size: 5vw;
+    font-size: 8.4vh;
     margin: 0px;
+
+    text-align: center;
 }
 #franja1{
-    top: 1%;
+    top: 0%;
     left: 0%;
 }
 #franja2{
-    bottom: 1%;
+    bottom: 0%;
     left: 0%;
+    background-color: var(--green);
 }
 #fondoTitulo{
     position: absolute;
-    background-color: #FFBC3A;
+    background-color: var(--orange);
     width: 100%;
     height: 12%;
-    top: 7%;
-    left: 0%;
+    top: 5%;
+    left: 0;
+    text-align: center;
 }
-#divTitulo{
-    position: absolute;
-    /* background-color: white; */
-    width: 20%;
-    height: 100%;
-    top: 0%;
-    left: 40%;
-    text-align:center;    
-}
+
+
 #idBotonJugar{
-    top: 35%;
+    top: 25%;
     left: 15%;
 }
 #idBotonInstrucciones{
-    top: 50%;
+    top: 45%;
     left: 15%;
 }
 #idBotonCreditos{
@@ -110,7 +119,7 @@ p{
     position: absolute;
     width: 30%;
     height: 50%;
-    background-color: #D052EC;
+    background-color: var(--blue);
     top: 30%;
     right: 15%;
     border-radius: 10%;
@@ -132,39 +141,70 @@ p{
     left: 0%;
     background-color: #141414;
     opacity: 0.9;
-    visibility: hidden;    
+    visibility: hidden;   
+    font-family: Galindo_normal; 
 }
 #id_caractJuego{
     position: absolute;
     width: 50%;
     height: 50%;
-    background-color: #e9eb94;
+    background-color: var(--fondo);
     top: 25%;
     left: 25%;
     border-radius: 10%;
     border-style:solid;
     border-width: 15px;
-    border-color: #0F6A00;
+    border-color: var(--orange);
     visibility: hidden;
+    text-align: center;
+    font-family: Galindo_normal;
 }
 #numJugadores{
     position: relative;
     font-size: 2vw;
-    left: 15%;    
+    left: 1%;  
+    top: 8%;
+    text-align: center; 
+    font-family: Galindo_normal; 
+}
+#classLabelJugador{
+    position: absolute;
+    font-size: 2vw;
+    top:9%;
+}
+#TipoTab{
+    position: relative;
+    font-size: 2vw;
+    text-align: center; 
+    top:78%;
+}
+.Tableross{
+    font-size: 1.3vw;
+}
+
+#boton{
+    position: absolute;
+    font-size: 1.2vw;
+    top: 80%;
+    left: 45%;
+    font-family: Galindo_normal; 
+    background-color: var(--green);
 }
 #PcerrarVentana{
     margin: 10%;
     font-size: 2.5vw;
-    top: 0%;
+    top: -9%;
+   
 }
 #cerrarVentana{
     position: absolute;
     width: 45px;
     height: 45px;
-    background-color: #d10808;
-    top: 0%;
+    background-color: red;
+    top: -2%;
     right: 1%;
     border-radius: 50%;
     cursor: pointer;
 }
+
 
