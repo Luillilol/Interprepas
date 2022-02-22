@@ -29,9 +29,9 @@ window.onload = function() {
     function dibujarTablero(){
         if(tablero==42){
             console.log("TABLERO DE 42 CASILLAS");
-            imgTablero.src = '../statics/img/tablero42.png'
+            imgTablero.src = '../statics/img/tablero700.png'
             imgTablero.addEventListener('load', ()=>{
-                ctx.drawImage(imgTablero, 150, 50, 1000, 1000);
+                ctx.drawImage(imgTablero, 150, 0, 700, 700);
             });
             //divTablero.src=""
         }
