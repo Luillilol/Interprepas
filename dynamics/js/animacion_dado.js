@@ -9,7 +9,7 @@ function dado() {
     //TODO optimizar funcion printrand
 
     function printrand(){
-        let rand = Math.floor(Math.random() * (6 - 1)) + 1;
+        let rand = Math.floor(Math.random() * (7 - 1)) + 1;
         console.log(rand);
         
         if(rand==1){
@@ -69,7 +69,7 @@ function dado() {
                    printrand();
                    resolve();
                    
-               }, 4900)
+               }, 4790)
            })
         })
     }
