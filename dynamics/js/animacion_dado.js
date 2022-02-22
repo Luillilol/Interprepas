@@ -9,7 +9,7 @@ function dado() {
     //TODO optimizar funcion printrand
 
     function printrand(){
-        let rand = Math.floor(Math.random() * (6 - 1)) + 1;
+        let rand = Math.floor(Math.random() * (7 - 1)) + 1;
         console.log(rand);
         if(rand==1){
             ctx.drawImage(img,175*3,175*4,135,135,0,0,100,100);
@@ -38,7 +38,7 @@ function dado() {
     function step(){
         countAnimacion++;
         if(countAnimacion % 2 === 0){
-            ctx.clearRect(0,0,1000,1000);
+            ctx.clearRect(0,0,100,100);
             drawsprite(ctx,img,pos[0], pos[1]);
             if(pos[0]<15){
                 pos[0]++;
@@ -66,7 +66,7 @@ function dado() {
                setTimeout(()=>{
                    printrand();
                    resolve();
-               }, 4780)
+               }, 4790)
            })
         })
     }

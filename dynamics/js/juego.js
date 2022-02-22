@@ -1,4 +1,5 @@
 window.onload = function() {
+    const imgTablero = new Image(1000, 1000); //almacena la imagen del tablero
     //variables globales
     let pantalla = "tablero";
     let canvas = document.getElementById("juego");
@@ -6,9 +7,10 @@ window.onload = function() {
     let colorFondo = "#000000";
     let colorBotones = "#FEFA00";
     let menuFont = new FontFace('menuFont', 'url(../../statics/fonts/Galindo/Galindo-Regular.tff)')
-    let botonesY = canvas.height/5;
-    let jugadores;
-    let tablero;
+    let botonesY = canvas.height/5;    
+    let jugadores; // Variable de 
+    let tablero;   // las cookies
+
     
     //separar las cookies
     function cookies(){
@@ -23,13 +25,22 @@ window.onload = function() {
                 tablero=cookie[1];
             }
         });
-
     }
+    function dibujarTablero(){
+        if(tablero==42){
+            console.log("TABLERO DE 42 CASILLAS");
+            imgTablero.src = '../statics/img/tablero42.png'
+            imgTablero.addEventListener('load', ()=>{
+                ctx.drawImage(imgTablero, 150, 50, 1000, 1000);
+            });
+            //divTablero.src=""
+        }
+    }
+
 
     function tableroEvents(e){
         dado();
     }
-    
 
     //eventos de los botones del menu
     function menuEvents(e){
@@ -60,6 +71,7 @@ window.onload = function() {
     function boton(text, y, textX) {
         ctx.font = "manuFont 30px";
         ctx.beginPath();
+            ctx.
             ctx.rect(canvas.height/4, y, 400, 50);
             ctx.fillStyle = colorBotones;
             ctx.fill();
@@ -100,6 +112,7 @@ window.onload = function() {
     });
 
     cookies();
+    dibujarTablero();
     //timer del juego puesto a 60 fps
     
     setInterval(draw, 16);
