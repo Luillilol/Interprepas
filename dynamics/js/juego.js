@@ -10,6 +10,13 @@ window.onload = function() {
     let botonesY = canvas.height/5;    
     let jugadores; // Variable de 
     let tablero;   // las cookies
+    let fichas = [];
+
+    class Ficha{
+        constructor(casilla){
+            this.casilla = casilla;
+        }
+    }
 
     
     //separar las cookies
@@ -26,6 +33,13 @@ window.onload = function() {
             }
         });
     }
+
+    function inicializarJuego(){
+        for(let i=0; i<jugadores; i++){
+            fichas.push(new Ficha(0));
+        }
+    }
+
     function dibujarTablero(){
         if(tablero==42){
             console.log("TABLERO DE 42 CASILLAS");
@@ -90,6 +104,7 @@ window.onload = function() {
 
     //funcion que dibuja el canvas dependiendo de la pantalla *
     function draw() {
+        console.log(fichas);
         if (pantalla == "mainMenu") {
             mainMenu();
         } else if (pantalla == "tablero") {
@@ -111,7 +126,24 @@ window.onload = function() {
         }
     });
 
-    cookies();
+    new Promise((resolve,reject) =>{
+        cookies();
+        resolve();
+    }).then(()=>{
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                inicializarJuego();
+                resolve();
+            }, 1000);
+        })
+    })
+
+    //cookies();
+    
+    
+    
+    
+    
     dibujarTablero();
     //timer del juego puesto a 60 fps
     
