@@ -11,7 +11,6 @@ window.onload = function() {
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
-
     class Ficha{
         constructor(casilla){
             this.casilla = casilla;
@@ -28,7 +27,7 @@ window.onload = function() {
             //console.log(cookie[1]);
             if(cookie[0] == "jugadores"){
                 jugadores=cookie[1];
-            }else{
+            }else if(cookie[0] == "tablero"){
                 tablero=cookie[1];
             }
         });
@@ -43,11 +42,17 @@ window.onload = function() {
     function dibujarTablero(){
         if(tablero==42){
             console.log("TABLERO DE 42 CASILLAS");
-            imgTablero.src = '../statics/img/tablero700.png'
+            imgTablero.src = '../statics/img/tablero700.png';
             imgTablero.addEventListener('load', ()=>{
-                ctx.drawImage(imgTablero, 150, 0, 700, 700);
+                ctx.drawImage(imgTablero, 350, 0, 700, 700);
             });
             //divTablero.src=""
+        }else{
+            console.log("Tablero de 21 casillas");
+            imgTablero.src = '../statics/img/Tablero21.png';
+            imgTablero.addEventListener('load', ()=>{
+                ctx.drawImage(imgTablero, 350, 0, 700, 700);
+            })
         }
     }
 
@@ -145,7 +150,7 @@ window.onload = function() {
     
     
     dibujarTablero();
-    //timer del juego puesto a 60 fps
-    
+    //canvas.height='100%';
+    //timer del juego puesto a 60 fps    
     setInterval(draw, 16);
 }
