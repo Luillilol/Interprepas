@@ -10,7 +10,7 @@ function dado() {
 
     function printrand(){
         let rand = Math.floor(Math.random() * (7 - 1)) + 1;
-        console.log(rand);
+        //console.log(rand);
         if(rand==1){
             ctx.drawImage(img,175*3,175*4,135,135,0,0,100,100);
         }
@@ -71,7 +71,17 @@ function dado() {
         })
     }
     
-
+    /*new Promise((resolve,reject) =>{
+        animacion();
+        resolve();
+    }).then(()=>{
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                return rand;
+                resolve();
+            }, 500);
+        })
+    })*/
     animacion();
     
 }

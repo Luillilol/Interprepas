@@ -4,22 +4,56 @@ window.onload = function() {
     let pantalla = "tablero";
     let canvas = document.getElementById("juego");
     let ctx = canvas.getContext("2d");
-    let colorFondo = "#000000";
-    let colorBotones = "#FEFA00";
-    let menuFont = new FontFace('menuFont', 'url(../../statics/fonts/Galindo/Galindo-Regular.tff)')
-    let botonesY = canvas.height/5;    
+    let rand;
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
     class Ficha{
-        constructor(casilla){
-            this.casilla = casilla;
+
+        x = 800;
+        y = 650;
+        l = 20;
+
+        avanzar(){
+            this.x-=10;
+            //this.y++;
         }
+        dibujar(){
+            ctx.beginPath();
+            ctx.fillStyle = "#00cc00";
+            ctx.fill();
+            ctx.rect(this.x,this.y,this.l,this.l);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
+    function drawPregunta(){
+        //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
+       
+        ctx.beginPath();
+            ctx.fillStyle="#0000cc";
+            console.log(ctx.fillStyle);
+            ctx.fill();
+            ctx.rect(0,0,canvas.clientWidth,canvas.height);
+            ctx.stroke();
+            ctx.fill();
+            //ctx.fillStyle="#ffffff";
+            ctx.fill();
+            ctx.rect(250,50,500,200);
+            ctx.rect(250,300,500,100);
+            ctx.rect(250,450,500,100);
+            ctx.rect(250,600,500,100);
+            ctx.rect(250,750,500,100);
+            ctx.fill();
+            ctx.stroke();
+        ctx.closePath();
     }
 
     
     //separar las cookies
     function cookies(){
+        console.log(document.cookie);
         let cookies = document.cookie;
         let cookiesArray = cookies.split("; ");
         cookiesArray.forEach(element => {
@@ -35,11 +69,12 @@ window.onload = function() {
 
     function inicializarJuego(){
         for(let i=0; i<jugadores; i++){
-            fichas.push(new Ficha(0));
+            fichas.push(new Ficha());
         }
     }
 
     function dibujarTablero(){
+        console.log('entre');
         if(tablero==42){
             console.log("TABLERO DE 42 CASILLAS");
             imgTablero.src = '../statics/img/tablero700.png';
@@ -58,88 +93,68 @@ window.onload = function() {
 
 
     function tableroEvents(e){
-        dado();
-    }
+        new Promise((resolve,reject) =>{
+            dado();
+            resolve();
+        }).then(()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    //drawPregunta();
+                    resolve();
+                }, 5000);
+            })
+        })
+        //rand = dado();
 
-    //eventos de los botones del menu
-    function menuEvents(e){
-        //checa el boton que se presiono
-        if(e.offsetY >= botonesY && e.offsetY <= botonesY + 50){
-            pantalla = "juego";
-        }
-        if(e.offsetY >= botonesY*2 && e.offsetY <= botonesY*2 + 50){
-            pantalla = "Instrucciones"
-        }
-        if(e.offsetY >= botonesY*3 && e.offsetY <= botonesY*3 + 50){
-            pantalla = "conf";
-        }
-    }
-
-    //dibuja el fondo del menu *
-    function fondoMenu(){
-        colorFondo = "#33CCFF";
-        ctx.rect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = colorFondo;
-        ctx.fill();
-    }
-
-    //dibuja los botones, recibe de parametros :
-    //text = string que se va a mostrar en el boton
-    //y = posicion de y en coordenadas cartesianas del la esquina superios izquierda del boton
-    //textX = separacion en x del texto del boton y la esquina izquierda
-    function boton(text, y, textX) {
-        ctx.font = "manuFont 30px";
-        ctx.beginPath();
-            ctx.
-            ctx.rect(canvas.height/4, y, 400, 50);
-            ctx.fillStyle = colorBotones;
-            ctx.fill();
-            ctx.textAlign = "Center"
-            ctx.strokeText(text, (canvas.height/4)+textX, y + 25);
-        ctx.closePath();
-    }
-
-    //funcion que que llama a las funciones de dibujo del menu
-    function mainMenu() {
-        fondoMenu();
-        boton("Jugar", botonesY, 150);
-        boton("¿Cómo Jugar?", botonesY*2, 100);
-        boton("Configuración", botonesY*3, 100)
     }
 
     //funcion que dibuja el canvas dependiendo de la pantalla *
     function draw() {
-        console.log(fichas);
-        if (pantalla == "mainMenu") {
-            mainMenu();
-        } else if (pantalla == "tablero") {
-            //tabelro();
-            ;
-        } else if (pantalla == "gameOver") {
-            gameOver();
-        }
+        new Promise((resolve,reject) =>{
+            dibujarTablero();
+            resolve();
+        }).then(()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    fichas[0].dibujar();
+                    resolve();
+                }, 1000);
+            })
+        })
+        
+        
     }
 
     //eventos de mouse para el canvas 
     canvas.addEventListener('mouseup', e => {
-        if(pantalla == 'mainMenu')
-        {
-            menuEvents(e);
-        }
-        else if(pantalla == 'tablero'){
-            tableroEvents(e);
-        }
+        tableroEvents(e);
     });
 
+    function init(){
+        new Promise((resolve,reject) =>{
+            cookies();
+            resolve();
+        }).then(()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    inicializarJuego();
+                    resolve();
+                }, 1000);
+            })
+        })
+    }
+    
+    
+
     new Promise((resolve,reject) =>{
-        cookies();
+        init();
         resolve();
     }).then(()=>{
         return new Promise((resolve)=>{
             setTimeout(()=>{
-                inicializarJuego();
+                draw();
                 resolve();
-            }, 1000);
+            }, 1500);
         })
     })
 
@@ -152,5 +167,5 @@ window.onload = function() {
     dibujarTablero();
     //canvas.height='100%';
     //timer del juego puesto a 60 fps    
-    setInterval(draw, 16);
+    //setInterval(draw, 16);
 }
