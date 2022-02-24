@@ -8,6 +8,8 @@ window.onload = function() {
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
+    let dadoButton = document.getElementById("botonDado");
+    let bloqueBoton = document.getElementById("bloqueBoton");
     class Ficha{
 
         x = 800;
@@ -126,7 +128,10 @@ window.onload = function() {
     }
 
     //eventos de mouse para el canvas 
-    canvas.addEventListener('mouseup', e => {
+
+    dadoButton.addEventListener('click', e => {
+        console.log("botondado");
+        bloqueBoton.style.display='block';
         tableroEvents(e);
     });
 
