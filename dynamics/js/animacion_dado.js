@@ -32,7 +32,7 @@ function dado() {
     }
 
     function drawsprite(ctx,img,x,y){
-        ctx.drawImage(img,175*x,175*y,135,135,0,0,100,100);
+        ctx.drawImage(img,175*x,175*y,135,135,100,100,100,100);
     }
 
     function step(){
