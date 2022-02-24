@@ -29,7 +29,7 @@ window.onload = function() {
             ctx.closePath();
         }
     }
-
+    //No sirve, pero muestra la pregunta.
     function drawPregunta(){
         //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
        
@@ -40,7 +40,7 @@ window.onload = function() {
             ctx.rect(0,0,canvas.clientWidth,canvas.height);
             ctx.stroke();
             ctx.fill();
-            //ctx.fillStyle="#ffffff";
+            ctx.fillStyle="#ffffff";
             ctx.fill();
             ctx.rect(250,50,500,200);
             ctx.rect(250,300,500,100);
