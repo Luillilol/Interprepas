@@ -8,6 +8,8 @@ window.onload = function() {
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
+    let dadoButton = document.getElementById("botonDado");
+    let bloqueBoton = document.getElementById("bloqueBoton");
     class Ficha{
 
         x = 800;
@@ -27,7 +29,7 @@ window.onload = function() {
             ctx.closePath();
         }
     }
-
+    //No sirve, pero muestra la pregunta.
     function drawPregunta(){
         //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
        
@@ -38,7 +40,7 @@ window.onload = function() {
             ctx.rect(0,0,canvas.clientWidth,canvas.height);
             ctx.stroke();
             ctx.fill();
-            //ctx.fillStyle="#ffffff";
+            ctx.fillStyle="#ffffff";
             ctx.fill();
             ctx.rect(250,50,500,200);
             ctx.rect(250,300,500,100);
@@ -126,7 +128,10 @@ window.onload = function() {
     }
 
     //eventos de mouse para el canvas 
-    canvas.addEventListener('mouseup', e => {
+
+    dadoButton.addEventListener('click', e => {
+        console.log("botondado");
+        bloqueBoton.style.display='block';
         tableroEvents(e);
     });
 
