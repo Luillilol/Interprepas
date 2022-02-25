@@ -105,7 +105,7 @@ window.onload = function() {
             //divTablero.src=""
         }else{
             console.log("Tablero de 21 casillas");
-            imgTablero.src = '../statics/img/Tablero21.png';
+            imgTablero.src = '../statics/img/tablero21.png';
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 350, 0, 700, 700);
             })
