@@ -12,6 +12,11 @@ window.addEventListener("load", ()=>{
     let p1R4 = document.getElementById("4Jugadores");
     let p2R1 = document.getElementById("tablero21");
     let p2R2 = document.getElementById("tablero42");
+    let color1 = document.getElementById("colorj1");
+    let color2 = document.getElementById("colorj2");
+    let color3 = document.getElementById("colorj3");
+    let color4 = document.getElementById("colorj4");
+    let colores=[];
 
     
 
@@ -34,7 +39,7 @@ window.addEventListener("load", ()=>{
 
     //Eventos del Modal con Cuestionario
     botonForm.addEventListener("click", ()=>{
-        //Genera las coockies respecto a las respuestas
+        //Genera las coockies respecto a las respuestas y los colores
         if(p1R1.checked){
             console.log("1Jugador");
             document.cookie = "jugadores=1";
@@ -55,9 +60,18 @@ window.addEventListener("load", ()=>{
             console.log("Tablero 42");
             document.cookie = "tablero=42";
         }
-
-
-        window.location.assign("./templates/juego.html");
+        
+        colores.push(color1.value);    
+        colores.push(color2.value);
+        colores.push(color3.value);
+        colores.push(color4.value);
+        console.log(colores);
+        for (let i = 0; i < 4 ;i++) {
+            document.cookie = "color"+(i+1)+"="+colores[i];
+        }
+           
+        
+            window.location.assign("./templates/juego.html");
 
     });
     cerrarVentana.addEventListener("click", ()=>{

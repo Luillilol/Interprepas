@@ -9,7 +9,14 @@ body{
 }
 /* ==============================CLASES ================================= */
 .tarjetasJugador{
-    
+    position:absolute;
+    width: 350px;
+    height: 130px;
+    border-radius: 30px;
+}
+.textoTarjetas{
+    font-family: Galindo_normal;
+    font-size: 1.5vw;
 }
 
 
@@ -48,10 +55,29 @@ body{
 #botonDado:hover{
     background-color: #008bfc;
     cursor: pointer;
-
 }
 
-
+/* =======================================TARJETAS JUGADOR=========================================== */
+#jug1{
+    top: 300px;
+    background-color: aqua;
+    left: 1%;
+}
+#jug2{
+    top: 550px;
+    background-color: aqua;
+    left: 1%;
+}
+#jug3{
+    top: 300px;
+    background-color: aqua;
+    left: 75%;
+}
+#jug4{
+    top: 550px;
+    background-color: aqua;
+    left: 75%;
+}
 
 
 

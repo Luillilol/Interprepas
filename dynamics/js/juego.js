@@ -8,8 +8,18 @@ window.onload = function() {
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
+    let colores=[];
+
+    let aciertos, fallidos, kmRecorridos; //Variables para el recuento de la tarjetas por jugador
+
     let dadoButton = document.getElementById("botonDado");
     let bloqueBoton = document.getElementById("bloqueBoton");
+    let tarjeta1 = document.getElementById("jug1");
+    let tarjeta2 = document.getElementById("jug2");
+    let tarjeta3 = document.getElementById("jug3");
+    let tarjeta4 = document.getElementById("jug4");
+    
+    
     class Ficha{
 
         x = 800;
@@ -59,12 +69,21 @@ window.onload = function() {
         let cookies = document.cookie;
         let cookiesArray = cookies.split("; ");
         cookiesArray.forEach(element => {
+            console.log(element);
             let cookie = element.split("=");
             //console.log(cookie[1]);
             if(cookie[0] == "jugadores"){
                 jugadores=cookie[1];
             }else if(cookie[0] == "tablero"){
                 tablero=cookie[1];
+            }else if(cookie[0] == "color1"){
+                colores[0]=cookie[1];
+            }else if(cookie[0] == "color2"){
+                colores[1]=cookie[1];
+            }else if(cookie[0] == "color3"){
+                colores[2]=cookie[1];
+            }else if(cookie[0] == "color4"){
+                colores[3]=cookie[1];
             }
         });
     }
@@ -91,6 +110,10 @@ window.onload = function() {
                 ctx.drawImage(imgTablero, 350, 0, 700, 700);
             })
         }
+        tarjeta1.style.backgroundColor=colores[0];
+        tarjeta2.style.backgroundColor=colores[1];
+        tarjeta3.style.backgroundColor=colores[2];
+        tarjeta4.style.backgroundColor=colores[3];
     }
 
 
@@ -113,7 +136,7 @@ window.onload = function() {
     //funcion que dibuja el canvas dependiendo de la pantalla *
     function draw() {
         new Promise((resolve,reject) =>{
-            dibujarTablero();
+            //dibujarTablero();
             resolve();
         }).then(()=>{
             return new Promise((resolve)=>{
@@ -124,16 +147,20 @@ window.onload = function() {
             })
         })
         
-        
     }
 
-    //eventos de mouse para el canvas 
-
+    //eventos de botón para el canvas 
     dadoButton.addEventListener('click', e => {
-        console.log("botondado");
         bloqueBoton.style.display='block';
         tableroEvents(e);
     });
+    function infoTarjetas(){
+        let txtTarj1 = document.getElementById("textjug1");
+        let txtTarj2 = document.getElementById("textjug2");
+        let txtTarj3 = document.getElementById("textjug3");
+        let txtTarj4 = document.getElementById("textjug4");
+        txtTarj1.innerHTML="HOLASDASDWWW";
+    }
 
     function init(){
         new Promise((resolve,reject) =>{
@@ -157,19 +184,16 @@ window.onload = function() {
     }).then(()=>{
         return new Promise((resolve)=>{
             setTimeout(()=>{
+                console.log(colores);
                 draw();
-                resolve();
+                resolve();                
             }, 1500);
         })
     })
-
-    //cookies();
-    
-    
-    
     
     
     dibujarTablero();
+    infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
     //canvas.height='100%';
     //timer del juego puesto a 60 fps    
     //setInterval(draw, 16);
