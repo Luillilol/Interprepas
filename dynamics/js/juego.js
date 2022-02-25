@@ -98,14 +98,14 @@ window.onload = function() {
         console.log('entre');
         if(tablero==42){
             console.log("TABLERO DE 42 CASILLAS");
-            imgTablero.src = '../statics/img/tablero700.png';
+            imgTablero.src = '../statics/img/Tableros42.png';
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 350, 0, 700, 700);
             });
             //divTablero.src=""
         }else{
             console.log("Tablero de 21 casillas");
-            imgTablero.src = '../statics/img/tablero21.png';
+            imgTablero.src = '../statics/img/Tableros21.png';
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 350, 0, 700, 700);
             })
