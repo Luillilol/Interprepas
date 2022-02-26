@@ -116,14 +116,14 @@ window.onload = function() {
             console.log("TABLERO DE 42 CASILLAS");
             imgTablero.src = '../statics/img/Tableros42.png';
             imgTablero.addEventListener('load', ()=>{
-                ctx.drawImage(imgTablero, 350, 0, 700, 700);
+                ctx.drawImage(imgTablero, 230, 50, 800, 600);
             });
             //divTablero.src=""
         }else{
             console.log("Tablero de 21 casillas");
             imgTablero.src = '../statics/img/Tableros21.png';
             imgTablero.addEventListener('load', ()=>{
-                ctx.drawImage(imgTablero, 350, 0, 700, 700);
+                ctx.drawImage(imgTablero, 250, 50, 700, 700);
             })
         }
         //Condicionales para aparecer tarjetas de jugador según su número.
