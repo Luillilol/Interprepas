@@ -18,7 +18,9 @@
         array_push($arr, $row);
     }
     // print_r($arr);
-    print_r($arr[0]);
-
-
+    //print_r($arr[0]);
+    //var_dump($_SERVER);
+    $json = trim(file_get_contents("php://input"));
+    $decode = json_decode($json, true);
+    var_dump($decode);
 ?>

@@ -22,7 +22,8 @@ window.onload = function() {
     let tarjeta2 = document.getElementById("jug2");
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
-    
+    let materia=1, preguntas_pasadas = [1,2,3];
+    let data, objConf; 
     
     class Ficha{
 
@@ -43,6 +44,17 @@ window.onload = function() {
             ctx.closePath();
         }
     }
+
+    
+    function peticion(){
+        var datos = { id_materia: materia, preguntas: preguntas_pasadas}
+        fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
+            return response.text();
+        }).then(function (text){
+            console.log(text);
+        });
+    }
+
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
         //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
@@ -236,9 +248,7 @@ window.onload = function() {
         })
     })
 
-    dibujarTablero();
-    infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
-    //canvas.height='100%';
-    //timer del juego puesto a 60 fps    
-    //setInterval(draw, 16);
+    //dibujarTablero();
+    //infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
+    peticion();
 }
