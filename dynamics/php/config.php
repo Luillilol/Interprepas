@@ -1,7 +1,7 @@
 <?php
-    define("DBUSER","php_helper");
+    define("DBUSER","root");
     define("DBHOST","localhost");
-    define("PASSWORD","C0NTR@s3niaS3GuR4");
+    define("PASSWORD","");
     define("DB","maraton");
 
     function connect()
