@@ -44,6 +44,8 @@ body{
     width: 280px;
     height: 110px;
     border-radius: 30px;
+    display: none;
+    text-align: center;
 }
 .textoTarjetas{
     font-family: Galindo_normal;

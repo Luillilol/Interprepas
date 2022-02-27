@@ -1,0 +1,62 @@
+:root{
+    --blue: #48C8FF;
+}
+
+@font-face {
+    font-family: anymice;
+    src: url("../fonts/any.ttf");
+}
+
+body{
+    background-color: #eeeed8;
+    color: #444343;
+    width: 100%;
+    height: 100%;
+    font-family: anymice;
+}
+
+h1{
+    position: absolute;
+    right: 44%;
+    top: 0%;
+}
+
+h2{
+    text-align: center;
+}
+
+h3{
+    color: #0a0b0c;
+    font-size: 1.3em;
+}
+
+p{
+    font-size: 1.2em
+}
+
+a{
+    color: #1e7cda;
+    text-decoration: none;
+}
+
+#empezar{
+    position: absolute;
+    top: 10%;
+    left: 12%;
+}
+
+#juego{
+    position: absolute;
+    top: 25%;
+    left: 12%;
+}
+
+.desplegable{
+    /*background-color: var(--blue);*/
+    width: 75%;
+    height: 5%;
+    border-radius: 5%;
+    /*text-align: center;*/
+    position: relative;
+    top: 55%;
+}

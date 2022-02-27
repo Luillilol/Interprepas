@@ -10,7 +10,11 @@ window.onload = function() {
     let fichas = [];
     let colores=[];
 
-    let aciertos, fallidos, kmRecorridos; //Variables para el recuento de la tarjetas por jugador
+        
+    let aciertosJug1, fallidosJug1, kmRecorridosJug1; //Variables para el recuento de la tarjetas por jugador 
+    let aciertosJug2, fallidosJug2, kmRecorridosJug2; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug3, fallidosJug3, kmRecorridosJug3; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug4, fallidosJug4, kmRecorridosJug4; //Variables para el recuento de la tarjetas por jugador
 
     let dadoButton = document.getElementById("botonDado");
     let bloqueBoton = document.getElementById("bloqueBoton");
@@ -110,10 +114,32 @@ window.onload = function() {
                 ctx.drawImage(imgTablero, 250, 50, 700, 700);
             })
         }
-        tarjeta1.style.backgroundColor=colores[0];
-        tarjeta2.style.backgroundColor=colores[1];
-        tarjeta3.style.backgroundColor=colores[2];
-        tarjeta4.style.backgroundColor=colores[3];
+        //Condicionales para aparecer tarjetas de jugador según su número.
+        if(jugadores==1){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+        }else if(jugadores==2){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+        }else if(jugadores==3){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+            tarjeta3.style.display='block';
+            tarjeta3.style.backgroundColor=colores[2];   
+        }else if(jugadores==4){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+            tarjeta3.style.display='block';
+            tarjeta3.style.backgroundColor=colores[2];  
+            tarjeta4.style.display='block';
+            tarjeta4.style.backgroundColor=colores[3];  
+        }      
     }
 
 
@@ -155,11 +181,30 @@ window.onload = function() {
         tableroEvents(e);
     });
     function infoTarjetas(){
-        let txtTarj1 = document.getElementById("textjug1");
-        let txtTarj2 = document.getElementById("textjug2");
-        let txtTarj3 = document.getElementById("textjug3");
-        let txtTarj4 = document.getElementById("textjug4");
-        txtTarj1.innerHTML="HOLASDASDWWW";
+        let txtTarj1 = document.getElementById("jug1");
+        let txtTarj2 = document.getElementById("jug2");
+        let txtTarj3 = document.getElementById("jug3");
+        let txtTarj4 = document.getElementById("jug4");
+
+        if(jugadores==1){
+            txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+        }else if(jugadores==2){
+            txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;    
+        }else if(jugadores==3){
+            txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+        }else if(jugadores==4){
+            txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+        }
+       
+
+
+       
     }
 
     function init(){
@@ -190,8 +235,7 @@ window.onload = function() {
             }, 1500);
         })
     })
-    
-    
+
     dibujarTablero();
     infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
     //canvas.height='100%';
