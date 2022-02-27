@@ -1,17 +1,48 @@
+:root{
+    --pink: #FFBEFF;
+    --green: #70F15B; 
+    --blue: #48C8FF;
+    --orange: #FFBC3A;
+    --fondo: #FEFFD9;
+}
 @font-face{
     font-family: Galindo_normal;
     src: url("../fonts/Galindo/Galindo-Regular.ttf");
 }
 body{
-    background-color: #FEFFCA;
+    background-color: var(--fondo);
     /*width: 100%;
     height: 100%;*/
 }
+/*==========================Formato Diseño================================*/
+    h1{
+        position: relative;
+        font-family: Galindo_normal;
+        text-align: center;
+        font-size: 5vh;
+        top: -25%;
+    }
+    #fondoTitulo{
+        position: absolute;
+        background-color: var(--pink);
+        width: 100%;
+        height: 7.5%;
+        top: 0%;
+        left: 0;
+        text-align: center;
+    }
+    #espacio{
+        position: absolute;
+        width: 100%;
+        height: 10%;
+        background-color: #1897ff;
+    }
+
 /* ==============================CLASES ================================= */
 .tarjetasJugador{
     position:absolute;
-    width: 350px;
-    height: 130px;
+    width: 280px;
+    height: 110px;
     border-radius: 30px;
 }
 .textoTarjetas{
@@ -27,10 +58,10 @@ body{
 }
 #botonDado{
     position: absolute;
-    background-color: #69dbf8;
+    background-color: var(--blue);
     width: 150px;
     height: 40px;
-    top: 180px;
+    top: 210px;
     left: 100px;
     border-radius: 15px;
 }
@@ -53,7 +84,7 @@ body{
 }
 
 #botonDado:hover{
-    background-color: #008bfc;
+    background-color: #1897ff;
     cursor: pointer;
 }
 
@@ -64,19 +95,19 @@ body{
     left: 1%;
 }
 #jug2{
-    top: 550px;
+    top: 480px;
     background-color: aqua;
     left: 1%;
 }
 #jug3{
     top: 300px;
     background-color: aqua;
-    left: 75%;
+    left: 79%;
 }
 #jug4{
-    top: 550px;
+    top: 480px;
     background-color: aqua;
-    left: 75%;
+    left: 79%;
 }
 
 
