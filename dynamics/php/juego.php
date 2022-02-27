@@ -17,7 +17,8 @@
         // var_dump($row);
         array_push($arr, $row);
     }
-    print_r($arr);
+    // print_r($arr);
+    print_r($arr[0]);
 
 
 ?>
