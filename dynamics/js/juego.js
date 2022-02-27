@@ -51,7 +51,7 @@ window.onload = function() {
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
             return response.text();
         }).then(function (text){
-            console.log(text);
+            console.log("a"+text);
         });
     }
 
