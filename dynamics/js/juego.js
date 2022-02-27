@@ -110,10 +110,32 @@ window.onload = function() {
                 ctx.drawImage(imgTablero, 350, 0, 700, 700);
             })
         }
-        tarjeta1.style.backgroundColor=colores[0];
-        tarjeta2.style.backgroundColor=colores[1];
-        tarjeta3.style.backgroundColor=colores[2];
-        tarjeta4.style.backgroundColor=colores[3];
+        //Condicionales para aparecer tarjetas de jugador según su número.
+        if(jugadores==1){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+        }else if(jugadores==2){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+        }else if(jugadores==3){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+            tarjeta3.style.display='block';
+            tarjeta3.style.backgroundColor=colores[2];   
+        }else if(jugadores==4){
+            tarjeta1.style.display='block';
+            tarjeta1.style.backgroundColor=colores[0];  
+            tarjeta2.style.display='block';
+            tarjeta2.style.backgroundColor=colores[1];  
+            tarjeta3.style.display='block';
+            tarjeta3.style.backgroundColor=colores[2];  
+            tarjeta4.style.display='block';
+            tarjeta4.style.backgroundColor=colores[3];  
+        }      
     }
 
 
@@ -159,7 +181,7 @@ window.onload = function() {
         let txtTarj2 = document.getElementById("textjug2");
         let txtTarj3 = document.getElementById("textjug3");
         let txtTarj4 = document.getElementById("textjug4");
-        txtTarj1.innerHTML="HOLASDASDWWW";
+       
     }
 
     function init(){
