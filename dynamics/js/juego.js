@@ -11,10 +11,10 @@ window.onload = function() {
     let colores=[];
 
         
-    let aciertosJug1, fallidosJug1, kmRecorridosJug1; //Variables para el recuento de la tarjetas por jugador 
-    let aciertosJug2, fallidosJug2, kmRecorridosJug2; //Variables para el recuento de la tarjetas por jugador
-    let aciertosJug3, fallidosJug3, kmRecorridosJug3; //Variables para el recuento de la tarjetas por jugador
-    let aciertosJug4, fallidosJug4, kmRecorridosJug4; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug1=0, fallidosJug1=0, kmRecorridosJug1=0; //Variables para el recuento de la tarjetas por jugador 
+    let aciertosJug2=0, fallidosJug2=0, kmRecorridosJug2=0; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug3=0, fallidosJug3=0, kmRecorridosJug3=0; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug4=0, fallidosJug4=0, kmRecorridosJug4=0; //Variables para el recuento de la tarjetas por jugador
 
     let dadoButton = document.getElementById("botonDado");
     let bloqueBoton = document.getElementById("bloqueBoton");
@@ -248,7 +248,7 @@ window.onload = function() {
         })
     })
 
-    //dibujarTablero();
-    //infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
+    dibujarTablero();
+    infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
     peticion();
 }
