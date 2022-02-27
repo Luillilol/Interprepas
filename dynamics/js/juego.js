@@ -4,12 +4,12 @@ window.onload = function() {
     let pantalla = "tablero";
     let canvas = document.getElementById("juego");
     let ctx = canvas.getContext("2d");
-    let rand;
+    let rand=0;
     let jugadores; // Variable de 
     let tablero;   // las cookies
     let fichas = [];
     let colores=[];
-
+    
         
     let aciertosJug1=0, fallidosJug1=0, kmRecorridosJug1=0; //Variables para el recuento de la tarjetas por jugador 
     let aciertosJug2=0, fallidosJug2=0, kmRecorridosJug2=0; //Variables para el recuento de la tarjetas por jugador
@@ -22,9 +22,378 @@ window.onload = function() {
     let tarjeta2 = document.getElementById("jug2");
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
+    let inicioJuego = document.getElementById("comienzo");
+    let numJugadores=0;
+
+    let ordenJugadores =[];
+    let valorPrimerTiro=[];
+    let varcontrol = 0;
     let materia=1, preguntas_pasadas = [1,2,3];
     let data, objConf; 
     
+
+    //Determina el orden de juego de los jugadores
+    function arregloOrdenPlay(){
+        //Cada condicional determinaa las combinaciones posibles para determinar el orden
+        //en el que irán los jugadores
+        console.log(numJugadores);
+        console.log("Tiros "+valorPrimerTiro);
+    
+
+        if(numJugadores==1)
+        {
+            console.log("uno");
+            ordenJugadores.push(1);
+            console.log(ordenJugadores);
+        }
+        else if(numJugadores==2)
+        {
+            console.log("Doss");
+            if(valorPrimerTiro[0]>=valorPrimerTiro[1])
+            {
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+            }
+            else if(valorPrimerTiro[1]>=valorPrimerTiro[0]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+            }
+
+        }else if(numJugadores==3)
+        {
+            console.log("tres");
+            console.log(valorPrimerTiro[0]);
+            if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+            }
+
+
+        }else if(numJugadores==4)
+        {
+            console.log("cuatro");
+            if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+
+
+            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+
+            }else if(valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+
+
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+                ordenJugadores.push(4);
+
+            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+
+            }else if(valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
+                ordenJugadores.push(3);
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+
+
+                
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+                ordenJugadores.push(3);
+
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(2);
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+                ordenJugadores.push(1);
+                ordenJugadores.push(2);
+
+            }else if(valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
+                ordenJugadores.push(4);
+                ordenJugadores.push(3);
+                ordenJugadores.push(2);
+                ordenJugadores.push(1);
+            }
+        }
+        console.log("Orden jugadrores "+ordenJugadores);
+    }
+
+    //Dinuja dado y obtiene valores de 1 a 6
+    function dado() {
+        countAnimacion = 0;
+        let canvas = document.getElementById('juego');
+        let ctx = canvas.getContext("2d");
+        let img = new Image();
+        img.src = "../statics/img/dadodef.png"
+        let pos = [0,0];
+        let numDado=5;
+        rand = Math.floor(Math.random() * (7 - 1)) + 1;
+    
+
+        
+        //TODO optimizar funcion printrand
+        
+        //Imprime número aleatorio de juego
+        function printrand(){
+            
+            console.log(rand);
+            if(rand==1){
+                ctx.drawImage(img,175*3,175*4,135,135,100,50,100,100);
+            }
+            if(rand==2){
+                ctx.drawImage(img,175*3,175*1,135,135,100,50,100,100);
+            }
+            if(rand==3){
+                ctx.drawImage(img,175*3,0,135,135,100,50,100,100);
+            }
+            if(rand==4){
+                ctx.drawImage(img,175*3,175*7,135,135,100,50,100,100);
+            }
+            if(rand==5){
+                ctx.drawImage(img,175*3,175*6,135,135,100,50,100,100);
+            }
+            if(rand==6){
+                ctx.drawImage(img,175*3,175*3,135,135,100,50,100,100);
+            }
+            //almacena primeros valores de dado
+            if(valorPrimerTiro.length<numJugadores){
+                valorPrimerTiro.push(rand);
+               
+            }
+           /* if(valorPrimerTiro.length<1)
+            {
+                alert("Para iniciar el juego cada jugador tirará el dado\nPrimer jugador, es tu turno de tirar el dado");
+                valorPrimerTiro.push(rand);
+            }*/
+            
+           
+        }
+       
+        function drawsprite(ctx,img,x,y){
+            ctx.drawImage(img,175*x,175*y,135,135,100,50,100,100);
+        }
+    
+        function step(){
+            countAnimacion++;
+            if(countAnimacion % 2 === 0){
+                ctx.clearRect(100,50,100,100);
+                drawsprite(ctx,img,pos[0], pos[1]);
+                if(pos[0]<15){
+                    pos[0]++;
+                }
+                else
+                {
+                    pos[0]=0;
+                    pos[1]++;
+                }
+            }
+            if(pos[1]<9){
+                requestAnimationFrame(step);
+            }else{
+                countAnimacion = 0;
+                pos = [0,0];
+            }
+        }
+        
+    
+        function animacion(){
+            new Promise((resolve,reject) => {
+                requestAnimationFrame(step);
+                resolve();
+            }).then(()=>{
+               return new Promise((resolve)=>{
+                   setTimeout(()=>{
+                        printrand();
+                        console.log(valorPrimerTiro);
+                        resolve();
+                        
+                   }, 4800)
+               }).then(()=>{
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        if(valorPrimerTiro.length<numJugadores)
+                        {
+                            alert("Siguiente jugador, es tu turno de tirar el dado");
+                        }
+                        else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
+                        {
+                            
+                            arregloOrdenPlay();
+                            
+                            console.log(ordenJugadores);
+                            varcontrol++;
+
+                        }
+                       
+                        resolve();
+                        
+                    }, 1500)
+                })
+                
+               })
+            })
+          
+        }
+        
+        /*new Promise((resolve,reject) =>{
+            animacion();
+            resolve();
+        }).then(()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    return rand;
+                    resolve();
+                }, 500);
+            })
+        })*/
+        animacion();
+        
+        
+    }
+    
+   
+
+
+
+
+
+
+
+
+
     class Ficha{
 
         x = 800;
@@ -90,6 +459,7 @@ window.onload = function() {
             //console.log(cookie[1]);
             if(cookie[0] == "jugadores"){
                 jugadores=cookie[1];
+                numJugadores=cookie[1];
             }else if(cookie[0] == "tablero"){
                 tablero=cookie[1];
             }else if(cookie[0] == "color1"){
@@ -158,6 +528,7 @@ window.onload = function() {
     function tableroEvents(e){
         new Promise((resolve,reject) =>{
             dado();
+            
             resolve();
         }).then(()=>{
             return new Promise((resolve)=>{
@@ -167,8 +538,8 @@ window.onload = function() {
                 }, 5000);
             })
         })
-        //rand = dado();
-
+     
+       
     }
 
     //funcion que dibuja el canvas dependiendo de la pantalla *
@@ -188,10 +559,50 @@ window.onload = function() {
     }
 
     //eventos de botón para el canvas 
-    dadoButton.addEventListener('click', e => {
-        bloqueBoton.style.display='block';
-        tableroEvents(e);
-    });
+    function girarDado(){
+        dadoButton.addEventListener('click', e => {
+            bloqueBoton.style.display='block';
+            tableroEvents(e);
+        });
+    }
+    
+ //Evento para inicializar juego SE VA A IMPLEMENTAR PARA QUE AVISE EL ORDEN DE LOS JUGADORES, PERO YA ESTÁ EN EL ARREGLO
+ // comenzar.addEventListener('click', e =>{
+    function iniciarJuego(){
+        girarDado();
+       
+     
+        console.log(numJugadores);
+        console.log(valorPrimerTiro);
+        if(valorPrimerTiro.length >= 1 && valorPrimerTiro.length<numJugadores){
+            alert("Siguiente jugador, es tu turno de tirar el dado");
+        }
+        
+            
+            //si el valor de leghn es uno, pues oslo hay un jugador jugando 
+            //si es 2  hace la comparacion entre los 2 y asi.
+    
+        if(numJugadores==1){
+           
+        }
+        else if(numJugadores==2){
+           
+        }
+        else if(numJugadores==3){
+           
+
+        }else if(numJugadores==4){
+           
+        }
+        console.log();
+            
+     
+    }
+
+
+
+
+
     function infoTarjetas(){
         let txtTarj1 = document.getElementById("jug1");
         let txtTarj2 = document.getElementById("jug2");
@@ -248,7 +659,19 @@ window.onload = function() {
         })
     })
 
+    iniciarJuego();
+    
     dibujarTablero();
     infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
+    //canvas.height='100%';
+    //timer del juego puesto a 60 fps    
+    //setInterval(draw, 16);
+    
+   
+    console.log("Se imprime esto");
+    console.log(numJugadores);
+    
+   
+    
     peticion();
 }
