@@ -1,8 +1,11 @@
 <?php
+    //incluye el php que establce la conexión
     include("./config.php");
+    $conexion = connect();
+
+    //genera un numero random para la peticion de la pregunta
     $preguntaAzar= rand(1, 20);
     $numPregunta = ($preguntaAzar*4)-1;
-    $conexion = connect();
     
     $pregunta1 = [];
     $pregunta2 = [];
