@@ -1,7 +1,6 @@
 window.onload = function() {
     const imgTablero = new Image(1000, 1000); //almacena la imagen del tablero
     //variables globales
-    let pantalla = "tablero";
     let canvas = document.getElementById("juego");
     let ctx = canvas.getContext("2d");
     let rand=0;
@@ -30,10 +29,128 @@ window.onload = function() {
     let valorPrimerTiro=[];
     let varcontrol = 0;
     let materia=1, preguntas_pasadas = [1,2,3];
-    let data, objConf; 
     let stringPetición;
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
     let prueba, prueba2;
+
+
+    //declaracion de la clase ficha 
+    class Ficha{
+        lado = 15;
+        //pide la posicion y el color de la ficha
+        constructor(x,y,color){
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.casilla = 0;
+        }
+
+        //dibuja la ficha en el tablero
+        dibujar(){
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.fillRect(this.x,this.y,this.lado,this.lado);
+            ctx.stroke();
+            ctx.closePath();
+           
+        }
+
+        //permite a la ficha avanzar en el tablero
+        avanzar(){
+            this.casilla++;
+            if(tablero==21){
+                if(this.casilla == 1){
+                    this.x += 150;
+                }
+                else if(this.casilla<5){
+                    this.x += 110;
+                }
+                else if(this.casilla<7){
+                    this.y -= 70;
+                }
+                else if(this.casilla<11){
+                    this.x -= 110;
+                }
+                else if(this.casilla<13){
+                    this.y -= 70;
+                }
+                else if(this.casilla<17){
+                    this.x += 110;
+                }
+                else if(this.casilla<19){
+                    this.y -= 70;
+                }
+                else if(this.casilla<23){
+                    this.x -= 110;
+                }
+            }else{
+                if(this.casilla == 7){
+                    this.x -= 17;
+                }
+                if(this.casilla == 13){
+                    this.y -= 25;
+                }
+                if(this.casilla == 19){
+                    this.x += 35;
+                }
+                if(this.casilla == 24){
+                    this.y += 26;
+                }
+                if(this.casilla == 29){
+                    this.x -= 25;
+                }
+                if(this.casilla == 33){
+                    this.y -= 29;
+                }
+                if(this.casilla == 37){
+                    this.x += 13;
+                    this.y -= 5;
+                }
+                if(this.casilla == 40){
+                    this.y += 21;
+                }
+                if(this.casilla < 7){
+                    this.x -= 100;
+                }
+                else if(this.casilla < 13){
+                    this.y -= 80;
+                }
+                else if(this.casilla < 19){
+                    this.x += 95;
+                }
+                else if(this.casilla < 24){
+                    this.y += 80;
+                }else if(this.casilla < 29){
+                    this.x -= 95;
+                }else if(this.casilla<33){
+                    this.y -= 80;
+                }else if(this.casilla<37){
+                    this.x += 100;
+                }else if(this.casilla<40){
+                    this.y += 80;
+                }else if(this.casilla<43){
+                    this.x -= 100;
+                }else if(this.casilla==43){
+                    this.y -= 100;
+                }
+
+
+            }
+
+            new Promise((resolve,reject) =>{
+                dibujarTablero();
+                resolve();
+            }).then(()=>{
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        this.dibujar();
+                        resolve();                
+                    }, 50);
+                })
+            })
+        }
+    }
     
 
     //Determina el orden de juego de los jugadores
@@ -255,108 +372,7 @@ window.onload = function() {
 
 
 
-    class Ficha{
-        l = 15;
-        constructor(x,y,color){
-            this.x = x;
-            this.y = y;
-            this.color = color;
-            this.casilla = 0;
-        }
-
-        dibujar(){
-            ctx.beginPath();
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.fillRect(this.x,this.y,this.l,this.l);
-            ctx.stroke();
-            ctx.closePath();
-           
-        }
-
-        avanzar(){
-            this.casilla++;
-            if(tablero==21){
-                if(this.casilla == 1){
-                    this.x += 150;
-                }
-                else if(this.casilla<5){
-                    this.x += 110;
-                }
-                else if(this.casilla<7){
-                    this.y -= 70;
-                }
-                else if(this.casilla<11){
-                    this.x -= 110;
-                }
-                else if(this.casilla<13){
-                    this.y -= 70;
-                }
-                else if(this.casilla<17){
-                    this.x += 110;
-                }
-                else if(this.casilla<19){
-                    this.y -= 70;
-                }
-                else if(this.casilla<23){
-                    this.x -= 110;
-                }
-            }else{
-                if(this.casilla == 7){
-                    this.x -= 17;
-                }
-                if(this.casilla == 13){
-                    this.y -= 25;
-                }
-                if(this.casilla == 19){
-                    this.x += 35;
-                }
-                if(this.casilla == 24){
-                    this.y += 26;
-                }
-                if(this.casilla == 29){
-                    this.x -= 25;
-                }
-                if(this.casilla == 33){
-                    this.y -= 29;
-                }
-                if(this.casilla == 37){
-                    this.x += 13;
-                    this.y -= 5;
-                }
-                if(this.casilla == 40){
-                    this.y += 21;
-                }
-                if(this.casilla < 7){
-                    this.x -= 100;
-                }
-                else if(this.casilla < 13){
-                    this.y -= 80;
-                }
-                else if(this.casilla < 19){
-                    this.x += 95;
-                }
-                else if(this.casilla < 24){
-                    this.y += 80;
-                }else if(this.casilla < 29){
-                    this.x -= 95;
-                }else if(this.casilla<33){
-                    this.y -= 80;
-                }else if(this.casilla<37){
-                    this.x += 100;
-                }else if(this.casilla<40){
-                    this.y += 80;
-                }else if(this.casilla<43){
-                    this.x -= 100;
-                }else if(this.casilla==43){
-                    this.y -= 100;
-                }
-
-
-            }
-            this.dibujar();
-        }
-    }
+   
 
     
     function peticion(){
@@ -517,20 +533,9 @@ window.onload = function() {
 
     //funcion que dibuja el canvas dependiendo de la pantalla *
     function draw() {
-        new Promise((resolve,reject) =>{
-            //dibujarTablero();
-            resolve();
-        }).then(()=>{
-            return new Promise((resolve)=>{
-                setTimeout(()=>{
-                    fichas.forEach(Element=>{
-                        Element.dibujar();
-                    })
-                    resolve();
-                }, 1000);
-            })
+        fichas.forEach(Element=>{
+            Element.dibujar();
         })
-        
     }
 
     //eventos de botón para el canvas 
@@ -609,7 +614,7 @@ window.onload = function() {
             setTimeout(()=>{
                 draw();
                 resolve();                
-            }, 1500);
+            }, 1001);
         })
     })
 
