@@ -5,12 +5,16 @@ function dado() {
     let img = new Image();
     img.src = "../statics/img/dadodef.png"
     let pos = [0,0];
+    let numDado=5;
+   
 
     //TODO optimizar funcion printrand
-
+    
+    //Imprime número aleatorio de juego
     function printrand(){
-        let rand = Math.floor(Math.random() * (7 - 1)) + 1;
-        //console.log(rand);
+        rand = Math.floor(Math.random() * (7 - 1)) + 1;
+ 
+        console.log(rand);
         if(rand==1){
             ctx.drawImage(img,175*3,175*4,135,135,100,50,100,100);
         }
@@ -29,6 +33,7 @@ function dado() {
         if(rand==6){
             ctx.drawImage(img,175*3,175*3,135,135,100,50,100,100);
         }
+       
     }
 
     function drawsprite(ctx,img,x,y){
@@ -64,9 +69,9 @@ function dado() {
         }).then(()=>{
            return new Promise((resolve)=>{
                setTimeout(()=>{
-                   printrand();
-                   resolve();
-               }, 5000)
+                    printrand();
+                    resolve();
+               }, 4800)
            })
         })
     }
@@ -83,5 +88,6 @@ function dado() {
         })
     })*/
     animacion();
-    
+  
 }
+
