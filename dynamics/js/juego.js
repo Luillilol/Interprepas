@@ -389,7 +389,7 @@ window.onload = function() {
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
             return response.text();
         }).then(function (text){
-            /*stringPetición = text;
+            stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
            
             fetchPregunta = stringPetición.split(';');
@@ -416,7 +416,8 @@ window.onload = function() {
             console.log(fetchRes4);
             console.log(fetchKilometro);
             
-            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");*/
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
+        
            console.log(text);
 
             
@@ -432,7 +433,20 @@ window.onload = function() {
         respuesta1Tarjeta.innerHTML='Complemento';
         respuesta2Tarjeta.innerHTML='Suma';
         respuesta3Tarjeta.innerHTML='Intersección';
-        respuesta4Tarjeta.innerHTML='Diferencia';        
+        respuesta4Tarjeta.innerHTML='Diferencia';  
+        
+        respuesta1Tarjeta.addEventListener('click', ()=>{
+            console.log("RESPUESTA1");
+        });
+        respuesta2Tarjeta.addEventListener('click', ()=>{
+            console.log("RESPUESTA2");
+        })
+        respuesta3Tarjeta.addEventListener('click', ()=>{
+            console.log("RESPUESTA3");
+        })
+        respuesta4Tarjeta.addEventListener('click', ()=>{
+            console.log("RESPUESTA4");
+        })
     }
 
     
