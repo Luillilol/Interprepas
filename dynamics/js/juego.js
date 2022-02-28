@@ -35,6 +35,7 @@ window.onload = function() {
     let infoAcierto = document.getElementById("divAcierto");
     let infoFallo = document.getElementById("divFallo");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
+
     let numJugadores=0; 
     let orden = [];
     let valorPrimerTiro=[];
@@ -331,9 +332,43 @@ window.onload = function() {
             }
         }
         
-    
+        function ordenanza(){
+            if(valorPrimerTiro.length<numJugadores)
+            {
+                alert("Siguiente jugador, es tu turno de tirar el dado");
+                dadoButton.style.visibility = 'visible';
+            }
+            else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
+            {
+                
+                arregloOrdenPlay();
+                console.log(orden);
+                
+                varcontrol++;
+                if(numJugadores==1){
+                    alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                }
+                else if(numJugadores==2){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                        "\n¡Mucha suerte, gánenle a la ignorancia!");
+                }
+                else if(numJugadores==3){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                }else if(numJugadores==4){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                }
+                
+                inicioJuego.style.visibility = 'visible';
+
+            }
+        }
+
+
         function animacion(){
             new Promise((resolve,reject) => {
+                dadoButton.style.visibility = 'hidden';
                 requestAnimationFrame(step);
                 resolve();
             }).then(()=>{
@@ -342,23 +377,10 @@ window.onload = function() {
                         printrand();
                         resolve();        
                    }, 5000)
-               }).then(()=>{
+            }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
-                        if(valorPrimerTiro.length<numJugadores)
-                        {
-                            alert("Siguiente jugador, es tu turno de tirar el dado");
-                        }
-                        else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
-                        {
-                            
-                            arregloOrdenPlay();
-                            
-                            
-                            varcontrol++;
-
-                        }
-                       
+                        ordenanza();
                         resolve();
                         
                     }, 1500)
@@ -366,6 +388,7 @@ window.onload = function() {
                 
                })
             })
+       
           
         }
         animacion();

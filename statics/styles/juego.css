@@ -101,6 +101,7 @@ body{
     position: absolute;
     background-color: var(--blue);
     width: 150px;
+    height: 40px;
     top: 210px;
     left: 100px;
     border-radius: 15px;
@@ -123,15 +124,19 @@ body{
 }
 #comienzo{
     position: absolute;
-    width: 139px;
-    top: 775px;
-    left: 50%;
+    width: 130px;
+    top: 95px;
+    left: 1160px;
     border-radius: 15px;
     background-color: var(--green);
     text-align: center;
     font-family: Galindo_normal;
     font-size: 3vh;
+
+    visibility:hidden;
 }
+
+
 #comienzo:hover{
     background-color: #00b41e;
     cursor: pointer;
@@ -149,7 +154,7 @@ body{
     height: 100%;
     background-color: rgb(0, 0, 0);
     opacity: 0.9;
-    display: none;
+    display: none; 
 }
 #tarjetaPregunta{
     position: absolute;
