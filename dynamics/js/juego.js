@@ -11,10 +11,10 @@ window.onload = function() {
     let colores=[];
     
         
-    let aciertosJug1, fallidosJug1, kmRecorridosJug1; //Variables para el recuento de la tarjetas por jugador 
-    let aciertosJug2, fallidosJug2, kmRecorridosJug2; //Variables para el recuento de la tarjetas por jugador
-    let aciertosJug3, fallidosJug3, kmRecorridosJug3; //Variables para el recuento de la tarjetas por jugador
-    let aciertosJug4, fallidosJug4, kmRecorridosJug4; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug1=0, fallidosJug1=0, kmRecorridosJug1=0; //Variables para el recuento de la tarjetas por jugador 
+    let aciertosJug2=0, fallidosJug2=0, kmRecorridosJug2=0; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug3=0, fallidosJug3=0, kmRecorridosJug3=0; //Variables para el recuento de la tarjetas por jugador
+    let aciertosJug4=0, fallidosJug4=0, kmRecorridosJug4=0; //Variables para el recuento de la tarjetas por jugador
 
     let dadoButton = document.getElementById("botonDado");
     let bloqueBoton = document.getElementById("bloqueBoton");
@@ -28,6 +28,9 @@ window.onload = function() {
     let ordenJugadores =[];
     let valorPrimerTiro=[];
     let varcontrol = 0;
+    let materia=1, preguntas_pasadas = [1,2,3];
+    let data, objConf; 
+    
 
     //Determina el orden de juego de los jugadores
     function arregloOrdenPlay(){
@@ -410,6 +413,17 @@ window.onload = function() {
             ctx.closePath();
         }
     }
+
+    
+    function peticion(){
+        var datos = { id_materia: materia, preguntas: preguntas_pasadas}
+        fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
+            return response.text();
+        }).then(function (text){
+            console.log(text);
+        });
+    }
+
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
         //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
@@ -659,4 +673,5 @@ window.onload = function() {
     
    
     
+    peticion();
 }
