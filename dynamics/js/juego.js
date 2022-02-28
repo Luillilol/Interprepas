@@ -426,6 +426,22 @@ window.onload = function() {
 
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
+        function funcRespuesta(){
+            console.log("OWO");
+            new Promise((resolve, reject) => {
+                console.log("CLICK EN LA RESPUESTA");
+                resolve();
+            }).then(()=>{
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        fondoPreguntaTarjeta.style.display = 'none';
+                        tarjetaPreguntaTarjeta.style.display = 'none';
+                        console.log("HOLADASDAD");
+                        resolve();
+                    }, 2000)
+                })
+            })
+        }
         console.log("WOOWO");
         numKilometroTarjeta.innerHTML= '2KM';
         materiaTarjeta.innerHTML='MATEMÁTICAS'
@@ -437,15 +453,19 @@ window.onload = function() {
         
         respuesta1Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA1");
+            funcRespuesta();
         });
         respuesta2Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA2");
+            funcRespuesta();
         })
         respuesta3Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA3");
+            funcRespuesta();
         })
         respuesta4Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA4");
+            funcRespuesta();
         })
     }
 

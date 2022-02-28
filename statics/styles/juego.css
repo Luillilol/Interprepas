@@ -66,6 +66,11 @@ body{
     cursor: pointer;
 
 }
+.respuestasTarjetasClass:active{
+    transition: background-color .2s;
+    background-color: #f5af2e;
+}
+
 .classDivTarjeta{
     
     font-family: Galindo_normal;
