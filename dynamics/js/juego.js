@@ -32,12 +32,14 @@ window.onload = function() {
     let respuesta2Tarjeta = document.getElementById("idRespuesta2");
     let respuesta3Tarjeta = document.getElementById("idRespuesta3");
     let respuesta4Tarjeta = document.getElementById("idRespuesta4");
+    let infoAcierto = document.getElementById("divAcierto");
+    let infoFallo = document.getElementById("divFallo");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
     let numJugadores=0; 
     let orden = [];
     let valorPrimerTiro=[];
     let varcontrol = 0;
-    let materia=1, preguntas_pasadas = [21,22,23,24,25,26,27,28,29,30,121,102,103,104,105,106,107,108,10,109,110];
+    let materia=5 , preguntas_pasadas = [];
     let stringPetición;
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
     let prueba, prueba2;
@@ -391,7 +393,7 @@ window.onload = function() {
         }).then(function (text){
             stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
-           
+            console.log(text);
             fetchPregunta = stringPetición.split(';');
             fetchRespuestas = fetchPregunta[1].split('&');
             
@@ -409,16 +411,16 @@ window.onload = function() {
 
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
 
-            console.log(fetchPregunta);
-            console.log(fetchRes1);
-            console.log(fetchRes2);
-            console.log(fetchRes3);
-            console.log(fetchRes4);
-            console.log(fetchKilometro);
+            // console.log(fetchPregunta);
+            // console.log(fetchRes1);
+            // console.log(fetchRes2);
+            // console.log(fetchRes3);
+            // console.log(fetchRes4);
+            // console.log(fetchKilometro);
             
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
         
-           console.log(text);
+           
 
             
         });
@@ -426,16 +428,26 @@ window.onload = function() {
 
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
-        function funcRespuesta(){
-            console.log("OWO");
+        function funcRespuesta(res){
+           // console.log('RESPUESTA ES: '+res);
             new Promise((resolve, reject) => {
                 console.log("CLICK EN LA RESPUESTA");
+                if(res ==1){
+                    console.log("RESPUESTA CORRECTA");
+                    infoAcierto.style.display='block';
+                }else{
+                    console.log("RESPUESTA INCORRECTA");
+                    infoFallo.style.display='block';
+                }
                 resolve();
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
                         fondoPreguntaTarjeta.style.display = 'none';
                         tarjetaPreguntaTarjeta.style.display = 'none';
+                        infoFallo.style.display='none';
+                        infoAcierto.style.display='none';
+
                         console.log("HOLADASDAD");
                         resolve();
                     }, 2000)
@@ -443,29 +455,30 @@ window.onload = function() {
             })
         }
         console.log("WOOWO");
-        numKilometroTarjeta.innerHTML= '2KM';
-        materiaTarjeta.innerHTML='MATEMÁTICAS'
-        preguntaTarjeta.innerHTML='Las siguientes son operaciones que se pueden realizar entre conjuntos, excepto:'
-        respuesta1Tarjeta.innerHTML='Complemento';
-        respuesta2Tarjeta.innerHTML='Suma';
-        respuesta3Tarjeta.innerHTML='Intersección';
-        respuesta4Tarjeta.innerHTML='Diferencia';  
+        numKilometroTarjeta.innerHTML= fetchKilometro;
+        materiaTarjeta.innerHTML= 'Materia';
+        preguntaTarjeta.innerHTML= fetchPregunta[0];
+        respuesta1Tarjeta.innerHTML= fetchRes1[0];
+        respuesta2Tarjeta.innerHTML=fetchRes2[0];
+        respuesta3Tarjeta.innerHTML=fetchRes3[0];
+        respuesta4Tarjeta.innerHTML=fetchRes4[0];  
         
         respuesta1Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA1");
-            funcRespuesta();
+
+            funcRespuesta(fetchRes1[1]);
         });
         respuesta2Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA2");
-            funcRespuesta();
+            funcRespuesta(fetchRes2[1]);
         })
         respuesta3Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA3");
-            funcRespuesta();
+            funcRespuesta(fetchRes3[1]);
         })
         respuesta4Tarjeta.addEventListener('click', ()=>{
             console.log("RESPUESTA4");
-            funcRespuesta();
+            funcRespuesta(fetchRes4[1]);
         })
     }
 
@@ -683,10 +696,21 @@ window.onload = function() {
     
     dibujarTablero();
     infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
-    drawPregunta();//metodo de prueba para mostrar carta de pregunta 
+    // //metodo de prueba para mostrar carta de pregunta 
     
     
-   
+    new Promise((resolve, reject) =>{
+        console.log("Promesa Petición");
+        peticion();
+        resolve();
+    }).then(()=>{
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log("PROMESA DRAW PREGUNTA");
+                drawPregunta();
+            }, 2000)
+        })
+    })
     
-    peticion();
+    
 }

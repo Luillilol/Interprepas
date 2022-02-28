@@ -58,10 +58,9 @@
     $idSeleccionado = buscarPregunta($numMateria,$conexion,$preguntasPasadas);
 
 
-    $peticion = "SELECT id_pregunta, pregunta, respuesta, materia, boolCorrect, kilómetro FROM Preguntas 
+    $peticion = "SELECT id_pregunta, pregunta, respuesta, boolCorrect, kilómetro FROM Preguntas 
                 NATURAL JOIN Respuestas 
-                NATURAL JOIN Materias
-                WHERE Materias.id_materia=".$numMateria;
+                WHERE Preguntas.id_pregunta=".$idSeleccionado;
     mysqli_real_escape_string($conexion, $peticion);
     $query = mysqli_query($conexion, $peticion);
     // $row_instrucciones = mysqli_fetch_array($query);
@@ -76,10 +75,11 @@
     }
 
     /*Se asigna cada arreglo de pregunta en una variable*/
-    $pregunta1 = $arr[($numPregunta) + 1];
-    $pregunta2 = $arr[($numPregunta) + 2];
-    $pregunta3 = $arr[($numPregunta) + 3];
-    $pregunta4 = $arr[($numPregunta) + 4];
+    $pregunta1 = $arr[0];
+    $pregunta2 = $arr[1];
+    $pregunta3 = $arr[2];
+    $pregunta4 = $arr[3];
+
     /*Nos sirve en js: Kilometros, pregunta respuesta y boolcorrect */
 
     print_r($pregunta1['pregunta'].';'. $pregunta1['respuesta'].'#'.$pregunta1['boolCorrect'].'&'. $pregunta2['respuesta'] . '#' . $pregunta2['boolCorrect'].'&'. $pregunta3['respuesta'] . '#' . $pregunta3['boolCorrect'].'&'. $pregunta4['respuesta'] . '#' . $pregunta4['boolCorrect'].'|'.$pregunta1['kilómetro']);

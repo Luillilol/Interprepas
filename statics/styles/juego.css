@@ -78,6 +78,19 @@ body{
     font-size: 1vw;
     align-items: center;
 }
+.classAciertoFallo{
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    width: 300px;
+    height: 70px;
+    /* background-color: rgb(173, 38, 38); */
+    color: #ffffff;    
+    text-align: center;
+    font-family: Galindo_normal;
+    font-size: 5vh;
+    display: none;
+}
 
 
 
@@ -141,7 +154,7 @@ body{
 }
 #tarjetaPregunta{
     position: absolute;
-    top: 10%;
+    top: 15%;
     left: 35%;
     width: 400px;
     height: 500px;
@@ -199,6 +212,13 @@ body{
     /* background-color: rgb(71, 190, 151); */
      border-style: solid;
     border-width: 1px;
+}
+#divAcierto{
+    /* display: none; */
+}
+#divFallo{
+    /* display: none; */
+
 }
 
 
