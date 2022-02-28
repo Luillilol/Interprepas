@@ -341,7 +341,7 @@ window.onload = function() {
                    setTimeout(()=>{
                         printrand();
                         resolve();        
-                   }, 4800)
+                   }, 5000)
                }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
