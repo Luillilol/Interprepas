@@ -251,7 +251,7 @@ window.onload = function() {
         console.log("Orden jugadrores "+ordenJugadores);
     }
 
-    //Dinuja dado y obtiene valores de 1 a 6
+    //Dibuja dado y obtiene valores de 1 a 6
     function dado() {
         countAnimacion = 0;
         let canvas = document.getElementById('juego');
@@ -293,11 +293,7 @@ window.onload = function() {
                 valorPrimerTiro.push(rand);
                
             }
-           /* if(valorPrimerTiro.length<1)
-            {
-                alert("Para iniciar el juego cada jugador tirará el dado\nPrimer jugador, es tu turno de tirar el dado");
-                valorPrimerTiro.push(rand);
-            }*/
+        
             
            
         }
@@ -571,29 +567,6 @@ window.onload = function() {
     function iniciarJuego(){
         girarDado();
        
-     
-        console.log(numJugadores);
-        console.log(valorPrimerTiro);
-        if(valorPrimerTiro.length >= 1 && valorPrimerTiro.length<numJugadores){
-            alert("Siguiente jugador, es tu turno de tirar el dado");
-        }
-        
-            
-            //si el valor de leghn es uno, pues oslo hay un jugador jugando 
-            //si es 2  hace la comparacion entre los 2 y asi.
-    
-        if(numJugadores==1){
-           
-        }
-        else if(numJugadores==2){
-           
-        }
-        else if(numJugadores==3){
-           
-
-        }else if(numJugadores==4){
-           
-        }
         console.log();
             
      
@@ -667,9 +640,6 @@ window.onload = function() {
     //timer del juego puesto a 60 fps    
     //setInterval(draw, 16);
     
-   
-    console.log("Se imprime esto");
-    console.log(numJugadores);
     
    
     
