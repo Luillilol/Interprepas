@@ -25,7 +25,8 @@ window.onload = function() {
     let inicioJuego = document.getElementById("comienzo");
     let numJugadores=0;
 
-    let ordenJugadores =[];
+ 
+    let orden = [];
     let valorPrimerTiro=[];
     let varcontrol = 0;
     let materia=1, preguntas_pasadas = [1,2,3];
@@ -46,212 +47,93 @@ window.onload = function() {
         if(numJugadores==1)
         {
             console.log("uno");
-            ordenJugadores.push(1);
-            console.log(ordenJugadores);
+            orden.push(1);
+            
         }
         else if(numJugadores==2)
         {
             console.log("Doss");
             if(valorPrimerTiro[0]>=valorPrimerTiro[1])
             {
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
+                orden.push(1);
+                orden.push(2);
             }
             else if(valorPrimerTiro[1]>=valorPrimerTiro[0]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
+                orden.push(2);
+                orden.push(1);
             }
 
         }else if(numJugadores==3)
         {
             console.log("tres");
+            let jug1 = valorPrimerTiro[0];
+            let jug2 = valorPrimerTiro[1];
+            let jug3 = valorPrimerTiro[2]
+            let pass1 = false;
+            let pass2 = false;
+            let pass3 = false;
+            
+            console.log(valorPrimerTiro);
+            
+            valorPrimerTiro = valorPrimerTiro.sort().reverse();
+            console.log(valorPrimerTiro);
+            
+            valorPrimerTiro.forEach(Element=>{
+              if(jug1 == Element && pass1 == false){
+                orden.push(1);
+                pass1 = true;
+              }
+              else if(jug2 == Element && pass2 == false){
+                orden.push(2);
+                pass2 = true;
+              }
+              else if(jug3 == Element && pass3 == false){
+                orden.push(3);
+                pass3 = true;
+              }
+            })
+            console.log(orden);
             console.log(valorPrimerTiro[0]);
-            if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-            }
-
+           
 
         }else if(numJugadores==4)
         {
-            console.log("cuatro");
-            if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-
-
-            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-
-            }else if(valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-
-
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[3]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-                ordenJugadores.push(4);
-
-            }else if(valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-
-            }else if(valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[2]>=valorPrimerTiro[3] && valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
-                ordenJugadores.push(3);
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-
-
-                
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[2]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-                ordenJugadores.push(3);
-
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[1] && valorPrimerTiro[1]>=valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(2);
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[0] && valorPrimerTiro[0]>=valorPrimerTiro[1]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-                ordenJugadores.push(1);
-                ordenJugadores.push(2);
-
-            }else if(valorPrimerTiro[3]>valorPrimerTiro[2] && valorPrimerTiro[2]>valorPrimerTiro[1] && valorPrimerTiro[1]>valorPrimerTiro[0]){
-                ordenJugadores.push(4);
-                ordenJugadores.push(3);
-                ordenJugadores.push(2);
-                ordenJugadores.push(1);
-            }
+            let jug1 = valorPrimerTiro[0];
+            let jug2 = valorPrimerTiro[1];
+            let jug3 = valorPrimerTiro[2];
+            let jug4 = valorPrimerTiro[3];
+            let pass1 = false;
+            let pass2 = false;
+            let pass3 = false;
+            let pass4 = false;
+            
+            console.log(valorPrimerTiro);
+            
+            valorPrimerTiro = valorPrimerTiro.sort().reverse();
+            console.log(valorPrimerTiro);
+            
+            valorPrimerTiro.forEach(Element=>{
+              if(jug1 == Element && pass1 == false){
+                orden.push(1);
+                pass1 = true;
+              }
+              else if(jug2 == Element && pass2 == false){
+                orden.push(2);
+                pass2 = true;
+              }
+              else if(jug3 == Element && pass3 == false){
+                orden.push(3);
+                pass3 = true;
+              }
+              else if(jug4 == Element && pass4 == false){
+                orden.push(4);
+                pass4 = true;
+              }
+            })
+            console.log(orden);
+            
         }
-        console.log("Orden jugadrores "+ordenJugadores);
+        console.log("Orden jugadrores "+orden);
     }
 
     //Dibuja dado y obtiene valores de 1 a 6
@@ -352,7 +234,7 @@ window.onload = function() {
                             
                             arregloOrdenPlay();
                             
-                            console.log(ordenJugadores);
+                            console.log(orden);
                             varcontrol++;
 
                         }
