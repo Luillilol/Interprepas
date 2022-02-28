@@ -334,21 +334,35 @@ window.onload = function() {
         
         function ordenanza(){
             if(valorPrimerTiro.length<numJugadores)
-                        {
-                            alert("Siguiente jugador, es tu turno de tirar el dado");
-                            dadoButton.style.visibility = 'visible';
-                        }
-                        else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
-                        {
-                            
-                            arregloOrdenPlay();
-                            console.log(orden);
-                           
-                            varcontrol++;
-                            alert("El orden de los jugadores es: \n"+ orden);
-                            inicioJuego.style.visibility = 'visible';
+            {
+                alert("Siguiente jugador, es tu turno de tirar el dado");
+                dadoButton.style.visibility = 'visible';
+            }
+            else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
+            {
+                
+                arregloOrdenPlay();
+                console.log(orden);
+                
+                varcontrol++;
+                if(numJugadores==1){
+                    alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                }
+                else if(numJugadores==2){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                        "\n¡Mucha suerte, gánenle a la ignorancia!");
+                }
+                else if(numJugadores==3){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                }else if(numJugadores==4){
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                }
+                
+                inicioJuego.style.visibility = 'visible';
 
-                        }
+            }
         }
 
 
@@ -360,16 +374,13 @@ window.onload = function() {
             }).then(()=>{
                return new Promise((resolve)=>{
                    setTimeout(()=>{
-                        
                         printrand();
-                       
                         resolve();        
                    }, 5000)
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
-                        
-                       ordenanza();
+                        ordenanza();
                         resolve();
                         
                     }, 1500)
