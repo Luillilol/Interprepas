@@ -30,6 +30,9 @@ window.onload = function() {
     let varcontrol = 0;
     let materia=1, preguntas_pasadas = [1,2,3];
     let data, objConf; 
+    let stringPetición;
+    let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
+    let prueba, prueba2;
     
 
     //Determina el orden de juego de los jugadores
@@ -391,22 +394,22 @@ window.onload = function() {
 
 
     class Ficha{
-
-        x = 800;
-        y = 650;
-        l = 20;
-
-        avanzar(){
-            this.x-=10;
-            //this.y++;
+        l = 15;
+        constructor(x,y,color){
+            this.x = x;
+            this.y = y;
+            this.color = color;
         }
+
         dibujar(){
+            console.log(this.color);
             ctx.beginPath();
-            ctx.fillStyle = "#00cc00";
+            ctx.fillStyle = this.color;
             ctx.fill();
-            ctx.rect(this.x,this.y,this.l,this.l);
+            ctx.fillRect(this.x,this.y,this.l,this.l);
             ctx.stroke();
             ctx.closePath();
+            console.log("Dibujando ficha en "+this.x+" "+this.y);
         }
     }
 
@@ -416,7 +419,28 @@ window.onload = function() {
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
             return response.text();
         }).then(function (text){
-            console.log(text);
+            stringPetición = text;
+            //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
+            // console.log(stringPetición);
+            fetchPregunta = stringPetición.split(';');
+            console.log(fetchPregunta);
+            fetchRespuestas = fetchPregunta[1].split('&');
+            // console.log(fetchRespuestas);
+
+            fetchRes1= fetchRespuestas[0].split('#');
+            console.log(fetchRes1);
+            fetchRes2= fetchRespuestas[1].split('#');
+            console.log(fetchRes2);
+            fetchRes3= fetchRespuestas[2].split('#');
+            console.log(fetchRes3);
+
+            fetchResCorrect = fetchRespuestas[3].split('|')[1];
+            // console.log(fetchResCorrect);
+
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
+            console.log(fetchRes4);
+
+            console.log("a"+text);
         });
     }
 
@@ -472,8 +496,35 @@ window.onload = function() {
 
     function inicializarJuego(){
         for(let i=0; i<jugadores; i++){
-            fichas.push(new Ficha());
+            if(tablero == 21){
+                if(i==0){
+                    fichas.push(new Ficha(340,530,colores[i]));
+                }else if(i==1){
+                    fichas.push(new Ficha(340,560,colores[i]));
+                }else if(i==2){
+                    fichas.push(new Ficha(380,530,colores[i]));
+                }else if(i==3){
+                    fichas.push(new Ficha(380,560,colores[i]));
+                }
+            }else{
+                if(i==0){
+                    fichas.push(new Ficha(940,592,colores[i]));
+                }else if(i==1){
+                    fichas.push(new Ficha(940,622,colores[i]));
+                }else if(i==2){
+                    fichas.push(new Ficha(980,592,colores[i]));
+                }else if(i==3){
+                    fichas.push(new Ficha(980,622,colores[i]));
+                }
+            }
         }
+        if(tablero == 21){
+            fichas.push(new Ficha(360,545,"#000000"));
+        }
+        if(tablero == 42){
+            fichas.push(new Ficha(960,605,"#000000"));
+        }
+        
     }
 
     function dibujarTablero(){
@@ -546,7 +597,9 @@ window.onload = function() {
         }).then(()=>{
             return new Promise((resolve)=>{
                 setTimeout(()=>{
-                    fichas[0].dibujar();
+                    fichas.forEach(Element=>{
+                        Element.dibujar();
+                    })
                     resolve();
                 }, 1000);
             })

@@ -42,7 +42,7 @@ body{
 .tarjetasJugador{
     position:absolute;
     width: 280px;
-    height: 110px;
+    
     border-radius: 30px;
     display: none;
     text-align: center;
@@ -88,7 +88,6 @@ body{
 #comienzo{
     position: absolute;
     width: 139px;
-    height: 70px;
     top: 775px;
     left: 50%;
     border-radius: 15px;
