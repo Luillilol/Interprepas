@@ -41,7 +41,7 @@ window.onload = function() {
     let varcontrol = 0;
     let materia=4 , preguntas_pasadas = [];
     let stringPetición;
-    let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
+    let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas, fetchIDPregunta;
     let prueba, prueba2;
 
 
@@ -394,7 +394,10 @@ window.onload = function() {
             stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
             console.log(text);
-            fetchPregunta = stringPetición.split(';');
+            fetchIDPregunta = stringPetición.split('°');
+            fetchPregunta = fetchIDPregunta[0].split(";");
+            fetchIDPregunta=fetchIDPregunta[1];
+            preguntas_pasadas.push(fetchIDPregunta);
             fetchRespuestas = fetchPregunta[1].split('&');
             
 
@@ -410,13 +413,6 @@ window.onload = function() {
             
 
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-
-            // console.log(fetchPregunta);
-            // console.log(fetchRes1);
-            // console.log(fetchRes2);
-            // console.log(fetchRes3);
-            // console.log(fetchRes4);
-            // console.log(fetchKilometro);
             
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
         
@@ -707,10 +703,8 @@ window.onload = function() {
         return new Promise((resolve)=>{
             setTimeout(()=>{
                 console.log("PROMESA DRAW PREGUNTA");
-                drawPregunta();
+                //drawPregunta();
             }, 2000)
         })
     })
-    
-    
 }
