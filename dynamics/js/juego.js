@@ -22,9 +22,18 @@ window.onload = function() {
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
     let inicioJuego = document.getElementById("comienzo");
-    let numJugadores=0;
-
- 
+    //      Elementos de la tarjeta de pregunta
+    let fondoPreguntaTarjeta = document.getElementById("fondoTarjetas");
+    let tarjetaPreguntaTarjeta = document.getElementById("tarjetaPregunta");
+    let numKilometroTarjeta=document.getElementById("numKilometros");
+    let materiaTarjeta = document.getElementById("divMateria");
+    let preguntaTarjeta = document.getElementById("divPregunta");
+    let respuesta1Tarjeta = document.getElementById("idRespuesta1");
+    let respuesta2Tarjeta = document.getElementById("idRespuesta2");
+    let respuesta3Tarjeta = document.getElementById("idRespuesta3");
+    let respuesta4Tarjeta = document.getElementById("idRespuesta4");
+    //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
+    let numJugadores=0; 
     let orden = [];
     let valorPrimerTiro=[];
     let varcontrol = 0;
@@ -394,11 +403,19 @@ window.onload = function() {
             fetchRes3= fetchRespuestas[2].split('#');
             
 
-            fetchResCorrect = fetchRespuestas[3].split('|')[1];
+            // fetchResCorrect = fetchRespuestas[3].split('|')[1];
+            fetchKilometro=fetchRespuestas[3].split('|')[1]       
             
 
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-           
+
+            console.log(fetchPregunta);
+            console.log(fetchRes1);
+            console.log(fetchRes2);
+            console.log(fetchRes3);
+            console.log(fetchRes4);
+            console.log(fetchKilometro);
+            
 
             
         });
@@ -406,7 +423,14 @@ window.onload = function() {
 
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
-        
+        console.log("WOOWO");
+        numKilometroTarjeta.innerHTML= '2KM';
+        materiaTarjeta.innerHTML='MATEMÁTICAS'
+        preguntaTarjeta.innerHTML='Las siguientes son operaciones que se pueden realizar entre conjuntos, excepto:'
+        respuesta1Tarjeta.innerHTML='Complemento';
+        respuesta2Tarjeta.innerHTML='Suma';
+        respuesta3Tarjeta.innerHTML='Intersección';
+        respuesta4Tarjeta.innerHTML='Diferencia';        
     }
 
     
@@ -522,7 +546,7 @@ window.onload = function() {
         }).then(()=>{
             return new Promise((resolve)=>{
                 setTimeout(()=>{
-                    //drawPregunta();
+                    drawPregunta();
                     resolve();
                 }, 5000);
             })
@@ -618,10 +642,12 @@ window.onload = function() {
         })
     })
 
+
     iniciarJuego();
     
     dibujarTablero();
     infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
+    drawPregunta();//metodo de prueba para mostrar carta de pregunta 
     
     
    
