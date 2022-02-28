@@ -71,11 +71,10 @@ body{
     background-color: #f5af2e;
 }
 
-.classDivTarjeta{
-    
+.classDivTarjeta{    
     font-family: Galindo_normal;
     text-align: center;
-    font-size: 1vw;
+    font-size: 0.8vw;
     align-items: center;
 }
 .classAciertoFallo{
