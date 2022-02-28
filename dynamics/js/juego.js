@@ -403,6 +403,7 @@ window.onload = function() {
             this.x = x;
             this.y = y;
             this.color = color;
+            this.casilla = 0;
         }
 
         dibujar(){
@@ -414,6 +415,89 @@ window.onload = function() {
             ctx.stroke();
             ctx.closePath();
             console.log("Dibujando ficha en "+this.x+" "+this.y);
+        }
+
+        avanzar(){
+            this.casilla++;
+            if(tablero==21){
+                if(this.casilla == 1){
+                    this.x += 150;
+                }
+                else if(this.casilla<5){
+                    this.x += 110;
+                }
+                else if(this.casilla<7){
+                    this.y -= 70;
+                }
+                else if(this.casilla<11){
+                    this.x -= 110;
+                }
+                else if(this.casilla<13){
+                    this.y -= 70;
+                }
+                else if(this.casilla<17){
+                    this.x += 110;
+                }
+                else if(this.casilla<19){
+                    this.y -= 70;
+                }
+                else if(this.casilla<23){
+                    this.x -= 110;
+                }
+            }else{
+                if(this.casilla == 7){
+                    this.x -= 17;
+                }
+                if(this.casilla == 13){
+                    this.y -= 25;
+                }
+                if(this.casilla == 19){
+                    this.x += 35;
+                }
+                if(this.casilla == 24){
+                    this.y += 26;
+                }
+                if(this.casilla == 29){
+                    this.x -= 25;
+                }
+                if(this.casilla == 33){
+                    this.y -= 29;
+                }
+                if(this.casilla == 37){
+                    this.x += 13;
+                    this.y -= 5;
+                }
+                if(this.casilla == 40){
+                    this.y += 21;
+                }
+                if(this.casilla < 7){
+                    this.x -= 100;
+                }
+                else if(this.casilla < 13){
+                    this.y -= 80;
+                }
+                else if(this.casilla < 19){
+                    this.x += 95;
+                }
+                else if(this.casilla < 24){
+                    this.y += 80;
+                }else if(this.casilla < 29){
+                    this.x -= 95;
+                }else if(this.casilla<33){
+                    this.y -= 80;
+                }else if(this.casilla<37){
+                    this.x += 100;
+                }else if(this.casilla<40){
+                    this.y += 80;
+                }else if(this.casilla<43){
+                    this.x -= 100;
+                }else if(this.casilla==43){
+                    this.y -= 100;
+                }
+
+
+            }
+            this.dibujar();
         }
     }
 
@@ -512,13 +596,13 @@ window.onload = function() {
                 }
             }else{
                 if(i==0){
-                    fichas.push(new Ficha(940,592,colores[i]));
+                    fichas.push(new Ficha(945,592,colores[i]));
                 }else if(i==1){
-                    fichas.push(new Ficha(940,622,colores[i]));
+                    fichas.push(new Ficha(945,622,colores[i]));
                 }else if(i==2){
-                    fichas.push(new Ficha(980,592,colores[i]));
+                    fichas.push(new Ficha(975,592,colores[i]));
                 }else if(i==3){
-                    fichas.push(new Ficha(980,622,colores[i]));
+                    fichas.push(new Ficha(975,622,colores[i]));
                 }
             }
         }
@@ -615,6 +699,9 @@ window.onload = function() {
     function girarDado(){
         dadoButton.addEventListener('click', e => {
             bloqueBoton.style.display='block';
+            fichas.forEach(Element=>{
+                Element.avanzar();
+            });
             tableroEvents(e);
         });
     }
