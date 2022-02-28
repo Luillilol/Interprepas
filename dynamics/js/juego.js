@@ -28,7 +28,7 @@ window.onload = function() {
     let orden = [];
     let valorPrimerTiro=[];
     let varcontrol = 0;
-    let materia=1, preguntas_pasadas = [1,2,3];
+    let materia=1, preguntas_pasadas = [21,22,23,24,25,26,27,28,29,30,121,102,103,104,105,106,107,108,10,109,110];
     let stringPetición;
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
     let prueba, prueba2;
@@ -380,7 +380,7 @@ window.onload = function() {
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
             return response.text();
         }).then(function (text){
-            stringPetición = text;
+            /*stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
            
             fetchPregunta = stringPetición.split(';');
@@ -397,8 +397,8 @@ window.onload = function() {
             fetchResCorrect = fetchRespuestas[3].split('|')[1];
             
 
-            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-           
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");*/
+           console.log(text);
 
             
         });

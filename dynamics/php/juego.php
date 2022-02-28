@@ -1,4 +1,39 @@
 <?php
+
+    //funcion recursiva que busca el id de una pregunta que no haya sido seleccionado antes
+    function compairIds($ids, $idRand, $idsPasadas){
+        $boolPass = false;
+        foreach($idsPasadas as $id){
+            if($id == $idRand){
+                $boolPass = true;
+            }
+        }
+        if($boolPass == true){
+            $keyIdRand = rand(0,19);
+            $idRand = $ids[$keyIdRand];
+            return(compairIds($ids,$idRand,$idsPasadas));
+        }
+        else{
+            return $idRand;
+        }
+    }
+
+    //funcion que busca preguntas en la base de datos
+    function buscarPregunta($numMateria, $conexion, $idsPasadas){
+        $ids = [];
+        $peticion = "SELECT id_pregunta FROM Preguntas WHERE id_materia=".$numMateria.";";
+        mysqli_real_escape_string($conexion, $peticion);
+        $query = mysqli_query($conexion, $peticion);
+        while($row = mysqli_fetch_array($query, MYSQLI_ASSOC))
+        {
+            array_push($ids, $row["id_pregunta"]);
+        }
+        $keyIdRand = rand(0,19);
+        $idRand = $ids[$keyIdRand];
+        $idSeleccionado = compairIds($ids, $idRand, $idsPasadas);
+        return($idSeleccionado);
+    }
+
     //incluye el php que establce la conexión
     include("./config.php");
     $conexion = connect();
@@ -16,9 +51,11 @@
     $json = trim(file_get_contents("php://input"));
     $decode = json_decode($json, true);
     $numMateria=$decode['id_materia'];
+    $preguntasPasadas = $decode["preguntas"];
 
 
-
+    //id de la pregunta que se selecciono
+    $idSeleccionado = buscarPregunta($numMateria,$conexion,$preguntasPasadas);
 
 
     $peticion = "SELECT id_pregunta, pregunta, respuesta, materia, boolCorrect, kilómetro FROM Preguntas 
@@ -45,37 +82,6 @@
     $pregunta4 = $arr[($numPregunta) + 4];
     /*Nos sirve en js: Kilometros, pregunta respuesta y boolcorrect */
 
-//     // print_r($arr[($numPregunta)+1]);
     print_r($pregunta1['pregunta'].';'. $pregunta1['respuesta'].'#'.$pregunta1['boolCorrect'].'&'. $pregunta2['respuesta'] . '#' . $pregunta2['boolCorrect'].'&'. $pregunta3['respuesta'] . '#' . $pregunta3['boolCorrect'].'&'. $pregunta4['respuesta'] . '#' . $pregunta4['boolCorrect'].'|'.$pregunta1['kilómetro']);
-//     print_r($pregunta1['respuesta']);
-//     print_r($pregunta1['kilómetro']);
-//     print_r($pregunta1['boolCorrect']);
-// // print_r($arr[($numPregunta)+2]);
-//     print_r($pregunta2['pregunta']);
-//     print_r($pregunta2['respuesta']);
-//     print_r($pregunta2['kilómetro']);
-//     print_r($pregunta2['boolCorrect']);
-// // print_r($arr[($numPregunta)+3]);
-//     print_r($pregunta3['pregunta']);
-//     print_r($pregunta3['respuesta']);
-//     print_r($pregunta3['kilómetro']);
-//     print_r($pregunta3['boolCorrect']);
-// // print_r($arr[($numPregunta)+4]);
-//     print_r($pregunta4['pregunta']);
-//     print_r($pregunta4['respuesta']);
-//     print_r($pregunta4['kilómetro']);
-//     print_r($pregunta4['boolCorrect']);     
 
-    // print_r($arr);
-    // echo($preguntaAzar);
-    //print_r($arr[0]);
-    //var_dump($_SERVER);
-
-   
-
-    // echo($decode['id_materia']);
-
-
-
-    //var_dump($decode);
 ?>

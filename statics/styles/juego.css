@@ -64,7 +64,6 @@ body{
     position: absolute;
     background-color: var(--blue);
     width: 150px;
-    height: 40px;
     top: 210px;
     left: 100px;
     border-radius: 15px;
