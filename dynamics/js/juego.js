@@ -35,6 +35,7 @@ window.onload = function() {
     let infoAcierto = document.getElementById("divAcierto");
     let infoFallo = document.getElementById("divFallo");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
+
     let numJugadores=0; 
     let orden = [];
     let valorPrimerTiro=[];
@@ -331,34 +332,44 @@ window.onload = function() {
             }
         }
         
-    
-        function animacion(){
-            new Promise((resolve,reject) => {
-                requestAnimationFrame(step);
-                resolve();
-            }).then(()=>{
-               return new Promise((resolve)=>{
-                   setTimeout(()=>{
-                        printrand();
-                        resolve();        
-                   }, 5000)
-               }).then(()=>{
-                return new Promise((resolve)=>{
-                    setTimeout(()=>{
-                        if(valorPrimerTiro.length<numJugadores)
+        function ordenanza(){
+            if(valorPrimerTiro.length<numJugadores)
                         {
                             alert("Siguiente jugador, es tu turno de tirar el dado");
+                            dadoButton.style.visibility = 'visible';
                         }
                         else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
                         {
                             
                             arregloOrdenPlay();
-                            
-                            
+                            console.log(orden);
+                           
                             varcontrol++;
+                            alert("El orden de los jugadores es: \n"+ orden);
+                            inicioJuego.style.visibility = 'visible';
 
                         }
+        }
+
+
+        function animacion(){
+            new Promise((resolve,reject) => {
+                dadoButton.style.visibility = 'hidden';
+                requestAnimationFrame(step);
+                resolve();
+            }).then(()=>{
+               return new Promise((resolve)=>{
+                   setTimeout(()=>{
+                        
+                        printrand();
                        
+                        resolve();        
+                   }, 5000)
+            }).then(()=>{
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        
+                       ordenanza();
                         resolve();
                         
                     }, 1500)
@@ -366,6 +377,7 @@ window.onload = function() {
                 
                })
             })
+       
           
         }
         animacion();
@@ -707,7 +719,7 @@ window.onload = function() {
         return new Promise((resolve)=>{
             setTimeout(()=>{
                 console.log("PROMESA DRAW PREGUNTA");
-                drawPregunta();
+                //drawPregunta();
             }, 2000)
         })
     })
