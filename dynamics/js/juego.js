@@ -22,8 +22,11 @@ window.onload = function() {
     let tarjeta2 = document.getElementById("jug2");
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
-    let materia=1, preguntas_pasadas = [1,2,3];
+    let materia=1, preguntas_pasadas = [1,2,3,4,5,6];
     let data, objConf; 
+    let stringPetición;
+    let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
+    let prueba, prueba2;
     
     class Ficha{
 
@@ -51,7 +54,27 @@ window.onload = function() {
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
             return response.text();
         }).then(function (text){
-            console.log(text);
+            stringPetición = text;
+            //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
+            // console.log(stringPetición);
+            fetchPregunta = stringPetición.split(';');
+            console.log(fetchPregunta);
+            fetchRespuestas = fetchPregunta[1].split('&');
+            // console.log(fetchRespuestas);
+
+            fetchRes1= fetchRespuestas[0].split('#');
+            console.log(fetchRes1);
+            fetchRes2= fetchRespuestas[1].split('#');
+            console.log(fetchRes2);
+            fetchRes3= fetchRespuestas[2].split('#');
+            console.log(fetchRes3);
+
+            fetchResCorrect = fetchRespuestas[3].split('|')[1];
+            // console.log(fetchResCorrect);
+
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
+            console.log(fetchRes4);
+
         });
     }
 

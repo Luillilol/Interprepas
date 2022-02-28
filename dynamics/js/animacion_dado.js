@@ -66,7 +66,7 @@ function dado() {
                setTimeout(()=>{
                    printrand();
                    resolve();
-               }, 4800)
+               }, 5000)
            })
         })
     }
