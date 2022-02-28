@@ -40,19 +40,17 @@ window.onload = function() {
     function arregloOrdenPlay(){
         //Cada condicional determinaa las combinaciones posibles para determinar el orden
         //en el que irán los jugadores
-        console.log(numJugadores);
-        console.log("Tiros "+valorPrimerTiro);
     
 
         if(numJugadores==1)
         {
-            console.log("uno");
+            
             orden.push(1);
             
         }
         else if(numJugadores==2)
         {
-            console.log("Doss");
+            
             if(valorPrimerTiro[0]>=valorPrimerTiro[1])
             {
                 orden.push(1);
@@ -65,7 +63,7 @@ window.onload = function() {
 
         }else if(numJugadores==3)
         {
-            console.log("tres");
+            
             let jug1 = valorPrimerTiro[0];
             let jug2 = valorPrimerTiro[1];
             let jug3 = valorPrimerTiro[2]
@@ -73,10 +71,9 @@ window.onload = function() {
             let pass2 = false;
             let pass3 = false;
             
-            console.log(valorPrimerTiro);
-            
+                  
             valorPrimerTiro = valorPrimerTiro.sort().reverse();
-            console.log(valorPrimerTiro);
+            
             
             valorPrimerTiro.forEach(Element=>{
               if(jug1 == Element && pass1 == false){
@@ -92,8 +89,7 @@ window.onload = function() {
                 pass3 = true;
               }
             })
-            console.log(orden);
-            console.log(valorPrimerTiro[0]);
+            
            
 
         }else if(numJugadores==4)
@@ -107,10 +103,10 @@ window.onload = function() {
             let pass3 = false;
             let pass4 = false;
             
-            console.log(valorPrimerTiro);
+            
             
             valorPrimerTiro = valorPrimerTiro.sort().reverse();
-            console.log(valorPrimerTiro);
+            
             
             valorPrimerTiro.forEach(Element=>{
               if(jug1 == Element && pass1 == false){
@@ -130,10 +126,9 @@ window.onload = function() {
                 pass4 = true;
               }
             })
-            console.log(orden);
-            
+                        
         }
-        console.log("Orden jugadrores "+orden);
+        
     }
 
     //Dibuja dado y obtiene valores de 1 a 6
@@ -154,7 +149,6 @@ window.onload = function() {
         //Imprime número aleatorio de juego
         function printrand(){
             
-            console.log(rand);
             if(rand==1){
                 ctx.drawImage(img,175*3,175*4,135,135,100,50,100,100);
             }
@@ -218,9 +212,7 @@ window.onload = function() {
                return new Promise((resolve)=>{
                    setTimeout(()=>{
                         printrand();
-                        console.log(valorPrimerTiro);
-                        resolve();
-                        
+                        resolve();        
                    }, 4800)
                }).then(()=>{
                 return new Promise((resolve)=>{
@@ -234,7 +226,7 @@ window.onload = function() {
                             
                             arregloOrdenPlay();
                             
-                            console.log(orden);
+                            
                             varcontrol++;
 
                         }
@@ -248,18 +240,6 @@ window.onload = function() {
             })
           
         }
-        
-        /*new Promise((resolve,reject) =>{
-            animacion();
-            resolve();
-        }).then(()=>{
-            return new Promise((resolve)=>{
-                setTimeout(()=>{
-                    return rand;
-                    resolve();
-                }, 500);
-            })
-        })*/
         animacion();
         
         
@@ -285,14 +265,13 @@ window.onload = function() {
         }
 
         dibujar(){
-            console.log(this.color);
             ctx.beginPath();
             ctx.fillStyle = this.color;
             ctx.fill();
             ctx.fillRect(this.x,this.y,this.l,this.l);
             ctx.stroke();
             ctx.closePath();
-            console.log("Dibujando ficha en "+this.x+" "+this.y);
+           
         }
 
         avanzar(){
@@ -387,62 +366,43 @@ window.onload = function() {
         }).then(function (text){
             stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
-            // console.log(stringPetición);
+           
             fetchPregunta = stringPetición.split(';');
-            console.log(fetchPregunta);
             fetchRespuestas = fetchPregunta[1].split('&');
-            // console.log(fetchRespuestas);
+            
 
             fetchRes1= fetchRespuestas[0].split('#');
-            console.log(fetchRes1);
+           
             fetchRes2= fetchRespuestas[1].split('#');
-            console.log(fetchRes2);
+            
             fetchRes3= fetchRespuestas[2].split('#');
-            console.log(fetchRes3);
+            
 
             fetchResCorrect = fetchRespuestas[3].split('|')[1];
-            // console.log(fetchResCorrect);
+            
 
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-            console.log(fetchRes4);
+           
 
-            console.log("a"+text);
+            
         });
     }
 
     //No sirve, pero muestra la pregunta.
     function drawPregunta(){
-        //ctx.clearRect(0,0,canvas.clientWidth,canvas.height);
-       
-        ctx.beginPath();
-            ctx.fillStyle="#0000cc";
-            console.log(ctx.fillStyle);
-            ctx.fill();
-            ctx.rect(0,0,canvas.clientWidth,canvas.height);
-            ctx.stroke();
-            ctx.fill();
-            ctx.fillStyle="#ffffff";
-            ctx.fill();
-            ctx.rect(250,50,500,200);
-            ctx.rect(250,300,500,100);
-            ctx.rect(250,450,500,100);
-            ctx.rect(250,600,500,100);
-            ctx.rect(250,750,500,100);
-            ctx.fill();
-            ctx.stroke();
-        ctx.closePath();
+        
     }
 
     
     //separar las cookies
     function cookies(){
-        console.log(document.cookie);
+        
         let cookies = document.cookie;
         let cookiesArray = cookies.split("; ");
         cookiesArray.forEach(element => {
-            console.log(element);
+           
             let cookie = element.split("=");
-            //console.log(cookie[1]);
+            
             if(cookie[0] == "jugadores"){
                 jugadores=cookie[1];
                 numJugadores=cookie[1];
@@ -494,16 +454,16 @@ window.onload = function() {
     }
 
     function dibujarTablero(){
-        console.log('entre');
+        
         if(tablero==42){
-            console.log("TABLERO DE 42 CASILLAS");
+            
             imgTablero.src = '../statics/img/Tableros42.png';
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 230, 50, 800, 600);
             });
             //divTablero.src=""
         }else{
-            console.log("Tablero de 21 casillas");
+            
             imgTablero.src = '../statics/img/Tableros21.png';
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 250, 50, 700, 700);
@@ -589,7 +549,7 @@ window.onload = function() {
     function iniciarJuego(){
         girarDado();
        
-        console.log();
+        
             
      
     }
@@ -647,7 +607,6 @@ window.onload = function() {
     }).then(()=>{
         return new Promise((resolve)=>{
             setTimeout(()=>{
-                console.log(colores);
                 draw();
                 resolve();                
             }, 1500);
@@ -658,9 +617,6 @@ window.onload = function() {
     
     dibujarTablero();
     infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
-    //canvas.height='100%';
-    //timer del juego puesto a 60 fps    
-    //setInterval(draw, 16);
     
     
    
