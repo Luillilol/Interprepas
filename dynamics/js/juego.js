@@ -568,7 +568,7 @@ window.onload = function() {
     
  //Evento para inicializar juego SE VA A IMPLEMENTAR PARA QUE AVISE EL ORDEN DE LOS JUGADORES, PERO YA ESTÁ EN EL ARREGLO
  // comenzar.addEventListener('click', e =>{
-    /*function iniciarJuego(){
+    function iniciarJuego(){
         girarDado();
        
      
@@ -597,7 +597,7 @@ window.onload = function() {
         console.log();
             
      
-    }*/
+    }
 
 
 
