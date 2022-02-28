@@ -39,7 +39,7 @@ window.onload = function() {
     let orden = [];
     let valorPrimerTiro=[];
     let varcontrol = 0;
-    let materia=5 , preguntas_pasadas = [];
+    let materia=4 , preguntas_pasadas = [];
     let stringPetición;
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas;
     let prueba, prueba2;
@@ -341,7 +341,7 @@ window.onload = function() {
                    setTimeout(()=>{
                         printrand();
                         resolve();        
-                   }, 4800)
+                   }, 5000)
                }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
