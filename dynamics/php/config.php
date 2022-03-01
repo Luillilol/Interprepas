@@ -1,10 +1,16 @@
-
 <?php
+/*
+** @Archivo:        config.php
+** @Equipo: 	    CoyoAtlón
+** @Descripción:    Conexión con base de datos.
+*/
+
     //creación de constantes para la conexión
     define("DBUSER","root");
     define("DBHOST","localhost");
     define("PASSWORD","");
     define("DB","maraton");
+    
 
     //funcion que conecta a la base de datos
     function connect()

@@ -1,3 +1,8 @@
+/**  
+** @Archivo:        juego.js
+** @Equipo: 	    CoyoAtlón
+** @Descripción:    Código principal de funcionamiento del juego.
+*/
 window.onload = function() {
     const imgTablero = new Image(1000, 1000); //almacena la imagen del tablero
     //variables globales

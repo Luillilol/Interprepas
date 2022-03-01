@@ -1,3 +1,8 @@
+/**  
+** @Archivo:        index.js
+** @Equipo: 	    CoyoAtlón
+** @Descripción:    Funcionamiento de inicio del juego, selección de jugadores y tablero.
+*/
 window.addEventListener("load", ()=>{
     //Declaracion de las variables globales
     let botonJugar = document.getElementById("idBotonJugar");

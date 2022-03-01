@@ -1,4 +1,9 @@
 <?php
+/*
+** @Archivo:        juego.php
+** @Equipo: 	    CoyoAtlón
+** @Descripción:    Consultas a la base de datos
+*/
 
     //funcion recursiva que busca el id de una pregunta que no haya sido seleccionado antes
     function compairIds($ids, $idRand, $idsPasadas){
