@@ -47,11 +47,16 @@ window.onload = function() {
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas, fetchIDPregunta;
     let prueba, prueba2;
     let boolPregunta=false;
+    let turnoPregunta = false;
     let contadorJugadores = 0;
+    let contadorTurnosJuego = 0;
+    let turnoJugadorePregunta = 0;
+
+    let turnoJuego;
 
     class Ficha{
         lado = 15;
-        //pide la posicion y el color de la ficha
+        //pide la posicion y el color de la fichas
         constructor(x,y,color){
             this.x = x;
             this.y = y;
@@ -153,9 +158,9 @@ window.onload = function() {
 
                 }
             }
-            this.dibujar();
+            //this.dibujar();
 
-            /*new Promise((resolve,reject) =>{
+            new Promise((resolve,reject) =>{
                 dibujarTablero();
                 resolve();
             }).then(()=>{
@@ -165,13 +170,15 @@ window.onload = function() {
                         resolve();                
                     }, 50);
                 })
-            })*/
+            })
         }
         
     }
 
     function drawPregunta(){
         function funcRespuesta(res){
+            turnoPregunta=true;
+            console.log("FUNCIÓN DE RESPUESTA");
             bloqueoRespuestas.style.display='block';
             new Promise((resolve, reject) => {
                 console.log("CLICK EN LA RESPUESTA");
@@ -182,7 +189,16 @@ window.onload = function() {
                     console.log("RESPUESTA INCORRECTA");
                     infoFallo.style.display='block';
                 }
+                if(contadorTurnosJuego<jugadores-1){
+                    contadorTurnosJuego++;
+                    turnoJuego = orden[contadorTurnosJuego];
+                }else{
+                    contadorTurnosJuego = 0;
+                    turnoJuego=orden[0];
+                }
+                console.log("TURNO DEL JUEGO: "+turnoJuego);
                 resolve();
+                
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
@@ -191,8 +207,10 @@ window.onload = function() {
                         infoFallo.style.display='none';
                         infoAcierto.style.display='none';
                         bloqueoRespuestas.style.display='none';
+                        turnoPregunta=false;
                         if(res ==1){
                             fichas[0].avanzar(fetchKilometro);
+                            
                         }
                         console.log("HOLADASDAD");
 
@@ -209,22 +227,34 @@ window.onload = function() {
         respuesta1Tarjeta.innerHTML= fetchRes1[0];
         respuesta2Tarjeta.innerHTML=fetchRes2[0];
         respuesta3Tarjeta.innerHTML=fetchRes3[0];
-        respuesta4Tarjeta.innerHTML=fetchRes4[0];  
+        respuesta4Tarjeta.innerHTML=fetchRes4[0];          
         
-        respuesta1Tarjeta.addEventListener('click', ()=>{
-            
-            funcRespuesta(fetchRes1[1]);
+        
+        respuesta1Tarjeta.addEventListener('click', ()=>{     
+            console.log("a");    
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes1[1]);
         });
         respuesta2Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes2[1]);
-        })
+            console.log("b"); 
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes2[1]);
+        });
         respuesta3Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes3[1]);
-        })
+            console.log("c"); 
+            if(turnoPregunta==false) {
+                console.log("si entre :v");
+                funcRespuesta(fetchRes3[1]);
+            }
+                
+        });
         respuesta4Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes4[1]);
-        })
+            console.log("d"); 
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes4[1]);
+        });        
         
+       
     }
 
     function peticion(){
@@ -429,7 +459,8 @@ window.onload = function() {
         function ordenanza(){
             if(valorPrimerTiro.length<numJugadores)
             {
-                alert("Siguiente jugador, es tu turno de tirar el dado");
+                // alert("Siguiente jugador, es tu turno de tirar el dado");
+                Swal.fire("Siguiente jugador, es tu turno de tirar el dado");
                 dadoButton.style.visibility = 'visible';
             }
             else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
@@ -440,22 +471,31 @@ window.onload = function() {
                 
                 varcontrol++;
                 if(numJugadores==1){
-                    alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                    // alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                    Swal.fire('Eres el único jugador, ¡Mucha suerte, que la ignorancia no gane!');
                 }
                 else if(numJugadores==2){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                        "\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
                         "\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 else if(numJugadores==3){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                   /* alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                     Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
                     +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    
                 }else if(numJugadores==4){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
+                    +"\nJugador "+orden[2]+"\nJugador "+orden[3]+"\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 
                 dadoButton.style.visibility = 'visible';
                 boolPregunta=true;
+                turnoJuego = orden[0];
                 //console.log("BOOLRP");
             }
             
@@ -477,6 +517,7 @@ window.onload = function() {
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
+                        
                         if(boolPregunta==false){
                             ordenanza();
                         }
