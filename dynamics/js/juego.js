@@ -101,7 +101,7 @@ window.onload = function() {
                 else if(this.casilla<23){
                     this.x -= 110;
                 }
-            }else{
+                }else{
                 if(this.casilla == 7){
                     this.x -= 17;
                 }
@@ -238,9 +238,7 @@ window.onload = function() {
             let pass4 = false;
             
             
-            
             valorPrimerTiro = valorPrimerTiro.sort().reverse();
-            
             
             valorPrimerTiro.forEach(Element=>{
               if(jug1 == Element && pass1 == false){
@@ -358,11 +356,11 @@ window.onload = function() {
                         "\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 else if(numJugadores==3){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
                     +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
                 }else if(numJugadores==4){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
+                    +"\nJugador "+orden[2]+"\nJugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 
                 inicioJuego.style.visibility = 'visible';
@@ -443,9 +441,6 @@ window.onload = function() {
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
             
             fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-        
-           
-
             
         });
     }
