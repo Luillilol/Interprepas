@@ -142,5 +142,35 @@ window.addEventListener("load", ()=>{
         }
     
     }
+
+    let canvas = document.getElementById('juego');
+        let ctx = canvas.getContext("2d");
+    //ANIMACIÓN
+    function foco(){
+        
+
+        ctx.beginPath();
+       // ctx.moveTo(250, 250);
+        ctx.arc(250,170,100,0, Math.PI*2);
+        ctx.stroke();
+        ctx.fillStyle ="#ffe045";
+        ctx.fill();
+        ctx.moveTo(150, 210);
+        ctx.rect(202, 240, 100, 60);
+       
+        //ctx.fillStyle ="#e6bf00";
+        ctx.stroke();
+        ctx.fill();
+        ctx.closePath();
+        
+    }
+    foco();
+    ctx.beginPath();
+        ctx.fillStyle ="#00059e";
+        ctx.rect(202, 270, 100, 50);
+        ctx.fill();
+        ctx.closePath();
+    //}
+    //foco();
 });
 

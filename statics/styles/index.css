@@ -123,11 +123,11 @@ h1, p{
 }
 #idImagen{
     position: absolute;
-    width: 30%;
-    height: 50%;
-    background-color: var(--blue);
-    top: 30%;
-    right: 15%;
+    width: 500px;
+    height: 4;
+    background-color: white;
+    top: 25%;
+    right: 10%;
     border-radius: 10%;
 }
 /* #idCreativeCommons{
@@ -212,5 +212,7 @@ h1, p{
     border-radius: 50%;
     cursor: pointer;
 }
+/*=======================Animación===========================*/
+
 
 
