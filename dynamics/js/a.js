@@ -51,6 +51,8 @@ window.onload = function() {
     let contadorJugadores = 0;
     let contadorTurnosJuego = 0;
     let turnoJugadorePregunta = 0;
+    let turnosPasadosPregunta = 0;
+    let contador;
 
     let turnoJuego;
 
@@ -189,13 +191,7 @@ window.onload = function() {
                     console.log("RESPUESTA INCORRECTA");
                     infoFallo.style.display='block';
                 }
-                if(contadorTurnosJuego<jugadores-1){
-                    contadorTurnosJuego++;
-                    turnoJuego = orden[contadorTurnosJuego];
-                }else{
-                    contadorTurnosJuego = 0;
-                    turnoJuego=orden[0];
-                }
+                
                 console.log("TURNO DEL JUEGO: "+turnoJuego);
                 resolve();
                 
@@ -208,11 +204,48 @@ window.onload = function() {
                         infoAcierto.style.display='none';
                         bloqueoRespuestas.style.display='none';
                         turnoPregunta=false;
-                        if(res ==1){
-                            fichas[0].avanzar(fetchKilometro);
-                            
+                        if(res == 1){
+                            fichas[orden[contador]-1].avanzar(fetchKilometro);
+                            if(contadorTurnosJuego<jugadores-1){
+                                contadorTurnosJuego++;
+                                turnoJuego = orden[contadorTurnosJuego];
+                            }else{
+                                contadorTurnosJuego = 0;
+                                turnoJuego=orden[0];
+                            }
                         }
-                        console.log("HOLADASDAD");
+                        else{
+                            if(turnosPasadosPregunta<jugadores-1){
+                                drawPregunta(); 
+ 
+                                if(contador < jugadores-1){
+                                    contador++;
+                                    turnoJugadorePregunta = orden[contador];
+                                    //console.log("CONTADOR: "+contador);
+                                }
+                                else if(contador == jugadores-1){
+                                    contador = 0;
+                                    turnoJugadorePregunta = orden[contador];
+                                    //console.log("CONTADOR else: "+contador);
+                                }
+                                turnosPasadosPregunta++;
+                                //turnoJugadorePregunta = orden[turnoJuego];
+                            }
+                            else if(turnosPasadosPregunta >= jugadores-1){
+                                if(contadorTurnosJuego<jugadores-1){
+                                    contadorTurnosJuego++;
+                                    turnoJuego = orden[contadorTurnosJuego];
+                                }else{
+                                    contadorTurnosJuego = 0;
+                                    turnoJuego=orden[0];
+                                }
+                                fichas[jugadores].avanzar(fetchKilometro);
+                            }             
+                        }
+                        
+                        console.log("Jugador en turno en preguta: jugador"+turnoJugadorePregunta);
+                        console.log("CONTADOR: "+contador);
+                        console.log("TURNO DEL Pasados de las preguntas: "+turnosPasadosPregunta);
 
                         resolve();
                     }, 2000)
@@ -253,7 +286,8 @@ window.onload = function() {
             if(turnoPregunta==false) 
                 funcRespuesta(fetchRes4[1]);
         });        
-        
+        turnoJugadorePregunta = turnoJuego;
+       
        
     }
 
@@ -524,10 +558,13 @@ window.onload = function() {
                         else{
                             new Promise(function(resolve, reject){
                                 peticion();
+                                contador = contadorTurnosJuego;
+                                turnosPasadosPregunta=0;
                                 resolve();
                             }).then(()=>{
                                 return new Promise((resolve)=>{
                                     setTimeout(()=>{
+                                        console.log("1contador:"+contador);
                                         drawPregunta();
                                         resolve();                
                                     }, 700);
