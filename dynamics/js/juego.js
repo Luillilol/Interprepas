@@ -1,5 +1,13 @@
+/**  
+** @Archivo:        juego.js
+** @Equipo: 	    CoyoAtlón
+** @Descripción:    Funcionamiento del juego y animaciones
+*/
 window.onload = function() {
+    //constantes
     const imgTablero = new Image(1000, 1000); //almacena la imagen del tablero
+
+
     //variables globales
     let canvas = document.getElementById("juego");
     let ctx = canvas.getContext("2d");
@@ -14,7 +22,6 @@ window.onload = function() {
     let aciertosJug2=0, fallidosJug2=0, kmRecorridosJug2=0; //Variables para el recuento de la tarjetas por jugador
     let aciertosJug3=0, fallidosJug3=0, kmRecorridosJug3=0; //Variables para el recuento de la tarjetas por jugador
     let aciertosJug4=0, fallidosJug4=0, kmRecorridosJug4=0; //Variables para el recuento de la tarjetas por jugador
-    let kmRecorridoIgnorancia=0;
 
     let dadoButton = document.getElementById("botonDado");
     let bloqueBoton = document.getElementById("bloqueBoton");
@@ -22,7 +29,6 @@ window.onload = function() {
     let tarjeta2 = document.getElementById("jug2");
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
-    let inicioJuego = document.getElementById("comienzo");
     let divTurnoJugadorNormal = document.getElementById("turnoJugadorCasilla");
     //      Elementos de la tarjeta de pregunta
     let fondoPreguntaTarjeta = document.getElementById("fondoTarjetas");
@@ -40,6 +46,7 @@ window.onload = function() {
     let divTurnoJugadorTarjeta = document.getElementById("turnoJugadorPregunta");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
 
+    //variables de control para el juego
     let numJugadores=0; 
     let orden = [];
     let valorPrimerTiro=[];
@@ -47,7 +54,7 @@ window.onload = function() {
     let materia=4 , preguntas_pasadas = [];
     let stringPetición;
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas, fetchIDPregunta;
-    let prueba, prueba2;
+    
     let boolPregunta=false;
     let turnoPregunta = false;
     let contadorJugadores = 0;
@@ -58,7 +65,7 @@ window.onload = function() {
 
     let turnoJuego;
 
-
+    //variables para impedir repeticion y ciclos infinitos
     let idPreguntaMate = [21,22,23,24,25,26,27,28,29,30,101,102,103,104,105,106,107,108,109,110];
     let idPreguntaFisica = [81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100];
     let idPreguntaQuimica = [1,2,3,4,5,6,7,8,9,10,71,72,73,74,75,76,77,78,79,80];
@@ -67,6 +74,8 @@ window.onload = function() {
     let idPreguntaCom = [51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70];
     let contadorMate = 0, contadorFisica = 0, contadorQuimica=0, contadorPsico =0, contadorLite=0, contadorCom=0;     
 
+
+    //clase en comun para las fichas
     class Ficha{
         lado = 15;
         //pide la posicion y el color de la fichas
@@ -86,10 +95,6 @@ window.onload = function() {
             ctx.stroke();
             ctx.closePath();
            
-        }
-
-        returnCasilla(){
-            return this.casilla;
         }
 
         //permite a la ficha avanzar en el tablero
@@ -177,6 +182,7 @@ window.onload = function() {
         
     }
 
+    //funcion que impide ciclos infinitos
     function repetirIds(){
         if(contadorMate == 20){
             idPreguntaMate.forEach(id =>{
@@ -223,6 +229,7 @@ window.onload = function() {
     }
 
 
+    //funcion que verifica si hubo un ganador
     function checarGanador(){
         let contadorGanador = 1;
         fichas.forEach(ficha => {
@@ -241,7 +248,9 @@ window.onload = function() {
         });
     }
 
+    //funcion que dibuja las tarjetas de las preguntas
     function drawPregunta(){
+        //funcion que checa las respuestas
         function funcRespuesta(res){
             turnoPregunta=true;
             bloqueoRespuestas.style.display='block';
@@ -310,6 +319,7 @@ window.onload = function() {
                         }
                         else{
                             if(turnosPasadosPregunta<jugadores-1){
+                                //recursividad
                                 drawPregunta(); 
                                 if(orden[contador]==1){
                                     fallidosJug1++;
@@ -435,6 +445,7 @@ window.onload = function() {
        
     }
 
+    //funcion que comunica este archivo con php
     function peticion(){
         var datos = { id_materia: rand, preguntas: preguntas_pasadas}
         fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
@@ -456,7 +467,6 @@ window.onload = function() {
             fetchRes3= fetchRespuestas[2].split('#');
             
 
-            // fetchResCorrect = fetchRespuestas[3].split('|')[1];
             fetchKilometro=fetchRespuestas[3].split('|')[1]       
             
 
@@ -468,6 +478,7 @@ window.onload = function() {
         });
     }
 
+    //arreglo que dicta el orden de los jugaodres
     function arregloOrdenPlay(){ 
         //Cada condicional determinaa las combinaciones posibles para determinar el orden
         //en el que irán los jugadores
@@ -562,6 +573,7 @@ window.onload = function() {
         
     }
 
+    //funcion de la animacion del dado
     function dado() {
         countAnimacion = 0;
         let canvas = document.getElementById('juego');
@@ -633,10 +645,10 @@ window.onload = function() {
             }
         }
         
+        //funcion que muestra el orden en pantall
         function ordenanza(){
             if(valorPrimerTiro.length<numJugadores)
             {
-                // alert("Siguiente jugador, es tu turno de tirar el dado");
                 Swal.fire("Siguiente jugador, es tu turno de tirar el dado");
                 dadoButton.style.visibility = 'visible';
             }
@@ -669,7 +681,7 @@ window.onload = function() {
             }                  
         }
 
-
+        ///funcion que se encarga de todo el apartado grafico del juego
         function animacion(){
             new Promise((resolve,reject) => {
                 dadoButton.style.visibility = 'hidden';
@@ -808,6 +820,7 @@ window.onload = function() {
         }
     }
 
+    //funcion que crea los objetos de los jugadores
     function inicializarFichas(){
         for(let i=0; i<jugadores; i++){
             if(tablero == 21){
@@ -840,6 +853,7 @@ window.onload = function() {
         }        
     }    
 
+    //funcion que inicializa el juego
     function dibujar(){
         cookies();
         infoTarjetas();
