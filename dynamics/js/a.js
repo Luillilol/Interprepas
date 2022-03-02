@@ -186,8 +186,8 @@ window.onload = function() {
     }
 
     function checarGanador(){
+        let contadorGanador = 1;
         fichas.forEach(ficha => {
-            let contadorGanador = 1;
             if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
             {
                 document.cookie = "ganador=jugador"+contadorGanador;
@@ -335,7 +335,7 @@ window.onload = function() {
                                             //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
                                             infoTarjetas();
                                             resolve();                
-                                        }, 50);
+                                        }, 100);
                                     })
                                 })
                             }             
