@@ -1,8 +1,3 @@
-/**  
-** @Archivo:        juego.js
-** @Equipo: 	    CoyoAtlón
-** @Descripción:    Código principal de funcionamiento del juego.
-*/
 window.onload = function() {
     const imgTablero = new Image(1000, 1000); //almacena la imagen del tablero
     //variables globales
@@ -28,6 +23,7 @@ window.onload = function() {
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
     let inicioJuego = document.getElementById("comienzo");
+    let divTurnoJugadorNormal = document.getElementById("turnoJugadorCasilla");
     //      Elementos de la tarjeta de pregunta
     let fondoPreguntaTarjeta = document.getElementById("fondoTarjetas");
     let tarjetaPreguntaTarjeta = document.getElementById("tarjetaPregunta");
@@ -38,8 +34,10 @@ window.onload = function() {
     let respuesta2Tarjeta = document.getElementById("idRespuesta2");
     let respuesta3Tarjeta = document.getElementById("idRespuesta3");
     let respuesta4Tarjeta = document.getElementById("idRespuesta4");
+    let bloqueoRespuestas = document.getElementById("bloqueRes1");
     let infoAcierto = document.getElementById("divAcierto");
     let infoFallo = document.getElementById("divFallo");
+    let divTurnoJugadorTarjeta = document.getElementById("turnoJugadorPregunta");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
 
     let numJugadores=0; 
@@ -51,18 +49,33 @@ window.onload = function() {
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas, fetchIDPregunta;
     let prueba, prueba2;
     let boolPregunta=false;
+    let turnoPregunta = false;
+    let contadorJugadores = 0;
+    let contadorTurnosJuego = 0;
+    let turnoJugadorePregunta = 0;
+    let turnosPasadosPregunta = 0;
+    let contador;
+
+    let turnoJuego;
 
 
-    //declaracion de la clase ficha --
+    let idPreguntaMate = [21,22,23,24,25,26,27,28,29,30,101,102,103,104,105,106,107,108,109,110];
+    let idPreguntaFisica = [81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100];
+    let idPreguntaQuimica = [1,2,3,4,5,6,7,8,9,10,71,72,73,74,75,76,77,78,79,80];
+    let idPreguntaPsico = [11,12,13,14,15,16,17,18,19,20,111,112,113,114,115,116,117,118,119,120];
+    let idPreguntaLite = [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50];
+    let idPreguntaCom = [51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70];
+    let contadorMate = 0, contadorFisica = 0, contadorQuimica=0, contadorPsico =0, contadorLite=0, contadorCom=0;     
+
     class Ficha{
         lado = 15;
-        //pide la posicion y el color de la ficha
+        //pide la posicion y el color de la fichas
         constructor(x,y,color){
             this.x = x;
             this.y = y;
             this.color = color;
             this.casilla = 0;
-        }
+        }        
 
         //dibuja la ficha en el tablero
         dibujar(){
@@ -75,104 +88,380 @@ window.onload = function() {
            
         }
 
+        returnCasilla(){
+            return this.casilla;
+        }
+
         //permite a la ficha avanzar en el tablero
-        avanzar(){
-            this.casilla++;
-            if(tablero==21){
-                if(this.casilla == 1){
-                    this.x += 150;
-                }
-                else if(this.casilla<5){
-                    this.x += 110;
-                }
-                else if(this.casilla<7){
-                    this.y -= 70;
-                }
-                else if(this.casilla<11){
-                    this.x -= 110;
-                }
-                else if(this.casilla<13){
-                    this.y -= 70;
-                }
-                else if(this.casilla<17){
-                    this.x += 110;
-                }
-                else if(this.casilla<19){
-                    this.y -= 70;
-                }
-                else if(this.casilla<23){
-                    this.x -= 110;
-                }
+        avanzar(km){
+            for(let i = 0; i < km; i++){
+                this.casilla++;
+                if(tablero==21){
+                    if(this.casilla == 1){
+                        this.x += 150;
+                    }
+                    else if(this.casilla<5){
+                        this.x += 110;
+                    }
+                    else if(this.casilla<7){
+                        this.y -= 70;
+                    }
+                    else if(this.casilla<11){
+                        this.x -= 110;
+                    }
+                    else if(this.casilla<13){
+                        this.y -= 70;
+                    }
+                    else if(this.casilla<17){
+                        this.x += 110;
+                    }
+                    else if(this.casilla<19){
+                        this.y -= 70;
+                    }
+                    else if(this.casilla<23){
+                        this.x -= 110;
+                    }
                 }else{
-                if(this.casilla == 7){
-                    this.x -= 17;
+                    if(this.casilla == 7){
+                        this.x -= 17;
+                    }
+                    if(this.casilla == 13){
+                        this.y -= 25;
+                    }
+                    if(this.casilla == 19){
+                        this.x += 35;
+                    }
+                    if(this.casilla == 24){
+                        this.y += 26;
+                    }
+                    if(this.casilla == 29){
+                        this.x -= 25;
+                    }
+                    if(this.casilla == 33){
+                        this.y -= 29;
+                    }
+                    if(this.casilla == 37){
+                        this.x += 13;
+                        this.y -= 5;
+                    }
+                    if(this.casilla == 40){
+                        this.y += 21;
+                    }
+                    if(this.casilla < 7){
+                        this.x -= 100;
+                    }
+                    else if(this.casilla < 13){
+                        this.y -= 80;
+                    }
+                    else if(this.casilla < 19){
+                        this.x += 95;
+                    }
+                    else if(this.casilla < 24){
+                        this.y += 80;
+                    }else if(this.casilla < 29){
+                        this.x -= 95;
+                    }else if(this.casilla<33){
+                        this.y -= 80;
+                    }else if(this.casilla<37){
+                        this.x += 100;
+                    }else if(this.casilla<40){
+                        this.y += 80;
+                    }else if(this.casilla<43){
+                        this.x -= 100;
+                    }else if(this.casilla==43){
+                        this.y -= 100;
+                    }
                 }
-                if(this.casilla == 13){
-                    this.y -= 25;
-                }
-                if(this.casilla == 19){
-                    this.x += 35;
-                }
-                if(this.casilla == 24){
-                    this.y += 26;
-                }
-                if(this.casilla == 29){
-                    this.x -= 25;
-                }
-                if(this.casilla == 33){
-                    this.y -= 29;
-                }
-                if(this.casilla == 37){
-                    this.x += 13;
-                    this.y -= 5;
-                }
-                if(this.casilla == 40){
-                    this.y += 21;
-                }
-                if(this.casilla < 7){
-                    this.x -= 100;
-                }
-                else if(this.casilla < 13){
-                    this.y -= 80;
-                }
-                else if(this.casilla < 19){
-                    this.x += 95;
-                }
-                else if(this.casilla < 24){
-                    this.y += 80;
-                }else if(this.casilla < 29){
-                    this.x -= 95;
-                }else if(this.casilla<33){
-                    this.y -= 80;
-                }else if(this.casilla<37){
-                    this.x += 100;
-                }else if(this.casilla<40){
-                    this.y += 80;
-                }else if(this.casilla<43){
-                    this.x -= 100;
-                }else if(this.casilla==43){
-                    this.y -= 100;
-                }
-
-
             }
+        }
+        
+    }
 
-            new Promise((resolve,reject) =>{
-                dibujarTablero();
+    function repetirIds(){
+        if(contadorMate == 20){
+            idPreguntaMate.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+            });
+            contadorMate = 0;
+        }
+        if(contadorFisica == 20){
+            idPreguntaFisica.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+            });
+            contadorFisica = 0;
+        }
+        if(contadorQuimica == 20){
+            idPreguntaQuimica.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+                });
+            contadorQuimica = 0;
+        }
+        if(contadorPsico == 20){
+            idPreguntaPsico.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+            });
+            contadorPsico = 0;
+        }
+        if(contadorLite == 20){
+            idPreguntaLite.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+            });
+            contadorLite = 0;
+        }
+        if(contadorCom == 20){
+            idPreguntaCom.forEach(id =>{
+                let index = preguntasPasadas.indexOf(id);
+                preguntas_pasadas.splice(index,1);
+            });
+            contadorCom = 0;
+        }
+    }
+
+
+    function checarGanador(){
+        let contadorGanador = 1;
+        fichas.forEach(ficha => {
+            if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
+            {
+                document.cookie = "ganador=jugador"+contadorGanador;
+                window.location.assign("./ganar.html");
+            }
+            contadorGanador++;
+        });
+    }
+
+    function drawPregunta(){
+        function funcRespuesta(res){
+            turnoPregunta=true;
+            bloqueoRespuestas.style.display='block';
+            new Promise((resolve, reject) => {
+                if(res ==1){
+                    infoAcierto.style.display='block';
+                }else{
+                    infoFallo.style.display='block';
+                }
                 resolve();
+                
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
-                        this.dibujar();
-                        resolve();                
-                    }, 50);
+                        fondoPreguntaTarjeta.style.display = 'none';
+                        tarjetaPreguntaTarjeta.style.display = 'none';
+                        infoFallo.style.display='none';
+                        infoAcierto.style.display='none';
+                        bloqueoRespuestas.style.display='none';
+                        divTurnoJugadorTarjeta.style.display = 'none';
+                        turnoPregunta=false;
+                        if(res == 1){
+                            fichas[orden[contador]-1].avanzar(fetchKilometro);
+                            if(orden[contador]==1){
+                                aciertosJug1++;
+                                kmRecorridosJug1 = fichas[0].casilla;
+                            }
+                            else if(orden[contador]==2){
+                                aciertosJug2++;
+                                kmRecorridosJug2 = fichas[1].casilla;
+                            }
+                            else if(orden[contador]==3){
+                                aciertosJug3++;
+                                kmRecorridosJug3 = fichas[2].casilla;
+                            }
+                            else if(orden[contador]==4){
+                                aciertosJug4++;
+                                kmRecorridosJug4 = fichas[3].casilla;
+                            }
+                            
+                            if(contadorTurnosJuego<jugadores-1){
+                                contadorTurnosJuego++;
+                                turnoJuego = orden[contadorTurnosJuego];
+                            }else{
+                                contadorTurnosJuego = 0;
+                                turnoJuego=orden[0];
+                            }
+                            divTurnoJugadorTarjeta.style.display = 'none';
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+                            new Promise((resolve,reject) =>{
+                                dibujarTablero();
+                                resolve();
+                            }).then(()=>{
+                                return new Promise((resolve)=>{
+                                    setTimeout(()=>{
+                                        fichas.forEach(ficha => {
+                                            ficha.dibujar();
+                                        });
+                                        infoTarjetas(); 
+                                        resolve();  
+                                    }, 100);
+                                })
+                            })
+                            checarGanador();
+                            repetirIds();
+                        }
+                        else{
+                            if(turnosPasadosPregunta<jugadores-1){
+                                drawPregunta(); 
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
+                                if(contador < jugadores-1){
+                                    contador++;
+                                    turnoJugadorePregunta = orden[contador];
+                                }
+                                else if(contador == jugadores-1){
+                                    contador = 0;
+                                    turnoJugadorePregunta = orden[contador];
+                                }
+                                turnosPasadosPregunta++;
+                            }
+                            else if(turnosPasadosPregunta >= jugadores-1){
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
+                                if(contadorTurnosJuego<jugadores-1){
+                                    contadorTurnosJuego++;
+                                    turnoJuego = orden[contadorTurnosJuego];
+                                }else{
+                                    contadorTurnosJuego = 0;
+                                    turnoJuego=orden[0];
+                                }
+                                fichas[jugadores].avanzar(fetchKilometro);
+                                new Promise((resolve,reject) =>{
+                                    dibujarTablero();
+                                    
+                                    resolve();
+                                }).then(()=>{
+                                    return new Promise((resolve)=>{
+                                        setTimeout(()=>{
+                                            fichas.forEach(ficha => {
+                                                ficha.dibujar();
+                                            });
+                                            infoTarjetas();
+                                            resolve();                
+                                        }, 100);
+                                    })
+                                });
+                            }             
+                           
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego; 
+                            divTurnoJugadorTarjeta.innerHTML = 'Turno del jugador: '+turnoJugadorePregunta;
+                            checarGanador();
+                            repetirIds();
+                        }
+                        resolve();
+                    }, 2000)
                 })
             })
         }
+        fondoPreguntaTarjeta.style.display = 'block';
+        tarjetaPreguntaTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.innerHTML= 'Turno del jugador: '+turnoJuego;
+        numKilometroTarjeta.innerHTML= fetchKilometro;
+        if(rand==1){
+            materiaTarjeta.innerHTML= 'Matemáticas';
+            contadorMate++;
+        }else if(rand==2){
+            materiaTarjeta.innerHTML= 'Física';
+            contadorFisica++;
+        }else if(rand==3){
+            materiaTarjeta.innerHTML= 'Química';
+            contadorQuimica++;
+        }else if(rand==4){
+            materiaTarjeta.innerHTML= 'Psicología';
+            contadorPsico++;
+        }else if(rand==5){
+            materiaTarjeta.innerHTML= 'Literatura';
+            contadorLite++;
+        }else if(rand==6){
+            materiaTarjeta.innerHTML= 'Computación';
+            contadorCom++;
+        }
+        preguntaTarjeta.innerHTML= fetchPregunta[0];
+        respuesta1Tarjeta.innerHTML= fetchRes1[0];
+        respuesta2Tarjeta.innerHTML=fetchRes2[0];
+        respuesta3Tarjeta.innerHTML=fetchRes3[0];
+        respuesta4Tarjeta.innerHTML=fetchRes4[0];          
+        
+        
+        respuesta1Tarjeta.addEventListener('click', ()=>{       
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes1[1]);
+        });
+        respuesta2Tarjeta.addEventListener('click', ()=>{
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes2[1]);
+        });
+        respuesta3Tarjeta.addEventListener('click', ()=>{
+            if(turnoPregunta==false) {
+                funcRespuesta(fetchRes3[1]);
+            }
+                
+        });
+        respuesta4Tarjeta.addEventListener('click', ()=>{
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes4[1]);
+        });        
+        turnoJugadorePregunta = turnoJuego;
+       
+       
     }
-    
 
-    //Determina el orden de juego de los jugadores
+    function peticion(){
+        var datos = { id_materia: rand, preguntas: preguntas_pasadas}
+        fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
+            return response.text();
+        }).then(function (text){
+            stringPetición = text;
+            //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
+            fetchIDPregunta = stringPetición.split('°');
+            fetchPregunta = fetchIDPregunta[0].split(";");
+            fetchIDPregunta=fetchIDPregunta[1];
+            preguntas_pasadas.push(fetchIDPregunta);
+            fetchRespuestas = fetchPregunta[1].split('&');
+            
+
+            fetchRes1= fetchRespuestas[0].split('#');
+           
+            fetchRes2= fetchRespuestas[1].split('#');
+            
+            fetchRes3= fetchRespuestas[2].split('#');
+            
+
+            // fetchResCorrect = fetchRespuestas[3].split('|')[1];
+            fetchKilometro=fetchRespuestas[3].split('|')[1]       
+            
+
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
+            
+            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
+            dadoButton.style.visibility = 'visible';
+            
+        });
+    }
+
     function arregloOrdenPlay(){ 
         //Cada condicional determinaa las combinaciones posibles para determinar el orden
         //en el que irán los jugadores
@@ -240,7 +529,9 @@ window.onload = function() {
             let pass4 = false;
             
             
+            
             valorPrimerTiro = valorPrimerTiro.sort().reverse();
+            
             
             valorPrimerTiro.forEach(Element=>{
               if(jug1 == Element && pass1 == false){
@@ -265,7 +556,6 @@ window.onload = function() {
         
     }
 
-    //Dibuja dado y obtiene valores de 1 a 6
     function dado() {
         countAnimacion = 0;
         let canvas = document.getElementById('juego');
@@ -340,37 +630,37 @@ window.onload = function() {
         function ordenanza(){
             if(valorPrimerTiro.length<numJugadores)
             {
-                alert("Siguiente jugador, es tu turno de tirar el dado");
+                // alert("Siguiente jugador, es tu turno de tirar el dado");
+                Swal.fire("Siguiente jugador, es tu turno de tirar el dado");
                 dadoButton.style.visibility = 'visible';
             }
             else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
-            {
-                
+            {                
                 arregloOrdenPlay();
-                console.log(orden);
-                
+    
                 varcontrol++;
                 if(numJugadores==1){
-                    alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                    Swal.fire('Eres el único jugador, ¡Mucha suerte, que la ignorancia no gane!');
                 }
                 else if(numJugadores==2){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                        "\n¡Mucha suerte, gánenle a la ignorancia!");
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                        "\n¡Mucha suerte, que la ignorancia no gane!");
                 }
                 else if(numJugadores==3){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
-                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                     Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, que la ignorancia no gane!");
+                    
                 }else if(numJugadores==4){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
-                    +"\nJugador "+orden[2]+"\nJugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
+                    +"\nJugador "+orden[2]+"\nJugador "+orden[3]+"\n¡Mucha suerte, que la ignorancia no gane!");
                 }
                 
-                inicioJuego.style.visibility = 'visible';
+                dadoButton.style.visibility = 'visible';
                 boolPregunta=true;
-                console.log("BOOLRP")
-            }
-            
-
+                turnoJuego = orden[0];
+                divTurnoJugadorNormal.style.display = 'block';
+                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+            }                  
         }
 
 
@@ -388,9 +678,26 @@ window.onload = function() {
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
-                        ordenanza();
-                        resolve();
                         
+                        if(boolPregunta==false){
+                            ordenanza();
+                        }
+                        else{
+                            new Promise(function(resolve, reject){
+                                peticion();
+                                contador = contadorTurnosJuego;
+                                turnosPasadosPregunta=0;
+                                resolve();
+                            }).then(()=>{
+                                return new Promise((resolve)=>{
+                                    setTimeout(()=>{
+                                        drawPregunta();
+                                        resolve();                
+                                    }, 700);
+                                })
+                            });
+                        }
+                        resolve();
                     }, 1500)
                 })
                 
@@ -399,117 +706,10 @@ window.onload = function() {
        
           
         }
-        animacion();
-        
-        
-    }
-    
-    function saludar(){
-        console.log("FUNCION SALUDAR ");
-        dadoButton.style.display='block';
+        animacion();      
     }
 
-    inicioJuego.addEventListener('click', ()=>{
-        console.log("BOTON JUGAR");
-        function logicajuego(){
-            saludar();
-        }
-        logicajuego();
-    });
-    
-
-    
-    function peticion(){
-        var datos = { id_materia: rand, preguntas: preguntas_pasadas}
-        fetch("../dynamics/php/juego.php", {method: "POST", body: JSON.stringify(datos)}).then(function(response){
-            return response.text();
-        }).then(function (text){
-            stringPetición = text;
-            //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
-            console.log(text);
-            fetchIDPregunta = stringPetición.split('°');
-            fetchPregunta = fetchIDPregunta[0].split(";");
-            fetchIDPregunta=fetchIDPregunta[1];
-            preguntas_pasadas.push(fetchIDPregunta);
-            fetchRespuestas = fetchPregunta[1].split('&');
-            
-
-            fetchRes1= fetchRespuestas[0].split('#');
-           
-            fetchRes2= fetchRespuestas[1].split('#');
-            
-            fetchRes3= fetchRespuestas[2].split('#');
-            
-
-            // fetchResCorrect = fetchRespuestas[3].split('|')[1];
-            fetchKilometro=fetchRespuestas[3].split('|')[1]       
-            
-
-            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-            
-            fetchRes4=(fetchRespuestas[3].split('|')[0]).split("#");
-            
-        });
-    }
-
-    //No sirve, pero muestra la pregunta.
-    function drawPregunta(){
-        function funcRespuesta(res){
-           // console.log('RESPUESTA ES: '+res);
-            new Promise((resolve, reject) => {
-                console.log("CLICK EN LA RESPUESTA");
-                if(res ==1){
-                    console.log("RESPUESTA CORRECTA");
-                    infoAcierto.style.display='block';
-                }else{
-                    console.log("RESPUESTA INCORRECTA");
-                    infoFallo.style.display='block';
-                }
-                resolve();
-            }).then(()=>{
-                return new Promise((resolve)=>{
-                    setTimeout(()=>{
-                        fondoPreguntaTarjeta.style.display = 'none';
-                        tarjetaPreguntaTarjeta.style.display = 'none';
-                        infoFallo.style.display='none';
-                        infoAcierto.style.display='none';
-
-                        console.log("HOLADASDAD");
-                        resolve();
-                    }, 2000)
-                })
-            })
-        }
-        console.log("WOOWO");
-        numKilometroTarjeta.innerHTML= fetchKilometro;
-        materiaTarjeta.innerHTML= 'Materia';
-        preguntaTarjeta.innerHTML= fetchPregunta[0];
-        respuesta1Tarjeta.innerHTML= fetchRes1[0];
-        respuesta2Tarjeta.innerHTML=fetchRes2[0];
-        respuesta3Tarjeta.innerHTML=fetchRes3[0];
-        respuesta4Tarjeta.innerHTML=fetchRes4[0];  
-        
-        respuesta1Tarjeta.addEventListener('click', ()=>{
-            console.log("RESPUESTA1");
-
-            funcRespuesta(fetchRes1[1]);
-        });
-        respuesta2Tarjeta.addEventListener('click', ()=>{
-            console.log("RESPUESTA2");
-            funcRespuesta(fetchRes2[1]);
-        })
-        respuesta3Tarjeta.addEventListener('click', ()=>{
-            console.log("RESPUESTA3");
-            funcRespuesta(fetchRes3[1]);
-        })
-        respuesta4Tarjeta.addEventListener('click', ()=>{
-            console.log("RESPUESTA4");
-            funcRespuesta(fetchRes4[1]);
-        })
-    }
-
-    
-    //separar las cookies
+    //Función que separa las cookies de acuerdo al tablero, colores y jugadores
     function cookies(){
         
         let cookies = document.cookie;
@@ -533,44 +733,9 @@ window.onload = function() {
                 colores[3]=cookie[1];
             }
         });
-        console.log(colores+" "+tablero+""+jugadores);
-
     }
 
-    function dibujarFichas(){
-        for(let i=0; i<jugadores; i++){
-            if(tablero == 21){
-                if(i==0){
-                    fichas.push(new Ficha(340,530,colores[i]));
-                }else if(i==1){
-                    fichas.push(new Ficha(340,560,colores[i]));
-                }else if(i==2){
-                    fichas.push(new Ficha(380,530,colores[i]));
-                }else if(i==3){
-                    fichas.push(new Ficha(380,560,colores[i]));
-                }
-            }else{
-                if(i==0){
-                    fichas.push(new Ficha(945,592,colores[i]));
-                }else if(i==1){
-                    fichas.push(new Ficha(945,622,colores[i]));
-                }else if(i==2){
-                    fichas.push(new Ficha(975,592,colores[i]));
-                }else if(i==3){
-                    fichas.push(new Ficha(975,622,colores[i]));
-                }
-            }
-        }
-        if(tablero == 21){
-            fichas.push(new Ficha(360,545,"#000000"));
-        }
-        if(tablero == 42){
-            fichas.push(new Ficha(960,605,"#000000"));
-        }
-        
-    }
-
-    //----------
+    //Función que Dibuja el tablero que se va a ocupar
     function dibujarTablero(){
         
         if(tablero==42){
@@ -579,7 +744,6 @@ window.onload = function() {
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 230, 50, 800, 600);
             });
-            //divTablero.src=""
         }else{
             
             imgTablero.src = '../statics/img/Tableros21.png';
@@ -615,53 +779,6 @@ window.onload = function() {
         }      
     }
 
-
-    function tableroEvents(){
-        new Promise((resolve,reject) =>{
-            dado();            
-            resolve();
-        }).then(()=>{
-            return new Promise((resolve)=>{
-                setTimeout(()=>{
-                    // drawPregunta();
-                    resolve();
-                }, 5000);
-            })
-        })
-     
-       
-    }
-
-    //funcion que dibuja el canvas dependiendo de la pantalla *
-    function draw() {
-        fichas.forEach(Element=>{
-            Element.dibujar();
-        })
-    }
-
-    //eventos de botón para el canvas 
-    function girarDado(){
-        if(boolPregunta==false){        
-            dadoButton.addEventListener('click', e => {
-                bloqueBoton.style.display='block';
-                fichas.forEach(Element=>{
-                    Element.avanzar();
-                });
-                tableroEvents();
-            });
-        }
-    }
-    
- //Evento para inicializar juego SE VA A IMPLEMENTAR PARA QUE AVISE EL ORDEN DE LOS JUGADORES, PERO YA ESTÁ EN EL ARREGLO
- // comenzar.addEventListener('click', e =>{
-    function iniciarJuego(){
-        girarDado();       
-    }
-
-
-
-
-
     function infoTarjetas(){
         let txtTarj1 = document.getElementById("jug1");
         let txtTarj2 = document.getElementById("jug2");
@@ -672,68 +789,76 @@ window.onload = function() {
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
         }else if(jugadores==2){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;    
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2;    
         }else if(jugadores==3){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
         }else if(jugadores==4){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
+            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug4+'<br>Aciertos:'+aciertosJug4+'<br>Fallidos:'+fallidosJug4;
         }
-       
-
-
-       
     }
 
-    function init(){
-        new Promise((resolve,reject) =>{
-            cookies();
+    function inicializarFichas(){
+        for(let i=0; i<jugadores; i++){
+            if(tablero == 21){
+                if(i==0){
+                    fichas.push(new Ficha(340,530,colores[i]));
+                }else if(i==1){
+                    fichas.push(new Ficha(340,560,colores[i]));
+                }else if(i==2){
+                    fichas.push(new Ficha(380,530,colores[i]));
+                }else if(i==3){
+                    fichas.push(new Ficha(380,560,colores[i]));
+                }
+            }else{
+                if(i==0){
+                    fichas.push(new Ficha(945,592,colores[i]));
+                }else if(i==1){
+                    fichas.push(new Ficha(945,622,colores[i]));
+                }else if(i==2){
+                    fichas.push(new Ficha(975,592,colores[i]));
+                }else if(i==3){
+                    fichas.push(new Ficha(975,622,colores[i]));
+                }
+            }
+        }
+        if(tablero == 21){
+            fichas.push(new Ficha(360,545,"#000000"));
+        }
+        if(tablero == 42){
+            fichas.push(new Ficha(960,605,"#000000"));
+        }        
+    }    
+
+    function dibujar(){
+        cookies();
+        infoTarjetas();
+        inicializarFichas();
+        new Promise(function(resolve, reject){
+            dibujarTablero();
             resolve();
         }).then(()=>{
             return new Promise((resolve)=>{
                 setTimeout(()=>{
-                    dibujarFichas();
-                    resolve();
-                }, 1000);
+                    fichas.forEach(ficha => {
+                        ficha.dibujar();
+                    }); 
+                    
+                    resolve();                
+                }, 200);
             })
-        })
+        });
     }
     
-    
+    dibujar(); 
+    dadoButton.addEventListener('click', e => {
+        bloqueBoton.style.display='block';
+        dado();
+        contadorJugadores++;
+    });
 
-    new Promise((resolve,reject) =>{
-        init();
-        resolve();
-    }).then(()=>{
-        return new Promise((resolve)=>{
-            setTimeout(()=>{
-                draw();
-                resolve();                
-            }, 501);
-        })
-    })
-
-
-    iniciarJuego();
-    
-    dibujarTablero();
-    infoTarjetas();//Este método es solamente útil en lo que se cree eventos de puntajes u otrs cosas
-    
-    
-    // new Promise((resolve, reject) =>{
-    //     console.log("Promesa Petición");
-    //     peticion();
-    //     resolve();
-    // }).then(()=>{
-    //     return new Promise((resolve)=>{
-    //         setTimeout(()=>{
-    //             console.log("PROMESA DRAW PREGUNTA");
-    //             drawPregunta();
-    //         }, 2000)
-    //     })
-    // })
 }
