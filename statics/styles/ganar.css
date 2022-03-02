@@ -10,8 +10,15 @@
     --orange: #FFBC3A;
     --fondo: #FEFFD9;
 }
+@font-face {
+    font-family: anymice;
+    src: url("../fonts/any.ttf");
+}
 body{
     background-color: var(--fondo);
+}
+h1{
+    font-size: 70px;
 }
 #fondoTitulo{
     position: absolute;
@@ -30,3 +37,32 @@ body{
     text-align: center;
     left: 44%;
 }
+#ganaste{
+    display: inline;
+    color: green;
+    padding: 0px;
+}
+#Seccion1{
+    font-family: anymice;
+    display: flex;
+    flex-direction: column;
+    top: 80px;
+    margin: 80px;
+    border:40px;
+    align-items: center;
+    font-size: 30px;
+}
+#Seccion2{
+    font-family: anymice;
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    align-items: center;
+    text-align:center;
+    width: 100%;
+    right: 30%;
+    justify-content: center;
+    justify-items: center;
+}
+
+
