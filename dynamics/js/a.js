@@ -23,6 +23,7 @@ window.onload = function() {
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
     let inicioJuego = document.getElementById("comienzo");
+    let divTurnoJugadorNormal = document.getElementById("turnoJugadorCasilla");
     //      Elementos de la tarjeta de pregunta
     let fondoPreguntaTarjeta = document.getElementById("fondoTarjetas");
     let tarjetaPreguntaTarjeta = document.getElementById("tarjetaPregunta");
@@ -36,6 +37,7 @@ window.onload = function() {
     let bloqueoRespuestas = document.getElementById("bloqueRes1");
     let infoAcierto = document.getElementById("divAcierto");
     let infoFallo = document.getElementById("divFallo");
+    let divTurnoJugadorTarjeta = document.getElementById("turnoJugadorPregunta");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
 
     let numJugadores=0; 
@@ -203,6 +205,8 @@ window.onload = function() {
                         infoFallo.style.display='none';
                         infoAcierto.style.display='none';
                         bloqueoRespuestas.style.display='none';
+                        divTurnoJugadorTarjeta.style.display = 'none';
+                        console.log("TURNOJUEGO");
                         turnoPregunta=false;
                         if(res == 1){
                             fichas[orden[contador]-1].avanzar(fetchKilometro);
@@ -213,6 +217,8 @@ window.onload = function() {
                                 contadorTurnosJuego = 0;
                                 turnoJuego=orden[0];
                             }
+                            divTurnoJugadorTarjeta.style.display = 'none';
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
                         }
                         else{
                             if(turnosPasadosPregunta<jugadores-1){
@@ -241,7 +247,11 @@ window.onload = function() {
                                 }
                                 fichas[jugadores].avanzar(fetchKilometro);
                             }             
+                           
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego; 
+                            divTurnoJugadorTarjeta.innerHTML = 'Turno del jugador: '+turnoJugadorePregunta;
                         }
+                        
                         
                         console.log("Jugador en turno en preguta: jugador"+turnoJugadorePregunta);
                         console.log("CONTADOR: "+contador);
@@ -254,6 +264,8 @@ window.onload = function() {
         }
         fondoPreguntaTarjeta.style.display = 'block';
         tarjetaPreguntaTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.innerHTML= 'Turno del jugador: '+turnoJuego;
         numKilometroTarjeta.innerHTML= fetchKilometro;
         materiaTarjeta.innerHTML= 'Materia';
         preguntaTarjeta.innerHTML= fetchPregunta[0];
@@ -502,7 +514,8 @@ window.onload = function() {
                 
                 arregloOrdenPlay();
                 console.log(orden);
-                
+                /*divTurnoJugadorNormal.style.display = 'block';
+                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;*/
                 varcontrol++;
                 if(numJugadores==1){
                     // alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
@@ -531,8 +544,11 @@ window.onload = function() {
                 boolPregunta=true;
                 turnoJuego = orden[0];
                 //console.log("BOOLRP");
-            }
-            
+                divTurnoJugadorNormal.style.display = 'block';
+                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+                console.log("ORDEN");
+
+            }                   
 
         }
 
@@ -727,6 +743,7 @@ window.onload = function() {
                     fichas.forEach(ficha => {
                         ficha.dibujar();
                     }); 
+                    
                     resolve();                
                 }, 200);
             })
