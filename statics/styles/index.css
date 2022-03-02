@@ -27,7 +27,7 @@ body{
 }
 
 h1, p{
-    position: relative;
+    position: absolute;
     top: 0%;
     font-family: Galindo_normal;
     text-align: center;
@@ -41,10 +41,10 @@ h1, p{
     position: absolute;
     /* background-color: var(--pink); */
     width: 100%;
-    height: 5.5%;
+    height: 40px;
 }
 .claseBotonMenu{
-    position: absolute;
+    position: relative;
     background-color: var(--blue);
     width: 25%; 
     height: 14%;
@@ -52,6 +52,7 @@ h1, p{
     border-radius: 35px;
     text-align: center;    
     transition: background-color .4s;
+    text-align: center;
 }
 .claseBotonMenu:hover{
     background-color: var(--pink);
@@ -80,20 +81,21 @@ h1, p{
 /* ========================== ID ===================================*/
 
 #titulo{
-    position: relative;
+    position: absolute;
     top: 7%;
-    /* font-family: ; */
-    font-size: 8.4vh;
+    font-size: 50px;
     margin: 0px;
-
     text-align: center;
+    left: 40%;
 }
 #franja1{
+    position: absolute;
     top: 0%;
     left: 0%;
     background-color: var(--pink);
 }
 #franja2{
+    position: absolute;
     bottom: 0%;
     left: 0%;
     background-color: var(--green);
@@ -102,7 +104,7 @@ h1, p{
     position: absolute;
     background-color: var(--orange);
     width: 100%;
-    height: 12%;
+    height: 60px;
     top: 5%;
     left: 0;
     text-align: center;
@@ -110,24 +112,23 @@ h1, p{
 
 
 #idBotonJugar{
-    top: 25%;
+    position: absolute;
+    top: 35%;
     left: 15%;
 }
 #idBotonInstrucciones{
-    top: 45%;
+    position: absolute;
+    top: 60%;
     left: 15%;
 }
-#idBotonCreditos{
-    top: 65%;
-    left: 15%;
-}
-#idImagen{
+
+/*idImagen{
     position: absolute;
     width: 500px;
-    height: 4;
+    height: 400px;
     background-color: white;
     top: 25%;
-    right: 10%;
+    left: 45%;
     border-radius: 10%;
 }
 /* #idCreativeCommons{
@@ -212,7 +213,204 @@ h1, p{
     border-radius: 50%;
     cursor: pointer;
 }
-/*=======================Animación===========================*/
+/*=====================================Animación=====================================*/
+#foco{
+    top:270px;
+    position: absolute;
+    left: 850px;
+    /**/
+    width: 250px;
+    height: 250px;
+  
+    border-radius: 50%;
+    animation: encender 5s linear infinite;
+}
+#cuello{
+    top:490px;
+    position: absolute;
+    left: 910px;
+    width: 140px;
+    height: 50px;
+    animation: encender 5s linear infinite;
+    
+}
+#linea1{
+    position: absolute;
+    top:430px;
+    left: 950px;
+    width: 6px;
+    height: 120px;
+    background-color: BLACK;
+    
+}
+#linea2{
+    position: absolute;
+    top:430px;
+    left: 1000px;
+    width: 6px;
+    height: 120px;
+    background-color: BLACK;
+    
+}
+#ovalo{
+    position: absolute;
+    top:410px;
+    left: 996px;
+    width: 30px;
+    height: 20px;
+    border-radius: 50%;
+    border: 5px solid rgb(0, 0, 0);
+    transform: rotate(120deg);
+    
+}
+#ovalo2{
+    position: absolute;
+    top:410px;
+    left: 919px;
+    width: 30px;
+    height: 20px;
+    border-radius: 50%;
+    border: 5px solid rgb(0, 0, 0);
+    transform: rotate(230deg);
+    
+}
+#linea3{
+    position: absolute;
+    top:428px;
+    left: 950px;
+    width: 50px;
+    height: 5px;
+    background-color: BLACK;
+}
+#base{
+    top:535px;
+    position: absolute;
+    left: 910px;
+    width: 138px;
+    height: 50px;
+    background-color: #3a3a3a;
+    border-radius: 10%;
+    border: solid 0.5px black;
+    
+}
 
+#rayo1{
+    top:400px;
+    position: absolute;
+    left: 692px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(5deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo2{
+    top:300px;
+    position: absolute;
+    left: 703px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(20deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo3{
+    top:215px;
+    position: absolute;
+    left: 760px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(45deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo4{
+    top:167px;
+    position: absolute;
+    left: 855px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(80deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo5{
+    top:165px;
+    position: absolute;
+    left: 960px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(100deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo6{
+    top:210px;
+    position: absolute;
+    left: 1055px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(125deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo7{
+    top:300px;
+    position: absolute;
+    left: 1125px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(160deg);
+    
+    animation: encender 5s linear infinite;
+}
+#rayo8{
+    top:400px;
+    position: absolute;
+    left: 1125px;
+    width: 130px;
+    height: 20px;
+    border-radius: 40%;
+    transform: rotate(175deg);
+    
+    animation: encender 5s linear infinite;
+}
+@keyframes encender{
+    0%{
+        background-color:var(--fondo);
+       
+    }
+    1%{
+        background-color: rgb(255, 230, 0);
+
+      }
+    33%{
+        background-color: var(--fondo);
+       
+    }
+    34%{
+      background-color: rgb(255, 230, 0);
+     
+    }
+    66%{
+        background-color: var(--fondo);
+      
+      }
+    67%{
+      background-color: rgb(255, 230, 0);
+     
+    }
+    99%{
+        background-color:var(--fondo);
+        
+      }
+  }
 
 

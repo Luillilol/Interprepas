@@ -8,7 +8,7 @@ window.addEventListener("load", ()=>{
     //Declaracion de las variables globales
     let botonJugar = document.getElementById("idBotonJugar");
     let botonInstrucciones = document.getElementById("idBotonInstrucciones");
-    let botonCredito = document.getElementById("idBotonCreditos");
+    //let botonCredito = document.getElementById("idBotonCreditos");
     let fondoDegradado = document.getElementById("id_capaOscura");
     let divCaractJuego = document.getElementById("id_caractJuego");
     let botonForm = document.getElementById("boton");
@@ -37,9 +37,9 @@ window.addEventListener("load", ()=>{
         window.location.assign("./templates/instrucciones.html");
     });
 
-    botonCredito.addEventListener("click", ()=>{  
+    /*botonCredito.addEventListener("click", ()=>{  
         window.location.assign("./templates/creditos.html");
-    });
+    });*/
     //Eventos de selección de jugador y color
     players.addEventListener("click", ()=>{
         if(p1R1.checked){
@@ -144,7 +144,7 @@ window.addEventListener("load", ()=>{
     
     }
 
-    let canvas = document.getElementById('juego');
+  /*  let canvas = document.getElementById('juego');
         let ctx = canvas.getContext("2d");
     //ANIMACIÓN
     function foco(){
@@ -172,6 +172,6 @@ window.addEventListener("load", ()=>{
         ctx.fill();
         ctx.closePath();
     //}
-    //foco();
+    //foco();*/
 });
 
