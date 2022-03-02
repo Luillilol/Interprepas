@@ -4,6 +4,7 @@
 ** @Descripción:    Funcionamiento de inicio del juego, selección de jugadores y tablero.
 */
 window.addEventListener("load", ()=>{
+    document
     //Declaracion de las variables globales
     let botonJugar = document.getElementById("idBotonJugar");
     let botonInstrucciones = document.getElementById("idBotonInstrucciones");

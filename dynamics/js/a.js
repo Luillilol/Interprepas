@@ -185,6 +185,18 @@ window.onload = function() {
         
     }
 
+    function checarGanador(){
+        fichas.forEach(ficha => {
+            let contadorGanador = 1;
+            if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
+            {
+                document.cookie = "ganador=jugador"+contadorGanador;
+                window.location.assign("./ganador.html");
+            }
+            contadorGanador++;
+        });
+    }
+
     function drawPregunta(){
         function funcRespuesta(res){
             turnoPregunta=true;
@@ -256,9 +268,10 @@ window.onload = function() {
                                         //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
                                         infoTarjetas(); 
                                         resolve();  
-                                    }, 50);
+                                    }, 100);
                                 })
                             })
+                            checarGanador();
                         }
                         else{
                             if(turnosPasadosPregunta<jugadores-1){
@@ -319,7 +332,7 @@ window.onload = function() {
                                             fichas.forEach(ficha => {
                                                 ficha.dibujar();
                                             });
-                                            console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
+                                            //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
                                             infoTarjetas();
                                             resolve();                
                                         }, 50);
@@ -329,6 +342,7 @@ window.onload = function() {
                            
                             divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego; 
                             divTurnoJugadorTarjeta.innerHTML = 'Turno del jugador: '+turnoJugadorePregunta;
+                            checarGanador();
                         }
                         
                         
@@ -346,7 +360,19 @@ window.onload = function() {
         divTurnoJugadorTarjeta.style.display = 'block';
         divTurnoJugadorTarjeta.innerHTML= 'Turno del jugador: '+turnoJuego;
         numKilometroTarjeta.innerHTML= fetchKilometro;
-        materiaTarjeta.innerHTML= 'Materia';
+        if(rand==1){
+            materiaTarjeta.innerHTML= 'Matemáticas';
+        }else if(rand==2){
+            materiaTarjeta.innerHTML= 'Física';
+        }else if(rand==3){
+            materiaTarjeta.innerHTML= 'Química';
+        }else if(rand==4){
+            materiaTarjeta.innerHTML= 'Psicología';
+        }else if(rand==5){
+            materiaTarjeta.innerHTML= 'Literatura';
+        }else if(rand==6){
+            materiaTarjeta.innerHTML= 'Computación';
+        }
         preguntaTarjeta.innerHTML= fetchPregunta[0];
         respuesta1Tarjeta.innerHTML= fetchRes1[0];
         respuesta2Tarjeta.innerHTML=fetchRes2[0];
