@@ -23,6 +23,7 @@ window.onload = function() {
     let tarjeta3 = document.getElementById("jug3");
     let tarjeta4 = document.getElementById("jug4");
     let inicioJuego = document.getElementById("comienzo");
+    let divTurnoJugadorNormal = document.getElementById("turnoJugadorCasilla");
     //      Elementos de la tarjeta de pregunta
     let fondoPreguntaTarjeta = document.getElementById("fondoTarjetas");
     let tarjetaPreguntaTarjeta = document.getElementById("tarjetaPregunta");
@@ -36,6 +37,7 @@ window.onload = function() {
     let bloqueoRespuestas = document.getElementById("bloqueRes1");
     let infoAcierto = document.getElementById("divAcierto");
     let infoFallo = document.getElementById("divFallo");
+    let divTurnoJugadorTarjeta = document.getElementById("turnoJugadorPregunta");
     //              FIN DE ELEMENTOS DE LA TARJETA DE PREGUNTA 
 
     let numJugadores=0; 
@@ -47,17 +49,26 @@ window.onload = function() {
     let fetchPregunta, fetchRes1, fetchRes2, fetchRes3, fetchRes4, fetchKilometro, fetchResCorrect, fetchRespuestas, fetchIDPregunta;
     let prueba, prueba2;
     let boolPregunta=false;
+    let turnoPregunta = false;
     let contadorJugadores = 0;
+    let contadorTurnosJuego = 0;
+    let turnoJugadorePregunta = 0;
+    let turnosPasadosPregunta = 0;
+    let contador;
+
+    let turnoJuego;
 
     class Ficha{
         lado = 15;
-        //pide la posicion y el color de la ficha
+        //pide la posicion y el color de la fichas
         constructor(x,y,color){
             this.x = x;
             this.y = y;
             this.color = color;
             this.casilla = 0;
         }
+
+        
 
         //dibuja la ficha en el tablero
         dibujar(){
@@ -68,6 +79,10 @@ window.onload = function() {
             ctx.stroke();
             ctx.closePath();
            
+        }
+
+        returnCasilla(){
+            return this.casilla;
         }
 
         //permite a la ficha avanzar en el tablero
@@ -153,7 +168,7 @@ window.onload = function() {
 
                 }
             }
-            this.dibujar();
+            //this.dibujar();
 
             /*new Promise((resolve,reject) =>{
                 dibujarTablero();
@@ -170,8 +185,22 @@ window.onload = function() {
         
     }
 
+    function checarGanador(){
+        let contadorGanador = 1;
+        fichas.forEach(ficha => {
+            if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
+            {
+                document.cookie = "ganador=jugador"+contadorGanador;
+                window.location.assign("./ganador.html");
+            }
+            contadorGanador++;
+        });
+    }
+
     function drawPregunta(){
         function funcRespuesta(res){
+            turnoPregunta=true;
+            console.log("FUNCIÓN DE RESPUESTA");
             bloqueoRespuestas.style.display='block';
             new Promise((resolve, reject) => {
                 console.log("CLICK EN LA RESPUESTA");
@@ -182,7 +211,10 @@ window.onload = function() {
                     console.log("RESPUESTA INCORRECTA");
                     infoFallo.style.display='block';
                 }
+                
+                console.log("TURNO DEL JUEGO: "+turnoJuego);
                 resolve();
+                
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
@@ -191,10 +223,132 @@ window.onload = function() {
                         infoFallo.style.display='none';
                         infoAcierto.style.display='none';
                         bloqueoRespuestas.style.display='none';
-                        if(res ==1){
-                            fichas[0].avanzar(fetchKilometro);
+                        divTurnoJugadorTarjeta.style.display = 'none';
+                        console.log("TURNOJUEGO");
+                        turnoPregunta=false;
+                        if(res == 1){
+                            fichas[orden[contador]-1].avanzar(fetchKilometro);
+                            if(orden[contador]==1){
+                                aciertosJug1++;
+                                kmRecorridosJug1 = fichas[0].casilla;
+                            }
+                            else if(orden[contador]==2){
+                                aciertosJug2++;
+                                kmRecorridosJug2 = fichas[1].casilla;
+                            }
+                            else if(orden[contador]==3){
+                                aciertosJug3++;
+                                kmRecorridosJug3 = fichas[2].casilla;
+                            }
+                            else if(orden[contador]==4){
+                                aciertosJug4++;
+                                kmRecorridosJug4 = fichas[3].casilla;
+                            }
+                            
+                            if(contadorTurnosJuego<jugadores-1){
+                                contadorTurnosJuego++;
+                                turnoJuego = orden[contadorTurnosJuego];
+                            }else{
+                                contadorTurnosJuego = 0;
+                                turnoJuego=orden[0];
+                            }
+                            divTurnoJugadorTarjeta.style.display = 'none';
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+                            new Promise((resolve,reject) =>{
+                                dibujarTablero();
+                                resolve();
+                            }).then(()=>{
+                                return new Promise((resolve)=>{
+                                    setTimeout(()=>{
+                                        fichas.forEach(ficha => {
+                                            ficha.dibujar();
+                                        });
+                                        console.log(fichas);
+                                        console.log(fichas[0].casilla)
+                                        //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
+                                        infoTarjetas(); 
+                                        resolve();  
+                                    }, 100);
+                                })
+                            })
+                            checarGanador();
                         }
-                        console.log("HOLADASDAD");
+                        else{
+                            if(turnosPasadosPregunta<jugadores-1){
+                                drawPregunta(); 
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
+                                if(contador < jugadores-1){
+                                    contador++;
+                                    turnoJugadorePregunta = orden[contador];
+                                    //console.log("CONTADOR: "+contador);
+                                }
+                                else if(contador == jugadores-1){
+                                    contador = 0;
+                                    turnoJugadorePregunta = orden[contador];
+                                    //console.log("CONTADOR else: "+contador);
+                                }
+                                turnosPasadosPregunta++;
+                                //turnoJugadorePregunta = orden[turnoJuego];
+                            }
+                            else if(turnosPasadosPregunta >= jugadores-1){
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
+                                if(contadorTurnosJuego<jugadores-1){
+                                    contadorTurnosJuego++;
+                                    turnoJuego = orden[contadorTurnosJuego];
+                                }else{
+                                    contadorTurnosJuego = 0;
+                                    turnoJuego=orden[0];
+                                }
+                                fichas[jugadores].avanzar(fetchKilometro);
+                                new Promise((resolve,reject) =>{
+                                    dibujarTablero();
+                                    
+                                    resolve();
+                                }).then(()=>{
+                                    return new Promise((resolve)=>{
+                                        setTimeout(()=>{
+                                            fichas.forEach(ficha => {
+                                                ficha.dibujar();
+                                            });
+                                            //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
+                                            infoTarjetas();
+                                            resolve();                
+                                        }, 100);
+                                    })
+                                })
+                            }             
+                           
+                            divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego; 
+                            divTurnoJugadorTarjeta.innerHTML = 'Turno del jugador: '+turnoJugadorePregunta;
+                            checarGanador();
+                        }
+                        
+                        
+                        console.log("Jugador en turno en preguta: jugador"+turnoJugadorePregunta);
+                        console.log("CONTADOR: "+contador);
+                        console.log("TURNO DEL Pasados de las preguntas: "+turnosPasadosPregunta);
 
                         resolve();
                     }, 2000)
@@ -203,28 +357,55 @@ window.onload = function() {
         }
         fondoPreguntaTarjeta.style.display = 'block';
         tarjetaPreguntaTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.style.display = 'block';
+        divTurnoJugadorTarjeta.innerHTML= 'Turno del jugador: '+turnoJuego;
         numKilometroTarjeta.innerHTML= fetchKilometro;
-        materiaTarjeta.innerHTML= 'Materia';
+        if(rand==1){
+            materiaTarjeta.innerHTML= 'Matemáticas';
+        }else if(rand==2){
+            materiaTarjeta.innerHTML= 'Física';
+        }else if(rand==3){
+            materiaTarjeta.innerHTML= 'Química';
+        }else if(rand==4){
+            materiaTarjeta.innerHTML= 'Psicología';
+        }else if(rand==5){
+            materiaTarjeta.innerHTML= 'Literatura';
+        }else if(rand==6){
+            materiaTarjeta.innerHTML= 'Computación';
+        }
         preguntaTarjeta.innerHTML= fetchPregunta[0];
         respuesta1Tarjeta.innerHTML= fetchRes1[0];
         respuesta2Tarjeta.innerHTML=fetchRes2[0];
         respuesta3Tarjeta.innerHTML=fetchRes3[0];
-        respuesta4Tarjeta.innerHTML=fetchRes4[0];  
+        respuesta4Tarjeta.innerHTML=fetchRes4[0];          
         
-        respuesta1Tarjeta.addEventListener('click', ()=>{
-            
-            funcRespuesta(fetchRes1[1]);
+        
+        respuesta1Tarjeta.addEventListener('click', ()=>{     
+            console.log("a");    
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes1[1]);
         });
         respuesta2Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes2[1]);
-        })
+            console.log("b"); 
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes2[1]);
+        });
         respuesta3Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes3[1]);
-        })
+            console.log("c"); 
+            if(turnoPregunta==false) {
+                console.log("si entre :v");
+                funcRespuesta(fetchRes3[1]);
+            }
+                
+        });
         respuesta4Tarjeta.addEventListener('click', ()=>{
-            funcRespuesta(fetchRes4[1]);
-        })
-        
+            console.log("d"); 
+            if(turnoPregunta==false) 
+                funcRespuesta(fetchRes4[1]);
+        });        
+        turnoJugadorePregunta = turnoJuego;
+       
+       
     }
 
     function peticion(){
@@ -429,7 +610,8 @@ window.onload = function() {
         function ordenanza(){
             if(valorPrimerTiro.length<numJugadores)
             {
-                alert("Siguiente jugador, es tu turno de tirar el dado");
+                // alert("Siguiente jugador, es tu turno de tirar el dado");
+                Swal.fire("Siguiente jugador, es tu turno de tirar el dado");
                 dadoButton.style.visibility = 'visible';
             }
             else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
@@ -437,28 +619,41 @@ window.onload = function() {
                 
                 arregloOrdenPlay();
                 console.log(orden);
-                
+                /*divTurnoJugadorNormal.style.display = 'block';
+                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;*/
                 varcontrol++;
                 if(numJugadores==1){
-                    alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                    // alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
+                    Swal.fire('Eres el único jugador, ¡Mucha suerte, que la ignorancia no gane!');
                 }
                 else if(numJugadores==2){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                        "\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
                         "\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 else if(numJugadores==3){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                   /* alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                     Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
                     +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    
                 }else if(numJugadores==4){
-                    alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
+                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
+                    Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
+                    +"\nJugador "+orden[2]+"\nJugador "+orden[3]+"\n¡Mucha suerte, gánenle a la ignorancia!");
                 }
                 
                 dadoButton.style.visibility = 'visible';
                 boolPregunta=true;
+                turnoJuego = orden[0];
                 //console.log("BOOLRP");
-            }
-            
+                divTurnoJugadorNormal.style.display = 'block';
+                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+                console.log("ORDEN");
+
+            }                   
 
         }
 
@@ -477,16 +672,20 @@ window.onload = function() {
             }).then(()=>{
                 return new Promise((resolve)=>{
                     setTimeout(()=>{
+                        
                         if(boolPregunta==false){
                             ordenanza();
                         }
                         else{
                             new Promise(function(resolve, reject){
                                 peticion();
+                                contador = contadorTurnosJuego;
+                                turnosPasadosPregunta=0;
                                 resolve();
                             }).then(()=>{
                                 return new Promise((resolve)=>{
                                     setTimeout(()=>{
+                                        console.log("1contador:"+contador);
                                         drawPregunta();
                                         resolve();                
                                     }, 700);
@@ -588,16 +787,16 @@ window.onload = function() {
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
         }else if(jugadores==2){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;    
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2;    
         }else if(jugadores==3){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
         }else if(jugadores==4){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
+            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug4+'<br>Aciertos:'+aciertosJug4+'<br>Fallidos:'+fallidosJug4;
         }
     }
 
@@ -649,6 +848,7 @@ window.onload = function() {
                     fichas.forEach(ficha => {
                         ficha.dibujar();
                     }); 
+                    
                     resolve();                
                 }, 200);
             })
