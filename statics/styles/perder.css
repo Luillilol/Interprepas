@@ -18,6 +18,7 @@
 body{
     background-color: var(--fondo);
 }
+
 #fondoTitulo{
     position: absolute;
     background-color: var(--pink);
@@ -35,40 +36,13 @@ body{
     text-align: center;
     left: 44%;
 }
-#felicidades{
+#tituloPagina{
     position: absolute;
-    top: 8%;
-    left: 30%;
-    width: 45%;
-    height: 5%;
-    /* background-color: #70F15B; */
-    font-family: Galindo_normal;
-    font-size: 3vw;
+    width: 20%;
+    
+    top: 10%;
+    left: 40%;
 }
-#idMedalla{
-    position: absolute;
-    top: 15%;
-    left: 35%;
-}
-#jugador{
-    position: absolute;
-    background-color: #00e4f5;
-    border-style: solid;
-    border-radius: 20px;
-    width: 12%;
-    height: 5%;
-    top: 68%;
-    left: 42%;
-    font-family: Galindo_normal;
-    font-size: 2vw;
-}
-#cerebro1{
-    position: absolute;
-    top: 25%;
-    left: 12%;
-}
-#cerebro2{
-    position: absolute;
-    top: 25%;
-    right: 15%;
-}
+
+
+

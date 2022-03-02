@@ -229,13 +229,7 @@ window.onload = function() {
             if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
             {
                 document.cookie = "ganador=jugador"+contadorGanador;
-                if(contadorGanador == 5){
-                    window.location.assign("./perder.html");
-                }
-                else{
-                    window.location.assign("./ganar.html");
-                }
-                
+                window.location.assign("./ganador.html");
             }
             contadorGanador++;
         });
@@ -385,7 +379,7 @@ window.onload = function() {
         tarjetaPreguntaTarjeta.style.display = 'block';
         divTurnoJugadorTarjeta.style.display = 'block';
         divTurnoJugadorTarjeta.innerHTML= 'Turno del jugador: '+turnoJuego;
-        numKilometroTarjeta.innerHTML= 'Km: '+fetchKilometro;
+        numKilometroTarjeta.innerHTML= fetchKilometro;
         if(rand==1){
             materiaTarjeta.innerHTML= 'Matemáticas';
             contadorMate++;
@@ -846,7 +840,6 @@ window.onload = function() {
         inicializarFichas();
         new Promise(function(resolve, reject){
             dibujarTablero();
-            Swal.fire('Holalaskasdasjfdn');
             resolve();
         }).then(()=>{
             return new Promise((resolve)=>{
