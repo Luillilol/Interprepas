@@ -229,7 +229,13 @@ window.onload = function() {
             if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
             {
                 document.cookie = "ganador=jugador"+contadorGanador;
-                window.location.assign("./ganar.html");
+                if(contadorGanador == 5){
+                    window.location.assign("./perder.html");
+                }
+                else{
+                    window.location.assign("./ganar.html");
+                }
+                
             }
             contadorGanador++;
         });
