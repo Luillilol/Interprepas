@@ -4,8 +4,69 @@
 ** @Descripción:    Diseño del html llamado "instrucciones.html"
 */
 :root{
+    --pink: #FFBEFF;
+    --green: #70F15B; 
     --blue: #48C8FF;
+    --orange: #FFBC3A;
+    --fondo: #FEFFD9;
 }
+body{
+    background-color: var(--fondo);
+    color: #444343;
+    width: 100%;
+    height: 100%;
+    font-family: anymice;
+    font-size: 20px;
+}
+#instrucciones{
+    display: inline;
+    background-color: var(--orange);
+}
+h3{
+    display: inline;
+    background-color: var(--blue);
+    
+}
+h2{
+    display: inline;
+
+    background-color: var(--green);
+}
+p{
+    text-align: justify;
+}
+#empezar{
+    margin-top: 6%;
+    left: 7%;
+    width: 85%;
+    position: relative;
+    text-align: center;
+    margin-bottom: 0%;
+}
+#juego{
+    left: 7%;
+    width: 85%;
+    position: relative;
+    text-align: center;
+}
+#fondoTitulo{
+    position: absolute;
+    background-color: var(--pink);
+    width: 100%;
+    height: 60px;
+    top: 0%;
+    left: 0;
+    text-align: center;
+}
+#titulo{
+    position: absolute;
+    top: 7%;
+    font-size: 50px;
+    margin: 0px;
+    text-align: center;
+    left: 44%;
+}
+/*
 
 @font-face {
     font-family: anymice;
@@ -13,55 +74,24 @@
 }
 
 body{
-    background-color: #eeeed8;
+    background-color: var(--fondo);
     color: #444343;
     width: 100%;
     height: 100%;
     font-family: anymice;
 }
 
-h1{
-    position: absolute;
-    right: 44%;
-    top: 0%;
-}
 
-h2{
-    text-align: center;
-}
-
-h3{
-    color: #0a0b0c;
-    font-size: 1.3em;
-}
-
-p{
-    font-size: 1.2em
-}
-
-a{
-    color: #1e7cda;
-    text-decoration: none;
-}
-
-#empezar{
-    position: absolute;
-    top: 10%;
-    left: 12%;
-}
 
 #juego{
-    position: absolute;
-    top: 25%;
-    left: 12%;
-}
-
-.desplegable{
-    /*background-color: var(--blue);*/
-    width: 75%;
-    height: 5%;
-    border-radius: 5%;
-    /*text-align: center;*/
     position: relative;
-    top: 55%;
-}
+    display: flex;
+    flex-direction: row;
+    /*background-color: var(--blue);
+    width: 75%;
+    height: 90%;
+    border-radius: 5%;
+    /*text-align: center;
+    position: relative;
+    top: 50%;
+}*/
