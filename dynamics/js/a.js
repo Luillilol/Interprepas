@@ -289,6 +289,18 @@ window.onload = function() {
                                 //turnoJugadorePregunta = orden[turnoJuego];
                             }
                             else if(turnosPasadosPregunta >= jugadores-1){
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
                                 if(contadorTurnosJuego<jugadores-1){
                                     contadorTurnosJuego++;
                                     turnoJuego = orden[contadorTurnosJuego];
