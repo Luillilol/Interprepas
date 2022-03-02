@@ -66,9 +66,7 @@ window.onload = function() {
             this.y = y;
             this.color = color;
             this.casilla = 0;
-        }
-
-        
+        }        
 
         //dibuja la ficha en el tablero
         dibujar(){
@@ -164,23 +162,8 @@ window.onload = function() {
                     }else if(this.casilla==43){
                         this.y -= 100;
                     }
-
-
                 }
             }
-            //this.dibujar();
-
-            /*new Promise((resolve,reject) =>{
-                dibujarTablero();
-                resolve();
-            }).then(()=>{
-                return new Promise((resolve)=>{
-                    setTimeout(()=>{
-                        this.dibujar();
-                        resolve();                
-                    }, 50);
-                })
-            })*/
         }
         
     }
@@ -200,19 +183,13 @@ window.onload = function() {
     function drawPregunta(){
         function funcRespuesta(res){
             turnoPregunta=true;
-            console.log("FUNCIÓN DE RESPUESTA");
             bloqueoRespuestas.style.display='block';
             new Promise((resolve, reject) => {
-                console.log("CLICK EN LA RESPUESTA");
                 if(res ==1){
-                    console.log("RESPUESTA CORRECTA");
                     infoAcierto.style.display='block';
                 }else{
-                    console.log("RESPUESTA INCORRECTA");
                     infoFallo.style.display='block';
                 }
-                
-                console.log("TURNO DEL JUEGO: "+turnoJuego);
                 resolve();
                 
             }).then(()=>{
@@ -224,7 +201,6 @@ window.onload = function() {
                         infoAcierto.style.display='none';
                         bloqueoRespuestas.style.display='none';
                         divTurnoJugadorTarjeta.style.display = 'none';
-                        console.log("TURNOJUEGO");
                         turnoPregunta=false;
                         if(res == 1){
                             fichas[orden[contador]-1].avanzar(fetchKilometro);
@@ -263,9 +239,6 @@ window.onload = function() {
                                         fichas.forEach(ficha => {
                                             ficha.dibujar();
                                         });
-                                        console.log(fichas);
-                                        console.log(fichas[0].casilla)
-                                        //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
                                         infoTarjetas(); 
                                         resolve();  
                                     }, 100);
@@ -291,15 +264,12 @@ window.onload = function() {
                                 if(contador < jugadores-1){
                                     contador++;
                                     turnoJugadorePregunta = orden[contador];
-                                    //console.log("CONTADOR: "+contador);
                                 }
                                 else if(contador == jugadores-1){
                                     contador = 0;
                                     turnoJugadorePregunta = orden[contador];
-                                    //console.log("CONTADOR else: "+contador);
                                 }
                                 turnosPasadosPregunta++;
-                                //turnoJugadorePregunta = orden[turnoJuego];
                             }
                             else if(turnosPasadosPregunta >= jugadores-1){
                                 if(orden[contador]==1){
@@ -332,7 +302,6 @@ window.onload = function() {
                                             fichas.forEach(ficha => {
                                                 ficha.dibujar();
                                             });
-                                            //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
                                             infoTarjetas();
                                             resolve();                
                                         }, 100);
@@ -344,12 +313,6 @@ window.onload = function() {
                             divTurnoJugadorTarjeta.innerHTML = 'Turno del jugador: '+turnoJugadorePregunta;
                             checarGanador();
                         }
-                        
-                        
-                        console.log("Jugador en turno en preguta: jugador"+turnoJugadorePregunta);
-                        console.log("CONTADOR: "+contador);
-                        console.log("TURNO DEL Pasados de las preguntas: "+turnosPasadosPregunta);
-
                         resolve();
                     }, 2000)
                 })
@@ -380,26 +343,21 @@ window.onload = function() {
         respuesta4Tarjeta.innerHTML=fetchRes4[0];          
         
         
-        respuesta1Tarjeta.addEventListener('click', ()=>{     
-            console.log("a");    
+        respuesta1Tarjeta.addEventListener('click', ()=>{       
             if(turnoPregunta==false) 
                 funcRespuesta(fetchRes1[1]);
         });
         respuesta2Tarjeta.addEventListener('click', ()=>{
-            console.log("b"); 
             if(turnoPregunta==false) 
                 funcRespuesta(fetchRes2[1]);
         });
         respuesta3Tarjeta.addEventListener('click', ()=>{
-            console.log("c"); 
             if(turnoPregunta==false) {
-                console.log("si entre :v");
                 funcRespuesta(fetchRes3[1]);
             }
                 
         });
         respuesta4Tarjeta.addEventListener('click', ()=>{
-            console.log("d"); 
             if(turnoPregunta==false) 
                 funcRespuesta(fetchRes4[1]);
         });        
@@ -415,7 +373,6 @@ window.onload = function() {
         }).then(function (text){
             stringPetición = text;
             //metodo split que nos separa el string de la petición y los almacena en sus respectivas varibles en forma de arrelgos donde cada una contiene la respuesta y el boolCorrect
-            console.log(text);
             fetchIDPregunta = stringPetición.split('°');
             fetchPregunta = fetchIDPregunta[0].split(";");
             fetchIDPregunta=fetchIDPregunta[1];
@@ -615,46 +572,32 @@ window.onload = function() {
                 dadoButton.style.visibility = 'visible';
             }
             else if(valorPrimerTiro.length==numJugadores&&varcontrol===0)
-            {
-                
+            {                
                 arregloOrdenPlay();
-                console.log(orden);
-                /*divTurnoJugadorNormal.style.display = 'block';
-                divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;*/
+    
                 varcontrol++;
                 if(numJugadores==1){
-                    // alert("Eres el único jugador, ¡Mucha suerte, gánale a la ignorancia!");
                     Swal.fire('Eres el único jugador, ¡Mucha suerte, que la ignorancia no gane!');
                 }
                 else if(numJugadores==2){
-                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                        "\n¡Mucha suerte, gánenle a la ignorancia!");*/
                     Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                        "\n¡Mucha suerte, gánenle a la ignorancia!");
+                        "\n¡Mucha suerte, que la ignorancia no gane!");
                 }
                 else if(numJugadores==3){
-                   /* alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
                      Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
-                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    +"\nJugador "+orden[2]+"\n¡Mucha suerte, que la ignorancia no gane!");
                     
                 }else if(numJugadores==4){
-                    /*alert("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]+
-                    +"\nJugador "+orden[2]+"Jugador "+orden[1]+"\n¡Mucha suerte, gánenle a la ignorancia!");*/
                     Swal.fire("El orden de jugadores es :\nJugador "+orden[0]+"\nJugador "+orden[1]
-                    +"\nJugador "+orden[2]+"\nJugador "+orden[3]+"\n¡Mucha suerte, gánenle a la ignorancia!");
+                    +"\nJugador "+orden[2]+"\nJugador "+orden[3]+"\n¡Mucha suerte, que la ignorancia no gane!");
                 }
                 
                 dadoButton.style.visibility = 'visible';
                 boolPregunta=true;
                 turnoJuego = orden[0];
-                //console.log("BOOLRP");
                 divTurnoJugadorNormal.style.display = 'block';
                 divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
-                console.log("ORDEN");
-
-            }                   
-
+            }                  
         }
 
 
@@ -685,7 +628,6 @@ window.onload = function() {
                             }).then(()=>{
                                 return new Promise((resolve)=>{
                                     setTimeout(()=>{
-                                        console.log("1contador:"+contador);
                                         drawPregunta();
                                         resolve();                
                                     }, 700);
@@ -701,9 +643,7 @@ window.onload = function() {
        
           
         }
-        animacion();
-        
-        
+        animacion();      
     }
 
     //Función que separa las cookies de acuerdo al tablero, colores y jugadores
@@ -741,7 +681,6 @@ window.onload = function() {
             imgTablero.addEventListener('load', ()=>{
                 ctx.drawImage(imgTablero, 230, 50, 800, 600);
             });
-            //divTablero.src=""
         }else{
             
             imgTablero.src = '../statics/img/Tableros21.png';
@@ -829,11 +768,8 @@ window.onload = function() {
         }
         if(tablero == 42){
             fichas.push(new Ficha(960,605,"#000000"));
-        }
-        
-    }
-
-    
+        }        
+    }    
 
     function dibujar(){
         cookies();
@@ -856,7 +792,6 @@ window.onload = function() {
     }
     
     dibujar(); 
-
     dadoButton.addEventListener('click', e => {
         bloqueBoton.style.display='block';
         dado();
