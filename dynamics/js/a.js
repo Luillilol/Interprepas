@@ -68,6 +68,8 @@ window.onload = function() {
             this.casilla = 0;
         }
 
+        
+
         //dibuja la ficha en el tablero
         dibujar(){
             ctx.beginPath();
@@ -77,6 +79,10 @@ window.onload = function() {
             ctx.stroke();
             ctx.closePath();
            
+        }
+
+        returnCasilla(){
+            return this.casilla;
         }
 
         //permite a la ficha avanzar en el tablero
@@ -164,7 +170,7 @@ window.onload = function() {
             }
             //this.dibujar();
 
-            new Promise((resolve,reject) =>{
+            /*new Promise((resolve,reject) =>{
                 dibujarTablero();
                 resolve();
             }).then(()=>{
@@ -174,7 +180,7 @@ window.onload = function() {
                         resolve();                
                     }, 50);
                 })
-            })
+            })*/
         }
         
     }
@@ -210,6 +216,23 @@ window.onload = function() {
                         turnoPregunta=false;
                         if(res == 1){
                             fichas[orden[contador]-1].avanzar(fetchKilometro);
+                            if(orden[contador]==1){
+                                aciertosJug1++;
+                                kmRecorridosJug1 = fichas[0].casilla;
+                            }
+                            else if(orden[contador]==2){
+                                aciertosJug2++;
+                                kmRecorridosJug2 = fichas[1].casilla;
+                            }
+                            else if(orden[contador]==3){
+                                aciertosJug3++;
+                                kmRecorridosJug3 = fichas[2].casilla;
+                            }
+                            else if(orden[contador]==4){
+                                aciertosJug4++;
+                                kmRecorridosJug4 = fichas[3].casilla;
+                            }
+                            
                             if(contadorTurnosJuego<jugadores-1){
                                 contadorTurnosJuego++;
                                 turnoJuego = orden[contadorTurnosJuego];
@@ -219,11 +242,39 @@ window.onload = function() {
                             }
                             divTurnoJugadorTarjeta.style.display = 'none';
                             divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego;
+                            new Promise((resolve,reject) =>{
+                                dibujarTablero();
+                                resolve();
+                            }).then(()=>{
+                                return new Promise((resolve)=>{
+                                    setTimeout(()=>{
+                                        fichas.forEach(ficha => {
+                                            ficha.dibujar();
+                                        });
+                                        console.log(fichas);
+                                        console.log(fichas[0].casilla)
+                                        //console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
+                                        infoTarjetas(); 
+                                        resolve();  
+                                    }, 50);
+                                })
+                            })
                         }
                         else{
                             if(turnosPasadosPregunta<jugadores-1){
                                 drawPregunta(); 
- 
+                                if(orden[contador]==1){
+                                    fallidosJug1++;
+                                }
+                                else if(orden[contador]==2){
+                                    fallidosJug2++;
+                                }
+                                else if(orden[contador]==3){
+                                    fallidosJug3++;
+                                }
+                                else if(orden[contador]==4){
+                                    fallidosJug4++;
+                                }
                                 if(contador < jugadores-1){
                                     contador++;
                                     turnoJugadorePregunta = orden[contador];
@@ -246,6 +297,22 @@ window.onload = function() {
                                     turnoJuego=orden[0];
                                 }
                                 fichas[jugadores].avanzar(fetchKilometro);
+                                new Promise((resolve,reject) =>{
+                                    dibujarTablero();
+                                    
+                                    resolve();
+                                }).then(()=>{
+                                    return new Promise((resolve)=>{
+                                        setTimeout(()=>{
+                                            fichas.forEach(ficha => {
+                                                ficha.dibujar();
+                                            });
+                                            console.log(kmRecorridosJug1+","+kmRecorridosJug2+","+kmRecorridosJug3+","+kmRecorridosJug4);
+                                            infoTarjetas();
+                                            resolve();                
+                                        }, 50);
+                                    })
+                                })
                             }             
                            
                             divTurnoJugadorNormal.innerHTML='Turno: Jugador '+turnoJuego; 
@@ -682,16 +749,16 @@ window.onload = function() {
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
         }else if(jugadores==2){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;    
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2;    
         }else if(jugadores==3){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
         }else if(jugadores==4){
             txtTarj1.innerHTML='Jugador 1 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1; 
-            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
-            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug1+'<br>Aciertos:'+aciertosJug1+'<br>Fallidos:'+fallidosJug1;
+            txtTarj2.innerHTML='Jugador 2 <br>KM recorridos:'+kmRecorridosJug2+'<br>Aciertos:'+aciertosJug2+'<br>Fallidos:'+fallidosJug2; 
+            txtTarj3.innerHTML='Jugador 3 <br>KM recorridos:'+kmRecorridosJug3+'<br>Aciertos:'+aciertosJug3+'<br>Fallidos:'+fallidosJug3;
+            txtTarj4.innerHTML='Jugador 4 <br>KM recorridos:'+kmRecorridosJug4+'<br>Aciertos:'+aciertosJug4+'<br>Fallidos:'+fallidosJug4;
         }
     }
 
