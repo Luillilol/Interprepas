@@ -11,12 +11,15 @@
     --orange: #FFBC3A;
     --fondo: #FEFFD9;
 }
-@font-face{
-    font-family: Galindo_normal;
-    src: url("../fonts/Galindo/Galindo-Regular.ttf");
+@font-face {
+    font-family: anymice;
+    src: url("../fonts/any.ttf");
 }
 body{
     background-color: var(--fondo);
+}
+h1{
+    font-size: 70px;
 }
 #fondoTitulo{
     position: absolute;
@@ -35,40 +38,32 @@ body{
     text-align: center;
     left: 44%;
 }
-#felicidades{
-    position: absolute;
-    top: 8%;
-    left: 30%;
-    width: 45%;
-    height: 5%;
-    /* background-color: #70F15B; */
-    font-family: Galindo_normal;
-    font-size: 3vw;
+#ganaste{
+    display: inline;
+    color: green;
+    padding: 0px;
 }
-#idMedalla{
-    position: absolute;
-    top: 15%;
-    left: 35%;
+#Seccion1{
+    font-family: anymice;
+    display: flex;
+    flex-direction: column;
+    top: 80px;
+    margin: 80px;
+    border:40px;
+    align-items: center;
+    font-size: 30px;
 }
-#jugador{
-    position: absolute;
-    background-color: #00e4f5;
-    border-style: solid;
-    border-radius: 20px;
-    width: 12%;
-    height: 5%;
-    top: 68%;
-    left: 42%;
-    font-family: Galindo_normal;
-    font-size: 2vw;
+#Seccion2{
+    font-family: anymice;
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    align-items: center;
+    text-align:center;
+    width: 100%;
+    right: 30%;
+    justify-content: center;
+    justify-items: center;
 }
-#cerebro1{
-    position: absolute;
-    top: 25%;
-    left: 12%;
-}
-#cerebro2{
-    position: absolute;
-    top: 25%;
-    right: 15%;
-}
+
+

@@ -10,6 +10,10 @@
     --orange: #FFBC3A;
     --fondo: #FEFFD9;
 }
+@font-face {
+    font-family: anymice;
+    src: url("../fonts/any.ttf");
+}
 body{
     background-color: var(--fondo);
     color: #444343;
@@ -68,10 +72,7 @@ p{
 }
 /*
 
-@font-face {
-    font-family: anymice;
-    src: url("../fonts/any.ttf");
-}
+
 
 body{
     background-color: var(--fondo);
