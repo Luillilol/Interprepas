@@ -235,7 +235,7 @@ window.onload = function() {
         fichas.forEach(ficha => {
             if((ficha.casilla >= 43 && tablero==42) || (ficha.casilla >= 22 && tablero==21))
             {
-                document.cookie = "ganador=jugador"+contadorGanador;
+                document.cookie = "ganador="+contadorGanador;
                 if(contadorGanador == fichas.length){
                     window.location.assign("./perder.html");
                 }

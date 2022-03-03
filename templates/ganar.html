@@ -25,7 +25,7 @@
         <script>
             let cookies = document.cookie;
             cookies = cookies.split('; ');
-            let ganador = cookies[6].split('=')[1];
+            let ganador = cookies[0].split('=')[1];
             let jugador = document.getElementById("jugador");
             jugador.innerHTML = 'Jugador '+ganador;
         </script>
