@@ -3,7 +3,7 @@
 ** @Equipo: 	    CoyoAtlón
 ** @Descripción:    Diseño del html llamado "instrucciones.html"
 */
-
+/*====================Colores===============*/
 :root{
     --pink: #FFBEFF;
     --green: #70F15B; 
@@ -11,6 +11,7 @@
     --orange: #FFBC3A;
     --fondo: #FEFFD9;
 }
+/*=========================General==============*/
 @font-face {
     font-family: anymice;
     src: url("../fonts/any.ttf");
@@ -25,6 +26,8 @@ body{
 h1{
     font-size: 70px;
 }
+
+/*========================ID========================*/
 #fondoTitulo{
     position: absolute;
     background-color: var(--pink);
@@ -69,6 +72,9 @@ h1{
     right: 30%;
     justify-content: center;
     justify-items: center;
+}
+#Regresar{
+    font-size: 30px;
 }
 
 
