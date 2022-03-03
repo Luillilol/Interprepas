@@ -15,6 +15,10 @@
     font-family: anymice;
     src: url("../fonts/any.ttf");
 }
+@font-face{
+    font-family: Galindo_normal;
+    src: url("../fonts/Galindo/Galindo-Regular.ttf");
+}
 body{
     background-color: var(--fondo);
 }
@@ -31,6 +35,7 @@ h1{
     text-align: center;
 }
 #titulo{
+    font-family: Galindo_normal;
     position: absolute;
     top: 7%;
     font-size: 50px;
@@ -51,7 +56,7 @@ h1{
     margin: 80px;
     border:40px;
     align-items: center;
-    font-size: 30px;
+    font-size: 50px;
 }
 #Seccion2{
     font-family: anymice;

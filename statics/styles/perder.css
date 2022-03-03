@@ -1,7 +1,7 @@
 /*
-** @Archivo:        instrucciones.css
+** @Archivo:        perder.css
 ** @Equipo: 	    CoyoAtlón
-** @Descripción:    Diseño del html llamado "instrucciones.html"
+** @Descripción:    Diseño de  vista perder
 */
 
 :root{
@@ -14,6 +14,10 @@
 @font-face{
     font-family: Galindo_normal;
     src: url("../fonts/Galindo/Galindo-Regular.ttf");
+}
+@font-face {
+    font-family: anymice;
+    src: url("../fonts/any.ttf");
 }
 body{
     background-color: var(--fondo);
@@ -29,6 +33,7 @@ body{
     text-align: center;
 }
 #titulo{
+    font-family: Galindo_normal;
     position: absolute;
     top: 7%;
     font-size: 50px;
@@ -36,12 +41,30 @@ body{
     text-align: center;
     left: 44%;
 }
-#tituloPagina{
-    position: absolute;
-    width: 20%;
-    
-    top: 10%;
-    left: 40%;
+#Seccion1{
+    font-family: anymice;
+    display: flex;
+    flex-direction: column;
+    top: 80px;
+    margin: 80px;
+    border:40px;
+    align-items: center;
+    font-size: 40px;
+}
+#Seccion2{
+    font-family: anymice;
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    align-items: center;
+    text-align:center;
+    width: 100%;
+    right: 30%;
+    justify-content: center;
+    justify-items: center;
+}
+#perdiste{
+    color: rgb(192, 0, 0);
 }
 
 
