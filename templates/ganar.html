@@ -21,6 +21,13 @@
     
         <div id="idMedalla"> <img src="../statics/img/medalla.png" alt="medalla" width="400"></div>
         <div id="jugador">Jugador 1</div>
+        <script>
+            let cookies = document.cookie;
+            cookies = cookies.split('; ');
+            let ganador = cookies[6].split('=')[1];
+            let jugador = document.getElementById("jugador");
+            jugador.innerHTML = 'Jugador '+ganador;
+        </script>
         <div><h2>¡Demostraste muchos conocimientos!</h2></div>
         <div id="cerebro1"> <img src="../statics/img/cerebro.png" alt="medalla" width="300px"></div>
         <div id="cerebro2"> <img src="../statics/img/cerebro.png" alt="medalla" width="300px" ></div>

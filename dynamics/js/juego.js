@@ -860,7 +860,7 @@ window.onload = function() {
         inicializarFichas();
         new Promise(function(resolve, reject){
             dibujarTablero();
-            Swal.fire('Holalaskasdasjfdn');
+            Swal.fire('Gira el dado para iniciar el juego');
             resolve();
         }).then(()=>{
             return new Promise((resolve)=>{
